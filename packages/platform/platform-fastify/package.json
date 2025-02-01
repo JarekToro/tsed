@@ -1,7 +1,7 @@
 {
   "name": "@tsed/platform-fastify",
   "type": "module",
-  "version": "8.2.0",
+  "version": "8.5.0-beta.1",
   "description": "Fastify package for Ts.ED framework",
   "source": "./src/index.ts",
   "main": "./lib/esm/index.js",
@@ -60,7 +60,7 @@
     "@fastify/middie": ">=9.0.2",
     "@fastify/static": ">=8.0.4",
     "content-disposition": ">=0.5.4",
-    "tslib": "2.6.1"
+    "tslib": "2.7.0"
   },
   "devDependencies": {
     "@fastify/cookie": "11.0.1",
@@ -81,13 +81,13 @@
     "@fastify/accepts": ">=4.3.0",
     "@fastify/cookie": ">=9.3.1",
     "@fastify/formbody": ">=7.4.0",
-    "@tsed/core": ">=8.0.0",
-    "@tsed/di": ">=8.0.0",
-    "@tsed/json-mapper": ">=8.0.0",
+    "@tsed/core": ">=8.5.0-beta.1",
+    "@tsed/di": ">=8.5.0-beta.1",
+    "@tsed/json-mapper": ">=8.5.0-beta.1",
     "@tsed/logger": ">=7.0.0",
-    "@tsed/openspec": ">=8.0.0",
-    "@tsed/platform-http": ">=8.0.0",
-    "@tsed/schema": ">=8.0.0",
+    "@tsed/openspec": ">=8.5.0-beta.1",
+    "@tsed/platform-http": ">=8.5.0-beta.1",
+    "@tsed/schema": ">=8.5.0-beta.1",
     "fastify": ">=5.1.0",
     "fastify-raw-body": ">=5.0.0"
   },
