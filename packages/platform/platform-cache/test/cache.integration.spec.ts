@@ -1,4 +1,6 @@
 import {Controller, Inject} from "@tsed/di";
+// @ts-ignore
+import {PlatformExpress} from "@tsed/platform-express";
 import {PlatformTest} from "@tsed/platform-http/testing";
 import {PathParams, QueryParams} from "@tsed/platform-params";
 import {Get, Head, Post, Property} from "@tsed/schema";
@@ -84,7 +86,7 @@ class TestCacheController {
 describe("Cache", () => {
   beforeEach(
     PlatformTest.bootstrap(Server, {
-      logger: {},
+      adapter: PlatformExpress,
       mount: {
         "/rest": [TestCacheController]
       },

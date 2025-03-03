@@ -40,22 +40,6 @@ declare global {
 
 export class PlatformFastify extends PlatformAdapter<FastifyInstance> {
   readonly NAME = "fastify";
-
-  readonly providers = [
-    {
-      token: PlatformHandler
-    },
-    {token: PlatformApplication},
-    {token: Platform},
-    {
-      token: PlatformResponse,
-      useClass: PlatformFastifyResponse
-    },
-    {
-      token: PlatformRequest,
-      useClass: PlatformFastifyRequest
-    }
-  ];
   private staticsDecorated = false;
 
   /**
@@ -358,4 +342,13 @@ export class PlatformFastify extends PlatformAdapter<FastifyInstance> {
   }
 }
 
-adapter(PlatformFastify);
+adapter(PlatformFastify, [
+  {
+    token: PlatformResponse,
+    useClass: PlatformFastifyResponse
+  },
+  {
+    token: PlatformRequest,
+    useClass: PlatformFastifyRequest
+  }
+]);
