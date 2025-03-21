@@ -29,10 +29,6 @@ By default, the directory used is `${projetRoot}/uploads`. You can configure ano
 
 <<< @/docs/snippets/multer/configuration.ts
 
-Live example:
-
-<CodeSandbox sandboxId="rough-frost-6bi81" title="Multer example" />
-
 ## Options
 
 - `dest` (`string`): The destination directory for the uploaded files.
