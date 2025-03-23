@@ -2,7 +2,7 @@
   "name": "@tsed/prisma",
   "description": "Generate Ts.ED JsonSchema based on Prisma models",
   "type": "module",
-  "version": "8.6.0-beta.1",
+  "version": "8.7.1",
   "source": "./src/index.ts",
   "main": "./lib/esm/index.js",
   "module": "./lib/esm/index.js",
@@ -22,7 +22,7 @@
   "scripts": {
     "prebuild": "cd ../../core && yarn build",
     "build": "rm -rf lib && yarn build:ts && monorepo build-hybrid",
-    "build:ts": "tsc --build tsconfig.json",
+    "build:ts": "tsc --build tsconfig.esm.json",
     "test": "vitest run",
     "generate:enums": "yarn build && cd test/enums && prisma -v && prisma generate",
     "generate:postgres:esm": "yarn build && cd test/postgres-esm && prisma -v && prisma generate",
@@ -53,14 +53,14 @@
     "eslint": "9.12.0",
     "prisma": "^6.0.1",
     "typescript": "5.4.5",
-    "vitest": "2.1.2"
+    "vitest": "3.0.9"
   },
   "peerDependencies": {
     "@prisma/client": ">=6.0.0",
-    "@tsed/core": ">=8.6.0-beta.1",
-    "@tsed/di": ">=8.6.0-beta.1",
-    "@tsed/json-mapper": ">=8.6.0-beta.1",
-    "@tsed/schema": ">=8.6.0-beta.1"
+    "@tsed/core": ">=8.7.1",
+    "@tsed/di": ">=8.7.1",
+    "@tsed/json-mapper": ">=8.7.1",
+    "@tsed/schema": ">=8.7.1"
   },
   "keywords": [
     "TypeScript",

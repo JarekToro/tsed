@@ -2,7 +2,7 @@
   "name": "@tsed/jwks",
   "description": "Utils to generate jwks pair keys",
   "type": "module",
-  "version": "8.6.0-beta.1",
+  "version": "8.7.1",
   "source": "./src/index.ts",
   "main": "./lib/esm/index.js",
   "module": "./lib/esm/index.js",
@@ -19,7 +19,7 @@
     "build": "yarn build:ts",
     "test": "vitest run",
     "start": "ts-node test/app/index.ts",
-    "build:ts": "tsc --build tsconfig.json",
+    "build:ts": "tsc --build tsconfig.esm.json",
     "test:ci": "vitest run --coverage.thresholds.autoUpdate=true"
   },
   "dependencies": {
@@ -32,6 +32,6 @@
     "@tsed/typescript": "workspace:*",
     "eslint": "9.12.0",
     "typescript": "5.4.5",
-    "vitest": "2.1.2"
+    "vitest": "3.0.9"
   }
 }

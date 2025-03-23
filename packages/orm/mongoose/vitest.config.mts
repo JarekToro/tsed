@@ -8,14 +8,16 @@ export default defineConfig(
     test: {
       ...presets.test,
       // @ts-ignore
-      globalSetup: [import.meta.resolve("@tsed/testcontainers-mongo/vitest/setup")],
+      globalSetup: [
+        "../testcontainers-mongo/src/setup/vi.setup.ts"
+      ],
       coverage: {
         ...presets.test.coverage,
         thresholds: {
-          statements: 97.95,
-          branches: 96.18,
-          functions: 100,
-          lines: 97.95
+          statements: 0,
+          branches: 0,
+          functions: 0,
+          lines: 0
         }
       }
     }

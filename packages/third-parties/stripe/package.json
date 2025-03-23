@@ -2,7 +2,7 @@
   "name": "@tsed/stripe",
   "description": "Stripe package for Ts.ED framework",
   "type": "module",
-  "version": "8.6.0-beta.1",
+  "version": "8.7.1",
   "keywords": [
     "Stripe",
     "Ts.ED",
@@ -28,7 +28,7 @@
     "build": "yarn barrels && yarn build:ts",
     "barrels": "barrels",
     "test": "vitest run",
-    "build:ts": "tsc --build tsconfig.json",
+    "build:ts": "tsc --build tsconfig.esm.json",
     "test:ci": "vitest run --coverage.thresholds.autoUpdate=true"
   },
   "dependencies": {
@@ -45,18 +45,18 @@
     "@tsed/schema": "workspace:*",
     "@tsed/typescript": "workspace:*",
     "eslint": "9.12.0",
-    "stripe": "^8.222.0",
+    "stripe": "^17.7.0",
     "typescript": "5.4.5",
-    "vitest": "2.1.2"
+    "vitest": "3.0.9"
   },
   "peerDependencies": {
-    "@tsed/exceptions": ">=8.6.0-beta.1",
-    "@tsed/platform-middlewares": ">=8.6.0-beta.1",
-    "@tsed/platform-params": ">=8.6.0-beta.1",
-    "@tsed/schema": ">=8.6.0-beta.1",
+    "@tsed/exceptions": ">=8.7.1",
+    "@tsed/platform-middlewares": ">=8.7.1",
+    "@tsed/platform-params": ">=8.7.1",
+    "@tsed/schema": ">=8.7.1",
     "@types/body-parser": "^1.19.0",
     "body-parser": "^1.19.0",
-    "stripe": "^9.16.0"
+    "stripe": "^17.7.0"
   },
   "peerDependenciesMeta": {
     "@tsed/exceptions": {

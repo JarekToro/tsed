@@ -2,7 +2,7 @@
   "name": "@tsed/formio",
   "description": "Formio package for Ts.ED framework",
   "type": "module",
-  "version": "8.6.0-beta.1",
+  "version": "8.7.1",
   "keywords": [
     "Formio",
     "Ts.ED",
@@ -28,7 +28,7 @@
     "barrels": "barrels",
     "start": "ts-node test/app/index.ts",
     "test": "vitest run",
-    "build:ts": "tsc --build tsconfig.json",
+    "build:ts": "tsc --build tsconfig.esm.json",
     "test:ci": "vitest run --coverage.thresholds.autoUpdate=true"
   },
   "dependencies": {
@@ -48,12 +48,12 @@
     "express": "^4.21.0",
     "formio": "4.2.5",
     "mongodb": "^6.9.0",
-    "mongoose": "8.9.4",
+    "mongoose": "8.12.2",
     "typescript": "5.4.5",
-    "vitest": "2.1.2"
+    "vitest": "3.0.9"
   },
   "peerDependencies": {
-    "@tsed/platform-http": ">=8.6.0-beta.1",
+    "@tsed/platform-http": ">=8.7.1",
     "express": "^4.17.1",
     "formio": ">=2.0.0",
     "lodash": "^4.17.21",

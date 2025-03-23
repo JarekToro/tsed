@@ -1,5 +1,6 @@
+import "@tsed/platform-multer/express";
+
 import {IncomingMessage, ServerResponse} from "node:http";
-import {promisify} from "node:util";
 
 import {catchAsyncError, Env, isFunction, Type} from "@tsed/core";
 import {constant, inject, logger, runInContext} from "@tsed/di";
@@ -14,8 +15,6 @@ import {
   PlatformBuilder,
   PlatformContext,
   PlatformHandler,
-  PlatformMulter,
-  PlatformMulterSettings,
   PlatformRequest,
   PlatformResponse,
   PlatformStaticsOptions
@@ -64,13 +63,6 @@ declare global {
 export class PlatformExpress extends PlatformAdapter<Express.Application> {
   readonly NAME = "express";
 
-  #multer: typeof multer;
-
-  constructor() {
-    super();
-    import("multer").then(({default: multer}) => (this.#multer = multer));
-  }
-
   /**
    * Create new serverless application. In this mode, the component scan are disabled.
    * @param module
@@ -79,7 +71,7 @@ export class PlatformExpress extends PlatformAdapter<Express.Application> {
   static create(module: Type<any>, settings: Partial<TsED.Configuration> = {}) {
     return PlatformBuilder.create<Express.Application>(module, {
       ...settings,
-      adapter: PlatformExpress
+      adapter: PlatformExpress as any
     });
   }
 
@@ -91,7 +83,7 @@ export class PlatformExpress extends PlatformAdapter<Express.Application> {
   static bootstrap(module: Type<any>, settings: Partial<TsED.Configuration> = {}) {
     return PlatformBuilder.bootstrap<Express.Application>(module, {
       ...settings,
-      adapter: PlatformExpress
+      adapter: PlatformExpress as any
     });
   }
 
@@ -186,30 +178,6 @@ export class PlatformExpress extends PlatformAdapter<Express.Application> {
       app,
       callback: () => app
     };
-  }
-
-  multipart(options: PlatformMulterSettings): PlatformMulter {
-    const m = this.#multer(options);
-    const makePromise = (multer: any, name: string) => {
-      // istanbul ignore next
-      if (!multer[name]) return;
-
-      const fn = multer[name];
-
-      multer[name] = function apply(...args: any[]) {
-        const middleware: any = Reflect.apply(fn, this, args);
-
-        return (req: any, res: any) => promisify(middleware)(req, res);
-      };
-    };
-
-    makePromise(m, "any");
-    makePromise(m, "array");
-    makePromise(m, "fields");
-    makePromise(m, "none");
-    makePromise(m, "single");
-
-    return m;
   }
 
   statics(endpoint: string, options: PlatformStaticsOptions) {

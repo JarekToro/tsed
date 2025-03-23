@@ -1,6 +1,6 @@
 {
   "name": "@tsed/docs-new",
-  "version": "8.6.0-beta.1",
+  "version": "8.7.1",
   "type": "module",
   "scripts": {
     "docs:dev": "yarn build:api:summary && vitepress dev .",
@@ -9,7 +9,7 @@
     "build:api:summary": "node ./.vitepress/scripts/api-summary.js"
   },
   "dependencies": {
-    "@tsed/vitepress-theme": "1.5.3",
+    "@tsed/vitepress-theme": "1.5.5",
     "@vueuse/core": "10.11.0",
     "axios": "1.7.7",
     "lodash": "4.17.21",

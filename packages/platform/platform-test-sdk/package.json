@@ -2,7 +2,7 @@
   "name": "@tsed/platform-test-sdk",
   "description": "Package to test platform adapter integration with Ts.ED",
   "type": "module",
-  "version": "8.6.0-beta.1",
+  "version": "8.7.1",
   "source": "./src/index.ts",
   "main": "./lib/esm/index.js",
   "module": "./lib/esm/index.js",
@@ -18,7 +18,7 @@
   "scripts": {
     "build": "yarn barrels && yarn build:ts",
     "barrels": "barrels",
-    "build:ts": "tsc --build tsconfig.json"
+    "build:ts": "tsc --build tsconfig.esm.json"
   },
   "keywords": [
     "Ts.ED",

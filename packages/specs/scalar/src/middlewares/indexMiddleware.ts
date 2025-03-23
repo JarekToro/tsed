@@ -10,7 +10,6 @@ export function indexMiddleware(viewPath: string, conf: ScalarSettings) {
     const {path, options = {}, cssPath, cdn, fileName} = conf;
 
     const opts = {
-      _integration: "tsed",
       spec: {
         url: `${path}/${fileName}`
       },

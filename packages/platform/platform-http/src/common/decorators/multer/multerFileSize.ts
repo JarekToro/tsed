@@ -1,11 +1,11 @@
-import {MulterOptions} from "./multerOptions.js";
+import {MulterFileSize as M} from "@tsed/platform-multer";
 
 /**
  * Define file size limit.
  *
  * ```typescript
  * import {Post} from "@tsed/schema";
- * import {MulterOptions, MultipartFile} from "@tsed/platform-http";
+ * import {MulterOptions, MultipartFile} from "@tsed/platform-multer";
  * import {Controller} from "@tsed/di";
  * import {Multer} from "@types/multer";
  *
@@ -25,8 +25,7 @@ import {MulterOptions} from "./multerOptions.js";
  * @param fileSize
  * @returns {(target: any, propertyKey: string, descriptor: PropertyDescriptor) => PropertyDescriptor}
  * @decorator
+ * @deprecated use MulterFileSize from @tsed/platform-multer
  * @multer
  */
-export function MulterFileSize(fileSize: number): MethodDecorator {
-  return MulterOptions({limits: {fileSize}});
-}
+export const MulterFileSize: typeof M = M;

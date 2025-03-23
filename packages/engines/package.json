@@ -2,7 +2,7 @@
   "name": "@tsed/engines",
   "description": "Template engines library. Provide an API to adding custom engines from decorators.",
   "type": "module",
-  "version": "8.6.0-beta.1",
+  "version": "8.7.1",
   "source": "./src/index.ts",
   "main": "./lib/esm/index.js",
   "module": "./lib/esm/index.js",
@@ -19,7 +19,7 @@
     "build": "yarn barrels && yarn build:ts",
     "barrels": "barrels",
     "test": "vitest run",
-    "build:ts": "tsc --build tsconfig.json",
+    "build:ts": "tsc --build tsconfig.esm.json",
     "test:ci": "vitest run --coverage.thresholds.autoUpdate=true"
   },
   "dependencies": {
@@ -81,7 +81,7 @@
     "underscore": "^1.13.7",
     "vash": "^0.13.0",
     "velocityjs": "^2.0.6",
-    "vitest": "2.1.2",
+    "vitest": "3.0.9",
     "walrus": "^0.10.1",
     "whiskers": "^0.4.0"
   },

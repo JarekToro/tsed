@@ -75,6 +75,7 @@ Some options are available to configure Scalar, Ts.ED and the default spec infor
 | -------------------- | ------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
 | path                 | `/api-doc`                                                    | The url subpath to access to the documentation.                                                       |
 | specVersion          | `3.0.1`                                                       | The OpenSpec version.                                                                                 |
+| cdn                  | `https://cdn.jsdelivr.net/npm/@scalar/api-reference`          | Url to the @scalar/api-reference package.                                                             |
 | fileName             | `openapi.json`                                                | OpenAPI file name. By default openapi.json.                                                           |
 | doc                  | `hidden-doc`                                                  | The documentation key used by `@Docs` decorator to create several openapi documentations.             |
 | viewPath             | `${rootDir}/views/scalar.ejs` or `false`                      | The path to the ejs template. Set false to disabled scalar.                                           |
@@ -89,6 +90,30 @@ Some options are available to configure Scalar, Ts.ED and the default spec infor
 | operationIdPattern   | `%c_%m`                                                       | A pattern to generate the operationId. Format of operationId field (%c: class name, %m: method name). |
 | pathPatterns         | `[]`                                                          | Include only controllers whose paths match the pattern list provided.                                 |
 | sortPaths            | `true`                                                        | Sort paths by alphabetical order.                                                                     |
+
+:::tip
+
+Ts.ED relies on the latest version of the @scalar/api-reference package. If you need to use a specific version or have encountered an issue, you can specify the required version:
+
+```typescript
+import "@tsed/platform-express";
+import "@tsed/scalar"; // import scalar Ts.ED module
+
+import {Configuration} from "@tsed/di";
+
+@Configuration({
+  scalar: [
+    {
+      path: "/doc",
+      specVersion: "3.0.1",
+      cdn: "https://cdn.jsdelivr.net/npm/@scalar/api-reference@x.y.z"
+    }
+  ]
+})
+export class Server {}
+```
+
+:::
 
 ### Multi documentations
 
@@ -147,6 +172,22 @@ Sometimes you want to display extra `in` parameters like `headers` without consu
 It's possible to describe extra parameters by using the @@In@@ decorator over the method.
 
 <<< @/tutorials/snippets/scalar/endpoint-extra-in-params.ts
+
+## Intercept generated spec
+
+You can intercept the generated spec by using the `$alterOpenSpec` hook.
+
+This hook is called after the spec generation. You can modify the spec before it is sent to the client:
+
+```typescript
+@Configuration()
+class Server {
+  $alterOpenSpec(spec: OpenSpec, config: SwaggerSettings) {
+    // do something with the spec
+    return spec;
+  }
+}
+```
 
 ## Authors
 

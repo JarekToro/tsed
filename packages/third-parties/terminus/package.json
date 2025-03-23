@@ -2,7 +2,7 @@
   "name": "@tsed/terminus",
   "description": "Adds graceful shutdown and Kubernetes readiness / liveness checks for any HTTP applications.",
   "type": "module",
-  "version": "8.6.0-beta.1",
+  "version": "8.7.1",
   "author": "Emilien Leroy <emilien1005@hotmail.fr>",
   "source": "./src/index.ts",
   "main": "./lib/esm/index.js",
@@ -21,7 +21,7 @@
     "barrels": "barrels",
     "start": "ts-node test/app/index.ts",
     "test": "vitest run",
-    "build:ts": "tsc --build tsconfig.json",
+    "build:ts": "tsc --build tsconfig.esm.json",
     "test:ci": "vitest run --coverage.thresholds.autoUpdate=true"
   },
   "dependencies": {
@@ -37,14 +37,14 @@
     "@tsed/typescript": "workspace:*",
     "eslint": "9.12.0",
     "typescript": "5.4.5",
-    "vitest": "2.1.2"
+    "vitest": "3.0.9"
   },
   "peerDependencies": {
     "@godaddy/terminus": "^4.7.1",
-    "@tsed/core": ">=8.6.0-beta.1",
-    "@tsed/di": ">=8.6.0-beta.1",
-    "@tsed/platform-http": ">=8.6.0-beta.1",
-    "@tsed/schema": ">=8.6.0-beta.1"
+    "@tsed/core": ">=8.7.1",
+    "@tsed/di": ">=8.7.1",
+    "@tsed/platform-http": ">=8.7.1",
+    "@tsed/schema": ">=8.7.1"
   },
   "peerDependenciesMeta": {
     "@godaddy/terminus": {

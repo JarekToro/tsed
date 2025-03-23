@@ -2,7 +2,7 @@
   "name": "@tsed/socketio",
   "description": "Socket.io package for Ts.ED framework",
   "type": "module",
-  "version": "8.6.0-beta.1",
+  "version": "8.7.1",
   "keywords": [
     "tsed",
     "socket.io",
@@ -27,7 +27,7 @@
     "barrels": "barrels",
     "start": "ts-node test/app/index.ts",
     "test": "vitest run",
-    "build:ts": "tsc --build tsconfig.json",
+    "build:ts": "tsc --build tsconfig.esm.json",
     "test:ci": "vitest run --coverage.thresholds.autoUpdate=true"
   },
   "dependencies": {
@@ -49,14 +49,14 @@
     "socket.io": "4.8.0",
     "socket.io-client": "^4.8.0",
     "typescript": "5.4.5",
-    "vitest": "2.1.2"
+    "vitest": "3.0.9"
   },
   "peerDependencies": {
-    "@tsed/di": ">=8.6.0-beta.1",
-    "@tsed/json-mapper": ">=8.6.0-beta.1",
+    "@tsed/di": ">=8.7.1",
+    "@tsed/json-mapper": ">=8.7.1",
     "@tsed/logger": ">=7.0.1",
-    "@tsed/platform-middlewares": ">=8.6.0-beta.1",
-    "@tsed/schema": ">=8.6.0-beta.1",
+    "@tsed/platform-middlewares": ">=8.7.1",
+    "@tsed/schema": ">=8.7.1",
     "socket.io": ">=4.0.0"
   },
   "peerDependenciesMeta": {

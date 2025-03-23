@@ -2,7 +2,7 @@
   "name": "@tsed/platform-express",
   "description": "A TypeScript Framework on top of Express",
   "type": "module",
-  "version": "8.6.0-beta.1",
+  "version": "8.7.1",
   "source": "./src/index.ts",
   "main": "./lib/esm/index.js",
   "module": "./lib/esm/index.js",
@@ -21,7 +21,7 @@
     "start": "ts-node test/app/index.ts",
     "start:emulate": "ts-node test/app/emulate.ts",
     "test": "vitest run",
-    "build:ts": "tsc --build tsconfig.json",
+    "build:ts": "tsc --build tsconfig.esm.json",
     "test:ci": "vitest run --coverage.thresholds.autoUpdate=true"
   },
   "keywords": [
@@ -87,17 +87,17 @@
     "express-session": "1.18.1",
     "method-override": "3.0.0",
     "typescript": "5.4.5",
-    "vitest": "2.1.2"
+    "vitest": "3.0.9"
   },
   "peerDependencies": {
-    "@tsed/core": ">=8.6.0-beta.1",
-    "@tsed/di": ">=8.6.0-beta.1",
-    "@tsed/json-mapper": ">=8.6.0-beta.1",
+    "@tsed/core": ">=8.7.1",
+    "@tsed/di": ">=8.7.1",
+    "@tsed/json-mapper": ">=8.7.1",
     "@tsed/logger": ">=7.0.1",
-    "@tsed/openspec": ">=8.6.0-beta.1",
-    "@tsed/platform-http": ">=8.6.0-beta.1",
-    "@tsed/platform-views": ">=8.6.0-beta.1",
-    "@tsed/schema": ">=8.6.0-beta.1",
+    "@tsed/openspec": ">=8.7.1",
+    "@tsed/platform-http": ">=8.7.1",
+    "@tsed/platform-views": ">=8.7.1",
+    "@tsed/schema": ">=8.7.1",
     "@types/multer": "^1.4.5",
     "body-parser": "^1.19.0",
     "cross-env": "7.0.3",

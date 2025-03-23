@@ -2,7 +2,7 @@
   "name": "@tsed/objection",
   "description": "Objection.js package for Ts.ED framework",
   "type": "module",
-  "version": "8.6.0-beta.1",
+  "version": "8.7.1",
   "source": "./src/index.ts",
   "main": "./lib/esm/index.js",
   "module": "./lib/esm/index.js",
@@ -19,7 +19,7 @@
     "build": "yarn barrels && yarn build:ts",
     "barrels": "barrels",
     "test": "vitest run",
-    "build:ts": "tsc --build tsconfig.json",
+    "build:ts": "tsc --build tsconfig.esm.json",
     "test:ci": "vitest run --coverage.thresholds.autoUpdate=true"
   },
   "dependencies": {
@@ -38,14 +38,14 @@
     "objection": "^2.2.18",
     "sqlite3": "^5.1.7",
     "typescript": "5.4.5",
-    "vitest": "2.1.2"
+    "vitest": "3.0.9"
   },
   "peerDependencies": {
-    "@tsed/ajv": ">=8.6.0-beta.1",
-    "@tsed/core": ">=8.6.0-beta.1",
-    "@tsed/di": ">=8.6.0-beta.1",
-    "@tsed/json-mapper": ">=8.6.0-beta.1",
-    "@tsed/schema": ">=8.6.0-beta.1",
+    "@tsed/ajv": ">=8.7.1",
+    "@tsed/core": ">=8.7.1",
+    "@tsed/di": ">=8.7.1",
+    "@tsed/json-mapper": ">=8.7.1",
+    "@tsed/schema": ">=8.7.1",
     "knex": ">=0.94.0",
     "objection": ">=2.0.0"
   },

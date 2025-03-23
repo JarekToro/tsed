@@ -2,7 +2,7 @@
   "name": "@tsed/mikro-orm",
   "description": "MikroORM package for Ts.ED framework",
   "type": "module",
-  "version": "8.6.0-beta.1",
+  "version": "8.7.1",
   "source": "./src/index.ts",
   "main": "./lib/esm/index.js",
   "module": "./lib/esm/index.js",
@@ -19,7 +19,7 @@
     "build": "yarn barrels && yarn build:ts",
     "barrels": "barrels",
     "test": "vitest run",
-    "build:ts": "tsc --build tsconfig.json",
+    "build:ts": "tsc --build tsconfig.esm.json",
     "test:ci": "vitest run --coverage.thresholds.autoUpdate=true"
   },
   "dependencies": {
@@ -41,13 +41,13 @@
     "eslint": "9.12.0",
     "ts-mockito": "^2.6.1",
     "typescript": "5.4.5",
-    "vitest": "2.1.2"
+    "vitest": "3.0.9"
   },
   "peerDependencies": {
     "@mikro-orm/core": ">=4.5.9",
-    "@tsed/core": ">=8.6.0-beta.1",
-    "@tsed/di": ">=8.6.0-beta.1",
+    "@tsed/core": ">=8.7.1",
+    "@tsed/di": ">=8.7.1",
     "@tsed/logger": ">=7.0.1",
-    "@tsed/platform-http": ">=8.6.0-beta.1"
+    "@tsed/platform-http": ">=8.7.1"
   }
 }

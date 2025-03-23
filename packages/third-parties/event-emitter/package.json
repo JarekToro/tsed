@@ -2,7 +2,7 @@
   "name": "@tsed/event-emitter",
   "description": "EventEmitter package for Ts.ED framework",
   "type": "module",
-  "version": "8.6.0-beta.1",
+  "version": "8.7.1",
   "contributors": [
     {
       "name": "Oliver Christen"
@@ -27,7 +27,7 @@
     "build:browser": "webpack",
     "barrels": "barrels",
     "test": "vitest run",
-    "build:ts": "tsc --build tsconfig.json",
+    "build:ts": "tsc --build tsconfig.esm.json",
     "test:ci": "vitest run --coverage.thresholds.autoUpdate=true"
   },
   "dependencies": {
@@ -42,7 +42,7 @@
     "eslint": "9.12.0",
     "eventemitter2": "^6.4.9",
     "typescript": "5.4.5",
-    "vitest": "2.1.2",
+    "vitest": "3.0.9",
     "webpack": "^5.75.0"
   },
   "peerDependencies": {

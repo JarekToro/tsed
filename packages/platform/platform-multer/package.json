@@ -1,0 +1,107 @@
+{
+  "name": "@tsed/platform-multer",
+  "description": "Multer adapter package for Ts.ED framework",
+  "type": "module",
+  "version": "8.7.1",
+  "source": "./src/index.ts",
+  "main": "./lib/esm/index.js",
+  "module": "./lib/esm/index.js",
+  "typings": "./lib/types/index.d.ts",
+  "exports": {
+    ".": {
+      "tsed-source": "./src/index.ts",
+      "types": "./lib/types/index.d.ts",
+      "import": "./lib/esm/index.js",
+      "default": "./lib/esm/index.js"
+    },
+    "./express": {
+      "tsed-source": "./src/adapters/express/MulterModule.ts",
+      "types": "./lib/types/adapters/express/MulterModule.d.ts",
+      "import": "./lib/esm/adapters/express/MulterModule.js",
+      "default": "./lib/esm/adapters/express/MulterModule.js"
+    },
+    "./koa": {
+      "tsed-source": "./src/adapters/koa/MulterModule.ts",
+      "types": "./lib/types/adapters/koa/MulterModule.d.ts",
+      "import": "./lib/esm/adapters/koa/MulterModule.js",
+      "default": "./lib/esm/adapters/koa/MulterModule.js"
+    }
+  },
+  "scripts": {
+    "build": "yarn barrels && yarn build:ts",
+    "barrels": "barrels",
+    "test": "vitest run",
+    "build:ts": "tsc --build tsconfig.esm.json",
+    "test:ci": "vitest run --coverage.thresholds.autoUpdate=true"
+  },
+  "keywords": [
+    "Multer",
+    "TypeScript",
+    "typescript",
+    "Decorator",
+    "decorators",
+    "decorator",
+    "ESM",
+    "multipartfile",
+    "Ts.ED"
+  ],
+  "author": {
+    "name": "Romain Lenzotti"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tsedio/tsed/issues"
+  },
+  "homepage": "https://tsed.dev/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tsedio/tsed.git"
+  },
+  "devDependencies": {
+    "@tsed/barrels": "workspace:*",
+    "@tsed/core": "workspace:*",
+    "@tsed/di": "workspace:*",
+    "@tsed/platform-middlewares": "workspace:*",
+    "@tsed/typescript": "workspace:*",
+    "eslint": "9.12.0",
+    "typescript": "5.4.5",
+    "vitest": "3.0.9"
+  },
+  "dependencies": {
+    "multer": "^1.4.5-lts.1",
+    "tslib": "2.7.0"
+  },
+  "peerDependencies": {
+    "@tsed/core": ">=8.7.1",
+    "@tsed/di": ">=8.7.1",
+    "@tsed/json-mapper": ">=8.7.1",
+    "@tsed/logger": ">=7.0.1",
+    "@tsed/openspec": ">=8.7.1",
+    "@tsed/platform-middlewares": ">=8.7.1",
+    "@tsed/schema": ">=8.7.1",
+    "cross-env": "7.0.3"
+  },
+  "peerDependenciesMeta": {
+    "@tsed/core": {
+      "optional": false
+    },
+    "@tsed/di": {
+      "optional": false
+    },
+    "@tsed/json-mapper": {
+      "optional": false
+    },
+    "@tsed/logger": {
+      "optional": false
+    },
+    "@tsed/openspec": {
+      "optional": false
+    },
+    "@tsed/platform-middlewares": {
+      "optional": false
+    },
+    "@tsed/schema": {
+      "optional": false
+    }
+  }
+}
