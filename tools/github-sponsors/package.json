@@ -12,5 +12,7 @@
   },
   "devDependencies": {
     "yaml": "^2.5.1"
-  }
+  },
+  "dependencies": {},
+  "peerDependencies": {}
 }

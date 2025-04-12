@@ -23,5 +23,7 @@
     "typescript": "5.4.5"
   },
   "module": "./lib/esm/index.js",
-  "typings": "./lib/types/index.d.ts"
+  "typings": "./lib/types/index.d.ts",
+  "dependencies": {},
+  "peerDependencies": {}
 }

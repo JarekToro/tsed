@@ -7240,16 +7240,19 @@ __metadata:
     "@tsed/logger": "npm:^7.0.1"
     "@tsed/platform-http": "workspace:*"
     "@tsed/typescript": "workspace:*"
+    "@types/ws": "npm:8.18.1"
     eslint: "npm:9.12.0"
-    graphql-ws: "npm:5.16.0"
+    graphql-ws: "npm:6.0.4"
     tslib: "npm:2.7.0"
     typescript: "npm:5.4.5"
+    ws: "npm:8.18.1"
   peerDependencies:
     "@tsed/core": ">=8.7.1"
     "@tsed/di": ">=8.7.1"
     "@tsed/logger": ">=7.0.1"
     "@tsed/platform-http": ">=8.7.1"
-    graphql-ws: ">=5.14.2"
+    graphql-ws: ">=6.0.4"
+    ws: ">=8.18.1"
   languageName: unknown
   linkType: soft
 
@@ -9938,6 +9941,15 @@ __metadata:
     "@types/node": "npm:*"
     "@types/webidl-conversions": "npm:*"
   checksum: 10/975987a9ca14a8d5a883523acb4fa0df7760cd8ca8dee56cd57753821e56060bfbead94df84f4504fe0b4270776d81cbb40fcd1f8643dab86da3a9abe926fb5c
+  languageName: node
+  linkType: hard
+
+"@types/ws@npm:8.18.1":
+  version: 8.18.1
+  resolution: "@types/ws@npm:8.18.1"
+  dependencies:
+    "@types/node": "npm:*"
+  checksum: 10/1ce05e3174dcacf28dae0e9b854ef1c9a12da44c7ed73617ab6897c5cbe4fccbb155a20be5508ae9a7dde2f83bd80f5cf3baa386b934fc4b40889ec963e94f3a
   languageName: node
   linkType: hard
 
@@ -17703,12 +17715,22 @@ __metadata:
   languageName: node
   linkType: hard
 
-"graphql-ws@npm:5.16.0":
-  version: 5.16.0
-  resolution: "graphql-ws@npm:5.16.0"
+"graphql-ws@npm:6.0.4":
+  version: 6.0.4
+  resolution: "graphql-ws@npm:6.0.4"
   peerDependencies:
-    graphql: ">=0.11 <=16"
-  checksum: 10/e56d903920c78fa88966e31940d281f8b35ef8c9f4543255bfe349e47a0e972c6ca746bcb52040b1c6938d22e42560228994399972abc473cfa6bcd183aca709
+    "@fastify/websocket": ^10 || ^11
+    graphql: ^15.10.1 || ^16
+    uWebSockets.js: ^20
+    ws: ^8
+  peerDependenciesMeta:
+    "@fastify/websocket":
+      optional: true
+    uWebSockets.js:
+      optional: true
+    ws:
+      optional: true
+  checksum: 10/9cfd6bdf03a65c2b390e049b0e6ce43dd3e428eb7df74afaad45bbfe1f074687a507509f5ab3f9467fea90a7fbe468558621e8c7be06729ea9dc56e116f236da
   languageName: node
   linkType: hard
 
@@ -30632,6 +30654,21 @@ __metadata:
     utf-8-validate:
       optional: true
   checksum: 10/7c511c59e979bd37b63c3aea4a8e4d4163204f00bd5633c053b05ed67835481995f61a523b0ad2b603566f9a89b34cb4965cb9fab9649fbfebd8f740cea57f17
+  languageName: node
+  linkType: hard
+
+"ws@npm:8.18.1":
+  version: 8.18.1
+  resolution: "ws@npm:8.18.1"
+  peerDependencies:
+    bufferutil: ^4.0.1
+    utf-8-validate: ">=5.0.2"
+  peerDependenciesMeta:
+    bufferutil:
+      optional: true
+    utf-8-validate:
+      optional: true
+  checksum: 10/3f38e9594f2af5b6324138e86b74df7d77bbb8e310bf8188679dd80bac0d1f47e51536a1923ac3365f31f3d8b25ea0b03e4ade466aa8292a86cd5defca64b19b
   languageName: node
   linkType: hard
 

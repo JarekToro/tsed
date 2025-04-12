@@ -90,5 +90,6 @@
     "decorators",
     "engines",
     "view"
-  ]
+  ],
+  "peerDependencies": {}
 }

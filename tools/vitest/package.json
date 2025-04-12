@@ -14,5 +14,7 @@
   "scripts": {
     "generate": "node index.js",
     "reset:coverage": "node reset.js"
-  }
+  },
+  "dependencies": {},
+  "peerDependencies": {}
 }

@@ -1,36 +1,27 @@
 import Http from "node:http";
 import Https from "node:https";
 
-import {Constant, Inject, InjectorService, Module} from "@tsed/di";
-import type {Disposable} from "graphql-ws";
-import {useServer} from "graphql-ws/lib/use/ws";
+import {constant, inject, logger, Module} from "@tsed/di";
+import {useServer} from "graphql-ws/use/ws";
+import {WebSocketServer} from "ws";
 
 import {GraphQLWSOptions} from "./GraphQLWSOptions.js";
 
 @Module()
 export class GraphQLWSModule {
-  @Constant("graphqlWs", {})
-  private settings: GraphQLWSOptions;
-
-  @Inject(Http.Server)
-  private httpServer: Http.Server | null;
-
-  @Inject(Https.Server)
-  private httpsServer: Https.Server | null;
-
-  @Inject()
-  private injector: InjectorService;
+  private settings = constant<GraphQLWSOptions>("graphqlWs", {} as GraphQLWSOptions);
+  private httpServer = inject<Http.Server | null>(Http.Server);
+  private httpsServer = inject<Https.Server | null>(Https.Server);
 
   async createWSServer(settings: GraphQLWSOptions) {
-    // @ts-ignore
-    const {WebSocketServer} = await import("ws");
-
-    const wsServer = new WebSocketServer({
+    const opts = {
       ...(this.settings.wsServerOptions || {}),
       ...settings.wsServerOptions,
       server: this.httpsServer || this.httpServer!,
       path: settings.path
-    });
+    };
+
+    const wsServer = new WebSocketServer(opts);
 
     return useServer(
       {
@@ -45,7 +36,7 @@ export class GraphQLWSModule {
   async $alterApolloServerPlugins(plugins: any[], settings: GraphQLWSOptions) {
     const wsServer = await this.createWSServer(settings);
 
-    this.injector.logger.info(`Create GraphQL WS server on: ${settings.path}`);
+    logger().info(`Create GraphQL WS server on: ${settings.path}`);
 
     return plugins.concat({
       serverWillStart() {

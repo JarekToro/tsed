@@ -45,5 +45,6 @@
     "vite": "6.0.14",
     "vitest": "3.0.9",
     "webpack": "^5.75.0"
-  }
+  },
+  "peerDependencies": {}
 }
