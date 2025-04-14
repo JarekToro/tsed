@@ -2,7 +2,7 @@
   "name": "@tsed/hooks",
   "description": "Hooks module for Ts.ED Framework",
   "type": "module",
-  "version": "8.7.1",
+  "version": "8.7.2",
   "source": "./src/index.ts",
   "main": "./lib/esm/index.js",
   "module": "./lib/esm/index.js",
@@ -42,6 +42,5 @@
     "vite": "6.0.14",
     "vitest": "3.0.9",
     "webpack": "^5.75.0"
-  },
-  "peerDependencies": {}
+  }
 }
