@@ -54,6 +54,8 @@ to make your code more readable and less error-prone.
 - Template (View),
 - Testing.
 
+See [Ts.ED capabilities](https://tsed.dev/introduction/capabilities.html) for more information.
+
 ## Documentation
 
 Documentation is available on [https://tsed.dev](https://tsed.dev)

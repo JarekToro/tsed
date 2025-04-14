@@ -38,6 +38,8 @@ npm install --save @tsed/platform-koa koa
 npm install --save-dev @types/koa
 ```
 
+See [Ts.ED capabilities](https://tsed.dev/introduction/capabilities.html) for more information.
+
 ## Contributors
 
 Please read [contributing guidelines here](https://tsed.devcontributing.html)
