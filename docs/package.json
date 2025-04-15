@@ -1,12 +1,13 @@
 {
   "name": "@tsed/docs-new",
-  "version": "8.8.0-beta.1",
+  "version": "8.8.0-beta.4",
   "type": "module",
   "scripts": {
     "docs:dev": "yarn build:api:summary && vitepress dev .",
     "docs:build": "yarn build:api:summary && vitepress build .",
     "docs:preview": "vitepress preview .",
-    "build:api:summary": "node ./.vitepress/scripts/api-summary.js"
+    "build:api:summary": "node ./.vitepress/scripts/api-summary.js",
+    "serve": "npx serve ./.vitepress/dist"
   },
   "dependencies": {
     "@tsed/vitepress-theme": "1.5.5",

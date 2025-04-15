@@ -38,6 +38,8 @@ npm install --save @tsed/platform-express express
 npm install --save-dev @types/express
 ```
 
+See [Ts.ED capabilities](https://tsed.dev/introduction/capabilities.html) for more information.
+
 ## Contributors
 
 Please read [contributing guidelines here](https://tsed.devcontributing.html)

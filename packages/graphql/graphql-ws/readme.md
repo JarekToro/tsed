@@ -37,7 +37,7 @@ You need to install `@tsed/apollo` before using this module.
 To begin, install the GraphQL WS module for TS.ED:
 
 ```bash
-npm install --save @tsed/graphql-ws graphql-ws
+npm install --save @tsed/graphql-ws graphql-ws ws @types/ws
 ```
 
 Now, we can configure the Ts.ED server by importing `@tsed/gr` in your Server:

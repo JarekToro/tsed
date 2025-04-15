@@ -26,12 +26,20 @@ This module need to be used with `@tsed/apollo` module. So, you must install it 
 
 ::: code-group
 
-```bash [Npm]
-npm install --save @tsed/graphql-ws graphql-ws
+```bash [npm]
+npm install --save @tsed/graphql-ws graphql-ws ws @types/ws
 ```
 
-```bash [Yarn]
-yarn add @tsed/graphql-ws graphql-ws
+```bash [yarn]
+yarn add @tsed/graphql-ws graphql-ws ws @types/ws
+```
+
+```bash [pnpm]
+pnpm add @tsed/graphql-ws graphql-ws ws @types/ws
+```
+
+```bash [bun]
+bun add @tsed/graphql-ws graphql-ws ws @types/ws
 ```
 
 :::
@@ -52,10 +60,10 @@ import {join} from "node:path";
       plugins: [], // Apollo plugins
 
       wsServerOptions: {
-        // See options descriptions on
+        // See options descriptions on WS website
       },
       wsUseServerOptions: {
-        // See options descriptions on GraphQL WS
+        // See options descriptions on GraphQL WS website
       }
 
       // Give custom server instance

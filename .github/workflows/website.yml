@@ -22,7 +22,7 @@ jobs:
       - name: Build pages
         env:
           CI: true
-        run: yarn docs:build
+        run: yarn build && yarn docs:build
       - name: Publish pages
         env:
           CI: true
