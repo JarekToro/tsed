@@ -95,7 +95,6 @@ The `mikroOrm` options accepts the same configuration object as `init()` from th
 `@Orm` decorator lets you retrieve an instance of MikroORM.
 
 ```typescript
-import {AfterRoutesInit} from "@tsed/platform-http";
 import {Injectable} from "@tsed/di";
 import {Orm} from "@tsed/mikro-orm";
 import {MikroORM} from "@mikro-orm/core";
@@ -141,7 +140,6 @@ export class MyService {
 `@EntityManager` and `@Em` decorators lets you retrieve an instance of EntityManager.
 
 ```typescript
-import {AfterRoutesInit} from "@tsed/platform-http";
 import {Injectable} from "@tsed/di";
 import {Em} from "@tsed/mikro-orm";
 import {EntityManager} from "@mikro-orm/mysql"; // Import EntityManager from your driver package or `@mikro-orm/knex`
@@ -163,7 +161,6 @@ export class UsersService {
 It's also possible to inject Entity manager by his context name:
 
 ```typescript
-import {AfterRoutesInit} from "@tsed/platform-http";
 import {Injectable} from "@tsed/di";
 import {Em} from "@tsed/mikro-orm";
 import {EntityManager} from "@mikro-orm/mysql"; // Import EntityManager from your driver package or `@mikro-orm/knex`
@@ -187,33 +184,33 @@ export class UsersService {
 To begin, we need to define an Entity MikroORM like this and use Ts.ED Decorator to define the JSON Schema.
 
 ```typescript
-import {Property, MaxLength, Required} from "@tsed/schema";
-import {Entity, Property, PrimaryKey, Property as Column} from "@mikro-orm/core";
+import {MaxLength, Required} from "@tsed/schema";
+import {Entity, Property, PrimaryKey, Property} from "@mikro-orm/core";
 
 @Entity()
 export class User {
   @PrimaryKey()
-  @Property()
+  @Required()
   id!: number;
 
-  @Column()
+  @Property()
   @MaxLength(100)
   @Required()
   firstName!: string;
 
-  @Column()
+  @Property()
   @MaxLength(100)
   @Required()
   lastName!: string;
 
-  @Column()
+  @Property()
   @Mininum(0)
   @Maximum(100)
   age!: number;
 }
 ```
 
-Now, the model is correctly defined and can be used with a [Controller](https://tsed.dev/docs/controllers.html)
+Now, the model is correctly defined and can be used with a [Controller](/docs/controllers.md)
 , [AJV validation](/tutorials/ajv.md),
 [Swagger](/tutorials/swagger.md) and [MikroORM](https://mikro-orm.io/docs/defining-entities).
 
@@ -278,10 +275,18 @@ export class UsersCtrl {
 By default, `IsolationLevel.READ_COMMITTED` is used. You can override it, specifying the isolation level for the transaction by supplying it as the `isolationLevel` parameter in the `@Transactional` decorator:
 
 ```typescript
-@Post("/")
-@Transactional({isolationLevel: IsolationLevel.SERIALIZABLE})
-create(@BodyParams() user: User): Promise<User> {
-  return this.usersService.create(user);
+import {Post} from "@tsed/schema";
+import {Controller} from "@tsed/di";
+import {Transactional} from "@tsed/mikro-orm";
+import {BodyParams} from "@tsed/platform-params";
+
+@Controller('/users')
+class UsersController {
+  @Post('/')
+  @Transactional({isolationLevel: IsolationLevel.SERIALIZABLE})
+  create(@BodyParams() user: User): Promise<User> {
+    return this.usersService.create(user);
+  }
 }
 ```
 
@@ -290,10 +295,18 @@ The MikroORM supports the standard isolation levels such as `SERIALIZABLE` or `R
 You can also set the [flushing strategy](https://mikro-orm.io/docs/unit-of-work#flush-modes) for the transaction by setting the `flushMode`:
 
 ```typescript
-@Post("/")
-@Transactional({flushMode: FlushMode.AUTO})
-create(@BodyParams() user: User): Promise<User> {
-  return this.usersService.create(user);
+import {Post} from "@tsed/schema";
+import {Controller} from "@tsed/di";
+import {BodyParams} from "@tsed/platform-params";
+import {Transactional} from "@tsed/mikro-orm";
+
+@Controller("/users")
+class UsersController {
+  @Post("/")
+  @Transactional({flushMode: FlushMode.AUTO})
+  create(@BodyParams() user: User): Promise<User> {
+    return this.usersService.create(user);
+  }
 }
 ```
 
@@ -302,10 +315,18 @@ In some cases, you might need to avoid an explicit transaction, but preserve an 
 To prevent `@Transactional()` use of an explicit transaction, you just need to set the `disabled` field to `true`:
 
 ```typescript
-@Post("/")
-@Transactional({disabled: true})
-create(@BodyParams() user: User): Promise<User> {
-  return this.usersService.create(user);
+import {Post} from "@tsed/schema";
+import {Controller} from "@tsed/di";
+import {BodyParams} from "@tsed/platform-params";
+import {Transactional} from "@tsed/mikro-orm";
+
+@Controller("/users")
+class UsersController {
+  @Post("/")
+  @Transactional({disabled: true})
+  create(@BodyParams() user: User): Promise<User> {
+    return this.usersService.create(user);
+  }
 }
 ```
 
@@ -380,7 +401,7 @@ export class UsersCtrl {
 
 ## Managing Lifecycle of Subscribers
 
-With Ts.ED, managing the lifecycle of subscribers registered with Mikro-ORM using the IoC container is simple. To automatically resolve a subscriber's dependencies, you can use the `@Subscriber` decorator as follows:
+With Ts.ED, managing the lifecycle of subscribers registered with MikroORM using the IoC container is simple. To automatically resolve a subscriber's dependencies, you can use the `@Subscriber` decorator as follows:
 
 ```typescript
 import {EventSubscriber} from "@mikro-orm/core";
