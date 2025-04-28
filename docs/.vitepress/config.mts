@@ -7,9 +7,9 @@ import team from "../team.json";
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  title: "Ts.ED a modern Node.js/Bun.js framework built with TypeScript on top of Express.js/Koa.js",
+  title: "Ts.ED a modern Node.js/Bun.js framework built with TypeScript on top of Express.js/Koa.js/Fastify.js/CLI/AWS",
   lastUpdated: true,
-  description: "Ts.ED offers a flexible and easy-to-learn structure designed to enhance the developer experience. It provides decorators, guidelines, and supports Node.js, Bun.js, Express, Koa, CLI, and serverless architectures (e.g., AWS).",
+  description: "Ts.ED offers a flexible and easy-to-learn structure designed to enhance the developer experience. It provides decorators, guidelines, and supports Node.js, Bun.js, Express.js, Koa.js, Fastify.js, CLI, and serverless architectures (e.g., AWS).",
   sitemap: {
     hostname: "https://tsed.dev"
   },
@@ -24,7 +24,7 @@ export default defineConfig({
     ["meta", {name: "theme-color", content: "#5f67ee"}],
     ["meta", {property: "og:type", content: "website"}],
     ["meta", {property: "og:locale", content: "en"}],
-    ["meta", {property: "og:title", content: "Ts.ED a modern Node.js/Bun.js framework built with TypeScript on top of Express.js/Koa.js"}],
+    ["meta", {property: "og:title", content: "Ts.ED a modern Node.js/Bun.js framework built with TypeScript on top of Express.js/Koa.js/Fastify.js/CLI/AWS"}],
     ["meta", {property: "og:site_name", content: "Ts.ED"}],
     ["meta", {property: "og:image", content: "https://tsed.dev/tsed-og.png"}],
     ["meta", {property: "og:url", content: "https://tsed.dev/"}],
