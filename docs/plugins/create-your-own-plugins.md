@@ -112,9 +112,8 @@ Ts.ED marketplace scans regularly the NPM registry to find new plugins.
 To appear on the Ts.ED marketplace, you have to publish your plugin on the NPM registry
 with one of the following name patterns:
 
-- `tsed-*` in the name of your package,
-- `@tsed/*` in the name of your scope
-- `@tsed/plugin-*` in the name of your scope and package
-- or adding `tsed` in the keywords package.json field.
+- `tsed-plugin-*`  in the name of your scope and package (recommanded)
+- `tsed-*` or`@tsed*/` in the name of your package,
+- or adding `Ts.ED` in your description package.json field.
 
 Thats it! Your plugin will be automatically listed on the Ts.ED marketplace.
