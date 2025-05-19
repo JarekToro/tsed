@@ -116,21 +116,41 @@ export class Server {
 
 Update config values in Vault from your services using dependency injection:
 
-```typescript
+::: code-group
+
+```typescript [Decorators]
 import {VaultConfigSource} from "@tsedio/config-vault";
 import {InjectConfigSource} from "@tsed/config/decorators/injectConfigSource.js";
 import {Injectable} from "@tsed/di";
 
 @Injectable()
 class MyService {
-  @InjectConfigSource()
-  vaultConfigSource: VaultConfigSource;
+  @InjectConfigSource("vault")
+  config: VaultConfigSource;
 
   async setValue(key: string, value: any) {
     await this.vaultConfigSource.set(key, value);
   }
 }
 ```
+
+```typescript [Functional API]
+import {VaultConfigSource} from "@tsedio/config-vault";
+import {injectConfigSource} from "@tsed/config/decorators/injectConfigSource.js";
+import {injectable} from "@tsed/di";
+
+class MyService {
+  config = injectConfigSource<VaultConfigSource>("vault");
+
+  async setValue(key: string, value: any) {
+    await this.vaultConfigSource.set(key, value);
+  }
+}
+
+injectable(MyService);
+```
+
+:::
 
 ## 🔑 Vault KV Secret Engine Versions
 

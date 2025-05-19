@@ -114,21 +114,41 @@ export class Server {
 
 You can update configuration values in MongoDB directly from your services, thanks to dependency injection:
 
-```typescript
+::: code-group
+
+```typescript [Decorators]
 import {MongoConfigSource} from "@tsedio/config-mongo";
 import {InjectConfigSource} from "@tsed/config/decorators/injectConfigSource.js";
 import {Injectable} from "@tsed/di";
 
 @Injectable()
 class MyService {
-  @InjectConfigSource()
-  mongoConfigSource: MongoConfigSource;
+  @InjectConfigSource("mongo")
+  config: MongoConfigSource;
 
   async setValue(key: string, value: any) {
-    await this.mongoConfigSource.set(key, value);
+    await this.config.set(key, value);
   }
 }
 ```
+
+```ts [Function API]
+import {MongoConfigSource} from "@tsedio/config-mongo";
+import {injectConfigSource} from "@tsed/config/fn/injectConfigSource.js";
+import {injectable} from "@tsed/di";
+
+class MyService {
+  config = injectConfigSource<MongoConfigSource>("mongo");
+
+  async setValue(key: string, value: any) {
+    await this.config.set(key, value);
+  }
+}
+
+injectable(MyService);
+```
+
+:::
 
 ## 💡 Tips
 

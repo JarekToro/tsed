@@ -108,21 +108,41 @@ export class Server {
 
 You can update configuration values in Redis directly from your services, using dependency injection.
 
-```typescript
+::: code-group
+
+```typescript [Decorators]
 import {IORedisConfigSource} from "@tsed/ioredis-config";
 import {InjectConfigSource} from "@tsed/config/decorators/injectConfigSource.js";
 import {Injectable} from "@tsed/di";
 
 @Injectable()
 class MyService {
-  @InjectConfigSource()
-  ioredisConfigSource: IORedisConfigSource;
+  @InjectConfigSource("redis")
+  config: IORedisConfigSource;
 
   async setValue(key: string, value: any) {
-    await this.ioredisConfigSource.set(key, value);
+    await this.config.set(key, value);
   }
 }
 ```
+
+```typescript [Functional API]
+import {IORedisConfigSource} from "@tsed/ioredis-config";
+import {injectConfigSource} from "@tsed/config/fn/injectConfigSource.js";
+import {injectable} from "@tsed/di";
+
+class MyService {
+  config = injectConfigSource<IORedisConfigSource>("redis");
+
+  async setValue(key: string, value: any) {
+    await this.config.set(key, value);
+  }
+}
+
+injectable(MyService);
+```
+
+:::
 
 ## 💡 Tips
 
