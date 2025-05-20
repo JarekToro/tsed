@@ -76,10 +76,9 @@ import {Configuration, Constant} from "@tsed/di";
       endpoint: "http://localhost:8200", // Vault server URL
       token: "your-vault-token", // Your Vault token
       secretPath: "secret/data/myapp", // Path to your secret (KV v2 or v1, see below)
-      refreshInterval: 10000, // ⏱️ Polling interval in ms (default: 10s)
-      clientOptions: {
-        // Additional node-vault options
-      }
+      refreshInterval: 10000 // ⏱️ Polling interval in ms (default: 10s)
+      // Additional node-vault options
+
       // validationSchema: object({})              // Optional: add a validation schema
     })
   ]
