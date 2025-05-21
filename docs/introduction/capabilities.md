@@ -10,10 +10,10 @@ head:
 
 # Capabilities
 
-Ts.ED is a Node.js and TypeScript framework on top of Express/Koa.js. It provides different platform adapters
+Ts.ED is a Node.js and TypeScript framework on top of [Express.js](/docs/configuration/express.html), [Koa.js](/docs/configuration/koa.html), [Fastify.js](/docs/configuration/fastify.html). It provides different platform adapters
 to build your awesome server-side application.
 
-Depending on the platform you choose, Ts.ED provides a level of abstraction above these common Node.js frameworks (Express/Koa) with the [Platform API](/docs/platform-api.md)
+Depending on the platform you choose, Ts.ED provides a level of abstraction above these common Node.js frameworks with the [Platform API](/docs/platform-api.md)
 but some features are not available on all platforms.
 
 You can find below the list of features and plugins provided by Ts.ED and the compatibility with the different platforms.
@@ -36,7 +36,7 @@ Here are the runtime support provided by Ts.ED:
 
 ## Platform features support
 
-Here are the features list provided by Ts.ED and the compatibility with the different platforms:
+Here is the feature list provided by Ts.ED and the compatibility with the different platforms:
 
 <div class="table-features">
 

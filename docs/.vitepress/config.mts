@@ -1,9 +1,66 @@
+// @ts-ignore
 import {apiAnchor} from "@tsed/vitepress-theme/markdown/api-anchor/api-anchor.js";
 import {defineConfig} from "vitepress";
 import pkg from "../../package.json";
 import referenceSidebar from "../public/reference-sidebar.json";
 import team from "../team.json";
 
+const Plugins = [
+  {
+    text: "Marketplace",
+    link: "/plugins/index"
+  },
+  {
+    text: "Install premium plugins",
+    link: "/plugins/premium/install-premium-plugins"
+  },
+  {
+    text: "Create your own plugins",
+    link: "/plugins/create-your-own-plugins"
+  },
+  {
+    text: "Premium ConfigSource",
+    items: [
+      {
+        text: "IORedis ",
+        link: "/plugins/premium/config-source/ioredis"
+      },
+      {
+        text: "Mongo",
+        link: "/plugins/premium/config-source/mongo"
+      },
+      {
+        text: "Postgres",
+        link: "/plugins/premium/config-source/postgres"
+      },
+      {
+        text: "Vault",
+        link: "/plugins/premium/config-source/vault"
+      }
+    ]
+  },
+  {
+    text: "Premium TestContainers",
+    items: [
+      {
+        text: "Redis",
+        link: "/plugins/premium/testcontainers/redis"
+      },
+      {
+        text: "Mongo",
+        link: "/plugins/premium/testcontainers/mongo"
+      },
+      {
+        text: "Postgres",
+        link: "/plugins/premium/testcontainers/postgres"
+      },
+      {
+        text: "Vault",
+        link: "/plugins/premium/testcontainers/vault"
+      }
+    ]
+  }
+]
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -24,7 +81,10 @@ export default defineConfig({
     ["meta", {name: "theme-color", content: "#5f67ee"}],
     ["meta", {property: "og:type", content: "website"}],
     ["meta", {property: "og:locale", content: "en"}],
-    ["meta", {property: "og:title", content: "Ts.ED a modern Node.js/Bun.js framework built with TypeScript on top of Express.js/Koa.js/Fastify.js/CLI/AWS"}],
+    ["meta", {
+      property: "og:title",
+      content: "Ts.ED a modern Node.js/Bun.js framework built with TypeScript on top of Express.js/Koa.js/Fastify.js/CLI/AWS"
+    }],
     ["meta", {property: "og:site_name", content: "Ts.ED"}],
     ["meta", {property: "og:image", content: "https://tsed.dev/tsed-og.png"}],
     ["meta", {property: "og:url", content: "https://tsed.dev/"}],
@@ -307,49 +367,7 @@ export default defineConfig({
       },
       {
         text: "Plugins",
-        items: [
-          {
-            text: "Marketplace",
-            link: "/plugins/index"
-          },
-          {
-            text: "Install premium plugins",
-            link: "/plugins/premium/install-premium-plugins"
-          },
-          {
-            text: "Create your own plugins",
-            link: "/plugins/create-your-own-plugins"
-          },
-          {
-            text: "Premium plugins",
-            items: [
-              {
-                text: "IORedis ConfigSource",
-                link: "/plugins/premium/config-source/ioredis"
-              },
-              {
-                text: "Mongo ConfigSource",
-                link: "/plugins/premium/config-source/mongo"
-              },
-              {
-                text: "Vault ConfigSource",
-                link: "/plugins/premium/config-source/vault"
-              },
-              {
-                text: "Redis Testcontainers",
-                link: "/plugins/premium/testcontainers/redis"
-              },
-              {
-                text: "Mongo Testcontainers",
-                link: "/plugins/premium/testcontainers/mongo"
-              },
-              {
-                text: "Vault Testcontainers",
-                link: "/plugins/premium/testcontainers/vault"
-              }
-            ]
-          }
-        ]
+        items: Plugins as any[]
       },
       {
         text: pkg.version,
@@ -534,49 +552,7 @@ export default defineConfig({
           ]
         }
       ],
-      "/plugins/": [
-        {
-          text: "Marketplace",
-          link: "/plugins/index"
-        },
-        {
-          text: "Install premium plugins",
-          link: "/plugins/premium/install-premium-plugins"
-        },
-        {
-          text: "Create your own plugins",
-          link: "/plugins/create-your-own-plugins"
-        },
-        {
-          text: "Premium plugins",
-          items: [
-            {
-              text: "IORedis ConfigSource",
-              link: "/plugins/premium/config-source/ioredis"
-            },
-            {
-              text: "Mongo ConfigSource",
-              link: "/plugins/premium/config-source/mongo"
-            },
-            {
-              text: "Vault ConfigSource",
-              link: "/plugins/premium/config-source/vault"
-            },
-            {
-              text: "Redis Testcontainers",
-              link: "/plugins/premium/testcontainers/redis"
-            },
-            {
-              text: "Mongo Testcontainers",
-              link: "/plugins/premium/testcontainers/mongo"
-            },
-            {
-              text: "Vault Testcontainers",
-              link: "/plugins/premium/testcontainers/vault"
-            }
-          ]
-        }
-      ],
+      "/plugins/": Plugins,
       "/tutorials/": [
         {
           text: "ORM",
@@ -727,8 +703,8 @@ export default defineConfig({
     pageData.frontmatter.head ??= [];
 
     const has = pageData.frontmatter.head.find(([, meta]) => {
-      return meta?.rel === "canonical" && meta?.href === canonicalUrl
-    })
+      return meta?.rel === "canonical" && meta?.href === canonicalUrl;
+    });
 
     if (!has) {
       pageData.frontmatter.head.push([

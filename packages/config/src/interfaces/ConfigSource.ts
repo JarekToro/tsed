@@ -46,7 +46,7 @@ export interface ConfigSourceOptions<Opts = any> {
 
 export type InitialConfigSourceOptions = Omit<ConfigSourceOptions, "options" | "use">;
 export type ConfigSourceWatchCloseCB = () => Promise<void> | void;
-export type ConfigSourceOnChangeCB = () => void;
+export type ConfigSourceOnChangeCB = () => Promise<void>;
 
 /**
  * Interface for a configuration source that can provide configuration values.
