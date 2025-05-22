@@ -16,7 +16,7 @@ import {
   nameOf,
   nameOfClass,
   primitiveOf
-} from "../../index.js";
+} from "../index.js";
 
 class Base {
   test1() {}

@@ -1,4 +1,4 @@
-import {Type} from "../../domain/Type.js";
+import {Type} from "../types/Type.js";
 import {ancestorsOf} from "./ancestorsOf.js";
 import {classOf} from "./classOf.js";
 import {isSymbol} from "./isSymbol.js";

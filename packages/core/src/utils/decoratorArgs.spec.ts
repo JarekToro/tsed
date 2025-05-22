@@ -1,6 +1,6 @@
-import {descriptorOf} from "../objects/descriptorOf.js";
-import {prototypeOf} from "../objects/prototypeOf.js";
 import {decoratorArgs} from "./decoratorArgs.js";
+import {descriptorOf} from "./descriptorOf.js";
+import {prototypeOf} from "./prototypeOf.js";
 
 describe("decoratorArgs", () => {
   it("should return decorator arguments", () => {

@@ -1,6 +1,6 @@
-import {StoreFn} from "../../decorators/storeFn.js";
-import {Store} from "../../domain/Store.js";
-import {AnyDecorator} from "../../interfaces/AnyDecorator.js";
+import {AnyDecorator} from "../../types/AnyDecorator.js";
+import {StoreFn} from "../decorators/storeFn.js";
+import {Store} from "../types/Store.js";
 import {useDecorators} from "./useDecorators.js";
 
 describe("useDecorators", () => {

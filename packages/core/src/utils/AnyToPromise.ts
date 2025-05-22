@@ -1,7 +1,7 @@
-import {isObject} from "../utils/objects/isObject.js";
-import {isObservable} from "../utils/objects/isObservable.js";
-import {isPromise} from "../utils/objects/isPromise.js";
-import {isStream} from "../utils/objects/isStream.js";
+import {isObject} from "./isObject.js";
+import {isObservable} from "./isObservable.js";
+import {isPromise} from "./isPromise.js";
+import {isStream} from "./isStream.js";
 
 /**
  * @ignore

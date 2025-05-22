@@ -1,5 +1,5 @@
-import {StoreFn} from "../../decorators/storeFn.js";
-import {Store} from "../../domain/Store.js";
+import {StoreFn} from "../decorators/storeFn.js";
+import {Store} from "../types/Store.js";
 import {useDecorators} from "./useDecorators.js";
 import {useMethodDecorator, useMethodDecorators} from "./useMethodDecorators.js";
 

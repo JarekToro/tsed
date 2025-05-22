@@ -1,10 +1,10 @@
-import {DecoratorTypes} from "../domain/DecoratorTypes.js";
-import {decoratorTypeOf} from "../utils/decorators/decoratorTypeOf.js";
-import {deepClone} from "../utils/objects/deepClone.js";
-import {deepMerge} from "../utils/objects/deepMerge.js";
-import {descriptorOf} from "../utils/objects/descriptorOf.js";
-import {isSymbol} from "../utils/objects/isSymbol.js";
-import {nameOf} from "../utils/objects/nameOf.js";
+import {decoratorTypeOf} from "../utils/decoratorTypeOf.js";
+import {deepClone} from "../utils/deepClone.js";
+import {deepMerge} from "../utils/deepMerge.js";
+import {descriptorOf} from "../utils/descriptorOf.js";
+import {isSymbol} from "../utils/isSymbol.js";
+import {nameOf} from "../utils/nameOf.js";
+import {DecoratorTypes} from "./DecoratorTypes.js";
 import {Metadata} from "./Metadata.js";
 import type {Type} from "./Type.js";
 

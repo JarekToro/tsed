@@ -1,6 +1,6 @@
 import "reflect-metadata";
 
-import {classOf} from "../utils/objects/classOf.js";
+import {classOf} from "../utils/classOf.js";
 
 /**
  * Metadata key

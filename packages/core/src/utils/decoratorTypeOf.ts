@@ -1,5 +1,5 @@
-import {DecoratorTypes} from "../../domain/DecoratorTypes.js";
-import {classOf} from "../objects/classOf.js";
+import {DecoratorTypes} from "../types/DecoratorTypes.js";
+import {classOf} from "./classOf.js";
 
 export function decoratorTypeOf(args: any[]): DecoratorTypes {
   const [target, propertyKey, descriptor] = args;

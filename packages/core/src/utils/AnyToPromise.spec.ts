@@ -2,9 +2,9 @@ import {createReadStream} from "node:fs";
 
 import {of} from "rxjs";
 
-import {catchAsyncError} from "../utils/catchError.js";
-import {isStream} from "../utils/objects/isStream.js";
 import {AnyToPromise, AnyToPromiseStatus} from "./AnyToPromise.js";
+import {catchAsyncError} from "./catchError.js";
+import {isStream} from "./isStream.js";
 
 const rootDir = import.meta.dirname; // automatically replaced by import.meta.dirname on build
 
