@@ -2,7 +2,7 @@ import {existsSync, readFileSync, watch} from "node:fs";
 
 import {logger} from "@tsed/di";
 
-import type {ConfigSource} from "../../interfaces/ConfigSource.js";
+import type {ConfigSource, ConfigSourceOnChangeCB} from "../../interfaces/ConfigSource.js";
 
 export interface JsonConfigSourceOptions {
   /**
@@ -34,7 +34,7 @@ export class JsonConfigSource implements ConfigSource<JsonConfigSourceOptions> {
     return JSON.parse(fileContent);
   }
 
-  watch(onChange: () => void) {
+  watch(onChange: ConfigSourceOnChangeCB) {
     const {path} = this.options;
     const watcher = watch(path, onChange);
 

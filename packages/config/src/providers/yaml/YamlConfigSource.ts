@@ -3,7 +3,7 @@ import {existsSync, watch} from "node:fs";
 import {logger} from "@tsed/di";
 import JsYaml, {type LoadOptions} from "js-yaml";
 
-import type {ConfigSource} from "../../interfaces/ConfigSource.js";
+import type {ConfigSource, ConfigSourceOnChangeCB} from "../../interfaces/ConfigSource.js";
 
 export interface YamlConfigSourceOptions extends LoadOptions {
   /**
@@ -28,7 +28,7 @@ export class YamlConfigSource implements ConfigSource<YamlConfigSourceOptions> {
     return (await JsYaml.load(path, opts)) as Record<string, unknown>;
   }
 
-  watch(onChange: () => void) {
+  watch(onChange: ConfigSourceOnChangeCB) {
     const {path} = this.options;
     const watcher = watch(path, onChange);
 
