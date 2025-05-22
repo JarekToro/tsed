@@ -1,4 +1,4 @@
-import {DecoratorParameters} from "../../types/DecoratorParameters.js";
+import {DecoratorParameters} from "../types/DecoratorParameters.js";
 import {Store} from "../types/Store.js";
 
 /**
