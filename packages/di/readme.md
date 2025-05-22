@@ -36,7 +36,7 @@ A powerful and flexible Dependency Injection (DI) toolkit inspired by Angular, d
 Install the latest release and required peer dependencies:
 
 ```bash
-npm install --save @tsed/di @tsed/core @tsed/hooks @tsed/logger @tsed/schema
+npm install --save @tsed/di @tsed/core @tsed/hooks @tsed/logger
 ```
 
 > **Important!**

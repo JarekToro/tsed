@@ -58,6 +58,7 @@ export function Controller(options: PathType | ControllerOptions): ClassDecorato
     (target: Type) => {
       controller(target, opts);
     },
+    // TODO @tsed/schema: remove this when we have a better solution
     path && Path(path as any),
     Children(...children)
   );
