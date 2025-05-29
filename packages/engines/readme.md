@@ -94,6 +94,7 @@ You can get an engine by using `engines`:
 
 ```typescript
 import {getEngine} from "@tsed/engines";
+import "@tsed/engies/SwigEngine.js"; // or any other engine you want to use
 
 getEngine("swig")
   .renderFile({user: "tobi"})
@@ -106,6 +107,7 @@ Or render directly a template:
 
 ```typescript
 import {getEngine} from "@tsed/engines";
+import "@tsed/engines/EjsEngine.js"; // or any other engine you want to use
 
 getEngine("ejs")
   .render("<p><%= user.name %></p>")
@@ -129,6 +131,7 @@ Using supported Express versions: `app.locals.cache = true` or set NODE_ENV to '
 ```typescript
 import express from "express";
 import {getEngine} from "@tsed/engines";
+import "@tsed/engines/SwigEngine.js"; // or any other engine you want to use
 
 // assign the swig engine to .html files
 app.engine("html", getEngine("swig"));
@@ -165,6 +168,7 @@ console.log("Express server listening on port 3000");
 
 ```typescript
 import {getEngines} from "./getEngines.js";
+import "@tsed/engines/SwigEngine.js"; // or any other engine you want to use
 
 var views = require("koa-views");
 
@@ -199,7 +203,9 @@ Template engines are exposed via the `requires` object, but they are not instant
 You can instantiate them manually beforehand if you want to add filters, globals, mixins, or other engine features.
 
 ```typescript
-import {requires} from "consolidate";
+import {requires} from "@tsed/engines";
+import "@tsed/engines/NunjucksEngine.js"; // or any other engine you want to use
+
 import nunjucks from "nunjucks";
 
 // add nunjucks to requires so filters can be
@@ -218,6 +224,7 @@ pug engine implementation:
 
 ```typescript
 import {Engine, ViewEngine} from "@tsed/engines";
+import "@tsed/engines/PugEngine.js"; // or any other engine you want to use
 
 @ViewEngine("pug", {
   requires: ["pug", "then-pug"] // multiple require is possible. Ts.ED will use the first module resolved from node_modules
@@ -239,6 +246,7 @@ See more examples in `packages/engines/src/components` directory.
 
 ```typescript
 import {PugEngine} from "@tsed/engines";
+import "@tsed/engines/PugEngine.js"; // or any other engine you want to use
 
 @ViewEngine("pug", {
   requires: ["pug", "then-pug"] // multiple require is possible. Ts.ED will use the first module resolved from node_modules
@@ -282,7 +290,7 @@ Support this project by becoming a sponsor. Your logo will show up here with a l
 
 The MIT License (MIT)
 
-Copyright (c) 2016 - 2021 Romain Lenzotti
+Copyright (c) 2016 - Today Romain Lenzotti
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 

@@ -1,3 +1,4 @@
+import "../components/index.js";
 import "../index.js";
 
 import {join} from "node:path";

@@ -13,6 +13,12 @@
       "types": "./lib/types/index.d.ts",
       "import": "./lib/esm/index.js",
       "default": "./lib/esm/index.js"
+    },
+    "./*.js": {
+      "tsed-source": "./src/components/*.ts",
+      "types": "./lib/types/components/*.d.ts",
+      "import": "./lib/esm/components/*.js",
+      "default": "./lib/esm/components/*.js"
     }
   },
   "scripts": {

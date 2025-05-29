@@ -1,3 +1,5 @@
+import {pascalCase} from "pascal-case";
+
 import {EngineOptions} from "../components/Engine.js";
 import {engines} from "../registries/EnginesContainer.js";
 

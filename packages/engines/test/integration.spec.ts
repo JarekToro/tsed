@@ -1,3 +1,4 @@
+import "../src/components/index.js";
 import "../src/index.js";
 
 import * as sharedFiltersTest from "./shared/filters.js";
