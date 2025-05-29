@@ -44,7 +44,7 @@ export * from "./decorators/textarea.js";
 export * from "./decorators/textCase.js";
 export * from "./decorators/tooltip.js";
 export * from "./decorators/validate.js";
-export * from "./domain/FormioDataResolver.js";
+export * from "./interfaces/FormioDataResolver.js";
 export * from "./registries/FormioMappersContainer.js";
 export * from "./registries/FormsContainer.js";
 export * from "./utils/getFormioProps.js";

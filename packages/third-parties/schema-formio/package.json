@@ -7,12 +7,12 @@
   "main": "./lib/esm/index.js",
   "module": "./lib/esm/index.js",
   "typings": "./lib/types/index.d.ts",
-  "browser": "./lib/browser/schema-formio.umd.cjs",
+  "browser": "./lib/browser/index.js",
   "exports": {
     ".": {
       "tsed-source": "./src/index.ts",
       "types": "./lib/types/index.d.ts",
-      "browser": "./lib/browser/schema-formio.umd.cjs",
+      "browser": "./lib/browser/index.js",
       "import": "./lib/esm/index.js",
       "default": "./lib/esm/index.js"
     }

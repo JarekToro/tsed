@@ -7,19 +7,16 @@
   "main": "./lib/esm/index.js",
   "module": "./lib/esm/index.js",
   "typings": "./lib/types/index.d.ts",
-  "browser": "./lib/browser/hooks.umd.cjs",
   "exports": {
     ".": {
       "tsed-source": "./src/index.ts",
       "types": "./lib/types/index.d.ts",
-      "browser": "./lib/browser/hooks.umd.cjs",
       "import": "./lib/esm/index.js",
       "default": "./lib/esm/index.js"
     }
   },
   "scripts": {
-    "build": "yarn build:ts && yarn run build:browser",
-    "build:browser": "vite build",
+    "build": "yarn build:ts",
     "build:ts": "tsc --build tsconfig.esm.json",
     "test": "vitest run",
     "test:ci": "vitest run --coverage.thresholds.autoUpdate=true"

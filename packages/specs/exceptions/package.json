@@ -7,12 +7,10 @@
   "main": "./lib/esm/index.js",
   "module": "./lib/esm/index.js",
   "typings": "./lib/types/index.d.ts",
-  "browser": "./lib/browser/exceptions.umd.cjs",
   "exports": {
     ".": {
       "tsed-source": "./src/index.ts",
       "types": "./lib/types/index.d.ts",
-      "browser": "./lib/browser/exceptions.umd.cjs",
       "import": "./lib/esm/index.js",
       "default": "./lib/esm/index.js"
     }
