@@ -35,6 +35,7 @@ export * from "./fn/injectMany.js";
 export * from "./fn/injector.js";
 export * from "./fn/lazyInject.js";
 export * from "./fn/localsContainer.js";
+export * from "./fn/logger.js";
 export * from "./fn/refValue.js";
 export * from "./interfaces/DIConfigurationOptions.js";
 export * from "./interfaces/DILogger.js";
