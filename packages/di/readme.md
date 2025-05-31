@@ -27,6 +27,15 @@
 
 <hr />
 
+<code><img height="20" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/typescript/typescript.png"></code>
+<code><img height="20" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/javascript/javascript.png"></code>
+<code><img height="20" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/nodejs/nodejs.png"></code>
+<code><img height="20" src="https://avatars.githubusercontent.com/u/42048915?s=48&v=4"></code>
+<code><img height="20" src="https://avatars.githubusercontent.com/u/108928776?s=48&v=4"></code>
+<code><img height="20" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/firefox/firefox.png"></code>
+<code><img height="20" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/chrome/chrome.png"></code>
+<code><img height="20" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/react/react.png"></code>
+
 A powerful and flexible Dependency Injection (DI) toolkit inspired by Angular, designed for both TypeScript and pure JavaScript applications. Use it standalone or as the foundation of Ts.ED. Supports both decorator-based and functional (decorator-less) APIs for maximum compatibility, even in non-TypeScript or pure JS projects.
 
 ---

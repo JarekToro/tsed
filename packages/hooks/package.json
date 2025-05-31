@@ -2,29 +2,21 @@
   "name": "@tsed/hooks",
   "description": "Hooks module for Ts.ED Framework",
   "type": "module",
-  "version": "8.9.5",
+  "version": "8.10.0-rc.3",
   "source": "./src/index.ts",
   "main": "./lib/esm/index.js",
   "module": "./lib/esm/index.js",
   "typings": "./lib/types/index.d.ts",
-  "browser": "./lib/browser/core.umd.min.js",
   "exports": {
     ".": {
       "tsed-source": "./src/index.ts",
       "types": "./lib/types/index.d.ts",
-      "browser": "./lib/browser/hooks.umd.min.js",
       "import": "./lib/esm/index.js",
       "default": "./lib/esm/index.js"
-    },
-    "./**/*.js": {
-      "types": "./lib/types/**/*.d.ts",
-      "import": "./lib/esm/**/*.js",
-      "default": "./lib/esm/**/*.js"
     }
   },
   "scripts": {
-    "build": "yarn build:ts && yarn run build:browser",
-    "build:browser": "webpack",
+    "build": "yarn build:ts",
     "build:ts": "tsc --build tsconfig.esm.json",
     "test": "vitest run",
     "test:ci": "vitest run --coverage.thresholds.autoUpdate=true"
@@ -34,13 +26,12 @@
     "tslib": "2.7.0"
   },
   "devDependencies": {
-    "@tsed/monorepo-utils": "2.3.11",
+    "@tsed/monorepo-utils": "2.3.13",
     "@tsed/typescript": "workspace:*",
     "@tsed/vitest": "workspace:*",
     "eslint": "9.12.0",
     "typescript": "5.4.5",
-    "vite": "6.3.5",
-    "vitest": "3.1.4",
-    "webpack": "^5.75.0"
+    "vite": "6.2.2",
+    "vitest": "3.1.4"
   }
 }

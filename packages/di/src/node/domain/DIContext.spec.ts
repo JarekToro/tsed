@@ -1,4 +1,4 @@
-import {logger} from "../fn/logger.js";
+import {logger} from "../../common/fn/logger.js";
 import {DITest} from "../services/DITest.js";
 import {DIContext} from "./DIContext.js";
 

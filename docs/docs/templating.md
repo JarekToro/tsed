@@ -134,6 +134,7 @@ You can instantiate them manually beforehand if you want to add filters, globals
 
 ```typescript
 import {Configuration} from "@tsed/di";
+import "@tsed/engines/NunjucksEngine.js"; // import Nunjucks engine
 import nunjucks from "nunjucks";
 
 const nunjucksInstances = nunjucks.configure("./views");

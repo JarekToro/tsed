@@ -2,31 +2,28 @@
   "name": "@tsed/core",
   "description": "Core module for Ts.ED Framework",
   "type": "module",
-  "version": "8.9.5",
+  "version": "8.10.0-rc.3",
   "source": "./src/index.ts",
   "main": "./lib/esm/index.js",
   "module": "./lib/esm/index.js",
   "typings": "./lib/types/index.d.ts",
-  "browser": "./lib/browser/core.umd.min.js",
   "exports": {
     ".": {
       "tsed-source": "./src/index.ts",
       "types": "./lib/types/index.d.ts",
-      "browser": "./lib/browser/core.umd.min.js",
       "import": "./lib/esm/index.js",
       "default": "./lib/esm/index.js"
     },
-    "./**/*": {
-      "tsed-source": "./src/**/*.ts",
-      "types": "./lib/types/**/*.d.ts",
-      "import": "./lib/esm/**/*.js",
-      "default": "./lib/esm/**/*.js"
+    "./*.js": {
+      "tsed-source": "./src/*.ts",
+      "types": "./lib/types/*.d.ts",
+      "import": "./lib/esm/*.js",
+      "default": "./lib/esm/*.js"
     }
   },
   "scripts": {
-    "build": "yarn barrels && yarn build:ts && yarn run build:browser",
+    "build": "yarn barrels && yarn build:ts",
     "barrels": "barrels",
-    "build:browser": "webpack",
     "build:ts": "tsc --build tsconfig.esm.json",
     "test": "vitest run",
     "test:ci": "vitest run --coverage.thresholds.autoUpdate=true"
@@ -37,13 +34,10 @@
   },
   "devDependencies": {
     "@tsed/barrels": "workspace:*",
-    "@tsed/monorepo-utils": "2.3.11",
+    "@tsed/monorepo-utils": "2.3.13",
     "@tsed/typescript": "workspace:*",
     "@tsed/vitest": "workspace:*",
-    "eslint": "9.12.0",
     "typescript": "5.4.5",
-    "vite": "6.3.5",
-    "vitest": "3.1.4",
-    "webpack": "^5.75.0"
+    "vitest": "3.1.4"
   }
 }

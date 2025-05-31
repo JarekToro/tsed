@@ -2,25 +2,22 @@
   "name": "@tsed/exceptions",
   "description": "HTTP exceptions module for Ts.ED Framework and other pure Express application",
   "type": "module",
-  "version": "8.9.5",
+  "version": "8.10.0-rc.3",
   "source": "./src/index.ts",
   "main": "./lib/esm/index.js",
   "module": "./lib/esm/index.js",
   "typings": "./lib/types/index.d.ts",
-  "browser": "./lib/browser/exceptions.umd.min.js",
   "exports": {
     ".": {
       "tsed-source": "./src/index.ts",
       "types": "./lib/types/index.d.ts",
-      "browser": "./lib/browser/exceptions.umd.min.js",
       "import": "./lib/esm/index.js",
       "default": "./lib/esm/index.js"
     }
   },
   "scripts": {
     "clean": "rm -rf lib",
-    "build": "yarn clean && yarn barrels && yarn build:ts && yarn run build:browser",
-    "build:browser": "webpack",
+    "build": "yarn clean && yarn barrels && yarn build:ts",
     "barrels": "barrels",
     "test": "vitest run",
     "build:ts": "tsc --build tsconfig.esm.json",
@@ -37,10 +34,10 @@
     "@types/statuses": "2.0.5",
     "eslint": "9.12.0",
     "typescript": "5.4.5",
-    "vitest": "3.1.4",
-    "webpack": "^5.75.0"
+    "vite": "6.2.2",
+    "vitest": "3.1.4"
   },
   "peerDependencies": {
-    "@tsed/core": ">=8.9.5"
+    "@tsed/core": ">=8.0.0"
   }
 }

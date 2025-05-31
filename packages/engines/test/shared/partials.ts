@@ -1,3 +1,5 @@
+import "../../src/components/index.js";
+
 import fs from "node:fs";
 import {join} from "node:path";
 

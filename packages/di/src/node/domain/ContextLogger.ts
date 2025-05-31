@@ -1,8 +1,7 @@
 import {Hooks} from "@tsed/hooks";
 import {levels, LogLevel} from "@tsed/logger";
 
-import {DILogger} from "../../common/index.js";
-import {logger as injectLogger} from "../fn/logger.js";
+import {DILogger, logger as injectLogger} from "../../common/index.js";
 
 export interface ContextLoggerOptions extends Record<string, any> {
   id: string;
