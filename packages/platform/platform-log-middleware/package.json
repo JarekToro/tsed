@@ -2,7 +2,7 @@
   "name": "@tsed/platform-log-middleware",
   "description": "Log request middleware module for Ts.ED Framework (deprecated)",
   "type": "module",
-  "version": "8.10.0",
+  "version": "8.11.0",
   "source": "./src/index.ts",
   "main": "./lib/esm/index.js",
   "module": "./lib/esm/index.js",
