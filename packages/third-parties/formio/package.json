@@ -2,7 +2,7 @@
   "name": "@tsed/formio",
   "description": "Formio package for Ts.ED framework",
   "type": "module",
-  "version": "8.11.0",
+  "version": "8.11.1",
   "keywords": [
     "Formio",
     "Ts.ED",

@@ -2,7 +2,7 @@
   "name": "@tsed/oidc-provider",
   "description": "OIDC provider package for Ts.ED framework",
   "type": "module",
-  "version": "8.11.0",
+  "version": "8.11.1",
   "contributors": [
     {
       "name": "romakita"

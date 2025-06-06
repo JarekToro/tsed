@@ -2,7 +2,7 @@
   "name": "@tsed/exceptions",
   "description": "HTTP exceptions module for Ts.ED Framework and other pure Express application",
   "type": "module",
-  "version": "8.11.0",
+  "version": "8.11.1",
   "source": "./src/index.ts",
   "main": "./lib/esm/index.js",
   "module": "./lib/esm/index.js",
