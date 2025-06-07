@@ -7486,7 +7486,6 @@ __metadata:
     eslint: "npm:9.12.0"
     tslib: "npm:2.7.0"
     typescript: "npm:5.4.5"
-    vite: "npm:6.2.2"
     vitest: "npm:3.1.4"
   peerDependencies:
     "@tsed/core": ">=8.0.0"
@@ -8756,7 +8755,6 @@ __metadata:
     statuses: "npm:^2.0.1"
     tslib: "npm:2.7.0"
     typescript: "npm:5.4.5"
-    vite: "npm:6.2.2"
     vitest: "npm:3.1.4"
   peerDependencies:
     "@tsed/core": ">=8.0.0"
