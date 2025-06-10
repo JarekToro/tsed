@@ -20,9 +20,10 @@
     "newLine": "LF",
     "skipLibCheck": true,
     "declaration": false,
+    "declarationMap": false,
     "noResolve": false,
     "preserveConstEnums": true,
-    "sourceMap": true,
+    "sourceMap": false,
     "noEmit": true
   }
 }

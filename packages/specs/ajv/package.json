@@ -2,25 +2,22 @@
   "name": "@tsed/ajv",
   "description": "AJV package for Ts.ED framework",
   "type": "module",
-  "version": "8.11.1",
+  "version": "8.12.0-rc.1",
   "source": "./src/index.ts",
   "main": "./lib/esm/index.js",
   "module": "./lib/esm/index.js",
   "typings": "./lib/types/index.d.ts",
-  "browser": "./lib/browser/index.js",
   "exports": {
     ".": {
       "tsed-source": "./src/index.ts",
       "types": "./lib/types/index.d.ts",
-      "browser": "./lib/browser/index.js",
       "import": "./lib/esm/index.js",
       "default": "./lib/esm/index.js"
     }
   },
   "scripts": {
     "clean": "rm -rf lib",
-    "build": "yarn clean && yarn barrels && yarn build:ts && yarn run build:browser",
-    "build:browser": "vite build",
+    "build": "yarn clean && yarn barrels && yarn build:ts",
     "barrels": "barrels",
     "test": "vitest run",
     "build:ts": "tsc --build tsconfig.esm.json",
