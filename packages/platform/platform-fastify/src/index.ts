@@ -6,3 +6,4 @@ export * from "./interfaces/interfaces.js";
 export * from "./interfaces/PlatformFastifySettings.js";
 export * from "./services/PlatformFastifyRequest.js";
 export * from "./services/PlatformFastifyResponse.js";
+export * from "./utils/convertPath.js";
