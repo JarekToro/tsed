@@ -2,7 +2,8 @@ import "@tsed/platform-multer/express";
 
 import {readFileSync} from "node:fs";
 import {IncomingMessage, ServerResponse} from "node:http";
-import {dirname} from "node:path";
+import {dirname, join} from "node:path";
+import {fileURLToPath} from "node:url";
 
 import {catchAsyncError, Env, isFunction, Type} from "@tsed/core";
 import {constant, inject, logger, runInContext} from "@tsed/di";
@@ -58,7 +59,7 @@ declare global {
 
 function getVersion() {
   try {
-    const {version} = JSON.parse(readFileSync(dirname(import.meta.resolve("express")) + "package.json", "utf8"));
+    const {version} = JSON.parse(readFileSync(join(dirname(fileURLToPath(import.meta.resolve("express"))), "package.json"), "utf8"));
 
     return `v${version.split(".")[0]}`;
   } catch (er) {
