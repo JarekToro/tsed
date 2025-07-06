@@ -1,6 +1,8 @@
 import "@tsed/platform-multer/express";
 
+import {readFileSync} from "node:fs";
 import {IncomingMessage, ServerResponse} from "node:http";
+import {dirname} from "node:path";
 
 import {catchAsyncError, Env, isFunction, Type} from "@tsed/core";
 import {constant, inject, logger, runInContext} from "@tsed/di";
@@ -19,7 +21,6 @@ import {
 import {PlatformHandlerMetadata, PlatformHandlerType, PlatformLayer} from "@tsed/platform-router";
 import {OptionsJson, OptionsText, OptionsUrlencoded} from "body-parser";
 import Express from "express";
-import {version} from "express/package.json" with {type: "json"};
 
 import {PlatformExpressStaticsOptions} from "../interfaces/PlatformExpressStaticsOptions.js";
 import {staticsMiddleware} from "../middlewares/staticsMiddleware.js";
@@ -52,6 +53,16 @@ declare global {
       id: string;
       $ctx: PlatformContext;
     }
+  }
+}
+
+function getVersion() {
+  try {
+    const {version} = JSON.parse(readFileSync(dirname(import.meta.resolve("express")) + "package.json", "utf8"));
+
+    return `v${version.split(".")[0]}`;
+  } catch (er) {
+    return "v4";
   }
 }
 
@@ -116,11 +127,11 @@ export class PlatformExpress extends PlatformAdapter<Express.Application> {
 
   mapLayers(layers: PlatformLayer[]) {
     const rawApp: any = this.app.getApp();
-    const v = `v${version.split(".")[0]}`;
+    const version = getVersion();
 
     layers.forEach((layer) => {
       const handlers = layer.getArgs(false);
-      const {path, wildcard} = convertPath(layer.path, v as "v4" | "v5");
+      const {path, wildcard} = convertPath(layer.path, version as "v4" | "v5");
 
       layer.path = path;
 
