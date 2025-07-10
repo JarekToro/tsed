@@ -71,7 +71,7 @@ To run a method with context in your unit test, you can use the @@runInContext@@
 
 ::: code-group
 <<< @/docs/snippets/request-context/fn/request-context-usage.ts [v7/v8]
-<<< @/docs/snippets/request-context/testing/request-context-usage.spec.ts [v8+]
+<<< @/docs/snippets/request-context/testing/request-context-usage.spec.ts [Test]
 :::
 
 ## Mock dependencies
