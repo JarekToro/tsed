@@ -7,7 +7,7 @@ export default {
         ...symbol,
         importFrom: symbol.importFrom.replace('src/types', 'src'),
         githubUrl: symbol.githubUrl.replace('src/types', 'src'),
-        relativePath: symbol.githubUrl.replace('src/types', 'src'),
+        relativePath: symbol.relativePath.replace('src/types', 'src'),
       }
     };
   }
