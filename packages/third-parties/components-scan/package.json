@@ -2,7 +2,7 @@
   "name": "@tsed/components-scan",
   "description": "Components scan utilities for Ts.ED Framework",
   "type": "module",
-  "version": "8.13.3",
+  "version": "8.13.4",
   "source": "./src/index.ts",
   "main": "./lib/esm/index.js",
   "module": "./lib/esm/index.js",
