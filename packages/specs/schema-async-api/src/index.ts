@@ -3,6 +3,7 @@
  */
 export * from "./components/channelsMapper.js";
 export * from "./components/generate.js";
+export * from "./components/index.js";
 export * from "./components/messageMapper.js";
 export * from "./components/payloadMapper.js";
 export * from "./components/responseMapper.js";
