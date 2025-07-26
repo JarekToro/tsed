@@ -13,6 +13,12 @@
       "types": "./lib/types/index.d.ts",
       "import": "./lib/esm/index.js",
       "default": "./lib/esm/index.js"
+    },
+    "./cache": {
+      "tsed-source": "./src/domain/index.ts",
+      "types": "./lib/types/domain/index.d.ts",
+      "import": "./lib/esm/domain/index.js",
+      "default": "./lib/esm/domain/index.js"
     }
   },
   "scripts": {
