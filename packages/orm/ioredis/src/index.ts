@@ -14,6 +14,18 @@ export * from "./domain/IORedisStore.js";
  * @deprecated use `import {IORedisTest} from "@tsed/ioredis/cache"` instead
  */
 export * from "./domain/IORedisTest.js";
+/**
+ * @deprecated since 8.15.0 – use `import {IORedisConfiguration} from "@tsed/ioredis/cache"` instead
+ */
+export * from "./domain/IORedisConfiguration.js";
+/**
+ * @deprecated since 8.15.0 – use `import {IORedisStore}from "@tsed/ioredis/cache"` instead
+ */
+export * from "./domain/IORedisStore.js";
+/**
+ * @deprecated since 8.15.0 – use `import {IORedisTest} from "@tsed/ioredis/cache"` instead
+ */
+export * from "./domain/IORedisTest.js";
 export * from "./utils/createConnection.js";
 export * from "./utils/mockConnections.js";
 export * from "./utils/registerConnectionProvider.js";
