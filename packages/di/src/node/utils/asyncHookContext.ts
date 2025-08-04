@@ -1,7 +1,7 @@
 import {AsyncLocalStorage, AsyncResource} from "node:async_hooks";
 
+import type {DIContext} from "../../common/domain/DIContext.js";
 import {InjectorService} from "../../common/index.js";
-import type {DIContext} from "../domain/DIContext.js";
 
 const storage: AsyncLocalStorage<{current: DIContext | undefined}> = new AsyncLocalStorage();
 
@@ -43,6 +43,9 @@ export function setContext(ctx: DIContext) {
   }
 }
 
+/**
+ * @deprecated
+ */
 export function bindContext(cb: any) {
   return AsyncResource.bind(cb);
 }

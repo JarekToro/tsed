@@ -7,12 +7,12 @@
   "main": "./lib/esm/index.js",
   "module": "./lib/esm/index.js",
   "typings": "./lib/types/index.d.ts",
-  "browser": "./lib/esm/common/index.js",
+  "browser": "./lib/esm/browser/index.js",
   "exports": {
     ".": {
       "tsed-source": "./src/index.ts",
       "types": "./lib/types/index.d.ts",
-      "browser": "./lib/esm/common/index.js",
+      "browser": "./lib/esm/browser/index.js",
       "import": "./lib/esm/index.js",
       "default": "./lib/esm/index.js"
     }
@@ -32,7 +32,8 @@
     "@tsed/barrels": "workspace:*",
     "@tsed/core": "workspace:*",
     "@tsed/hooks": "workspace:*",
-    "@tsed/logger": "^7.0.1",
+    "@tsed/logger": "^8.0.0-rc.1",
+    "@tsed/logger-std": "^8.0.0-rc.1",
     "@tsed/typescript": "workspace:*",
     "cross-env": "7.0.3",
     "eslint": "9.12.0",
@@ -43,7 +44,7 @@
   "peerDependencies": {
     "@tsed/core": ">=8.0.0",
     "@tsed/hooks": ">=8.0.0",
-    "@tsed/logger": ">=7.0.1"
+    "@tsed/logger": ">=8.0.0-rc.1"
   },
   "peerDependenciesMeta": {
     "@tsed/core": {

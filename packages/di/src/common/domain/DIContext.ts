@@ -1,4 +1,4 @@
-import {injector, InjectorService, LocalsContainer} from "../../common/index.js";
+import {injector, InjectorService, LocalsContainer} from "../index.js";
 import {ContextLogger, ContextLoggerOptions} from "./ContextLogger.js";
 
 export interface DIContextOptions extends Omit<ContextLoggerOptions, "dateStart"> {

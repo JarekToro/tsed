@@ -1,4 +1,4 @@
-import {injector} from "../../common/index.js";
+import {injector} from "../index.js";
 
 /**
  * @ignore

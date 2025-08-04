@@ -1,0 +1,1 @@
+import "@tsed/logger-std";

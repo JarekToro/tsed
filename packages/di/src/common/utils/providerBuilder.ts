@@ -1,7 +1,7 @@
 import "../registries/ProviderRegistry.js";
 
 import {Store} from "@tsed/core/types/Store.js";
-import {type Type} from "@tsed/core/types/Type.js";
+import type {Type} from "@tsed/core/types/Type.js";
 
 import {ProviderType} from "../domain/ProviderType.js";
 import {injector} from "../fn/injector.js";

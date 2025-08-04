@@ -1,8 +1,8 @@
 import {afterEach, beforeEach, expect} from "vitest";
 
+import {DITest} from "../../..";
 import {DIContext} from "../../common/domain/DIContext.js";
 import {Injectable} from "../../common/index.js";
-import {DITest} from "../services/DITest.js";
 import {runInContext} from "../utils/asyncHookContext.js";
 import {InjectContext} from "./injectContext.js";
 
