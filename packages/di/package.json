@@ -33,7 +33,6 @@
     "@tsed/core": "workspace:*",
     "@tsed/hooks": "workspace:*",
     "@tsed/logger": "^8.0.0-rc.1",
-    "@tsed/logger-std": "^8.0.0-rc.1",
     "@tsed/typescript": "workspace:*",
     "cross-env": "7.0.3",
     "eslint": "9.12.0",

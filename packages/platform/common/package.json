@@ -67,6 +67,7 @@
   ],
   "dependencies": {
     "@tsed/logger-file": ">=8.0.0-rc.1",
+    "@tsed/logger-std": ">=8.0.0-rc.1",
     "@tsed/platform-http": "workspace:*",
     "tslib": "2.7.0"
   },
@@ -79,14 +80,10 @@
     "typescript": "5.4.5"
   },
   "peerDependencies": {
-    "@tsed/logger": ">=8.0.0-rc.1",
-    "@tsed/logger-file": ">=8.0.0-rc.1"
+    "@tsed/logger": ">=8.0.0-rc.1"
   },
   "peerDependenciesMeta": {
     "@tsed/logger": {
-      "optional": false
-    },
-    "@tsed/logger-file": {
       "optional": false
     }
   }

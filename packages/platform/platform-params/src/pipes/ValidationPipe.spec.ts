@@ -103,7 +103,8 @@ describe("ValidationPipe", () => {
                           type: "boolean"
                         },
                         {
-                          type: "array"
+                          type: "array",
+                          items: {}
                         },
                         {
                           type: "object"
