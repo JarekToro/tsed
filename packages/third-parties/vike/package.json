@@ -2,7 +2,7 @@
   "name": "@tsed/vike",
   "description": "Vike package for Ts.ED framework",
   "type": "module",
-  "version": "8.14.2-rc.1",
+  "version": "8.14.2-rc.2",
   "contributors": [
     {
       "name": "romakita"

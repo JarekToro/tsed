@@ -2,7 +2,7 @@
   "name": "@tsed/formio-types",
   "description": "Formio types definition package for Ts.ED framework",
   "type": "module",
-  "version": "8.14.2-rc.1",
+  "version": "8.14.2-rc.2",
   "keywords": [
     "Formio",
     "Ts.ED",

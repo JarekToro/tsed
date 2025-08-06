@@ -2,7 +2,7 @@
   "name": "@tsed/config",
   "description": "Configuration management for Ts.ED",
   "type": "module",
-  "version": "8.14.2-rc.1",
+  "version": "8.14.2-rc.2",
   "keywords": [
     "Ts.ED",
     "Configuration",
