@@ -132,7 +132,9 @@ When a validation error occurs, AJV generates a list of errors with a full descr
     "keyword": "minLength",
     "dataPath": ".password",
     "schemaPath": "#/properties/password/minLength",
-    "params": {"limit": 6},
+    "params": {
+      "limit": 6
+    },
     "message": "should NOT be shorter than 6 characters",
     "modelName": "User"
   }
@@ -143,14 +145,20 @@ When a validation error occurs, AJV generates a list of errors with a full descr
 
 Ajv allows you to define custom keywords to validate a property.
 
-You can find more details on the different ways to declare a custom validator on this page: https://ajv.js.org/docs/keywords.html
+You can find more details on the different ways to declare a custom validator on this
+page: https://ajv.js.org/docs/keywords.html
 
-Ts.ED introduces the @@Keyword@@ decorator to declare a new custom validator for Ajv. Combined with the @@CustomKey@@ decorator to add keywords to a property of your class, you can use more complex scenarios than what basic JsonSchema allows.
+Ts.ED introduces the @@Keyword@@ decorator to declare a new custom validator for Ajv. Combined with the @@CustomKey@@
+decorator to add keywords to a property of your class, you can use more complex scenarios than what basic JsonSchema
+allows.
 
-For example, we can create a custom validator to support the `range` validation over a number. To do that, we have to define
+For example, we can create a custom validator to support the `range` validation over a number. To do that, we have to
+define
 the custom validator by using @@Keyword@@ decorator:
 
-```typescript
+::: code-group
+
+```typescript [Decorator]
 import {Keyword, KeywordMethods} from "@tsed/ajv";
 import {array, number} from "@tsed/schema";
 
@@ -161,35 +169,59 @@ import {array, number} from "@tsed/schema";
   implements: ["exclusiveRange"],
   metaSchema: array().items([number(), number()]).minItems(2).additionalItems(false)
 })
-class RangeKeyword implements KeywordMethods {
+export class RangeKeyword implements KeywordMethods {
   compile([min, max]: number[], parentSchema: any) {
     return parentSchema.exclusiveRange === true ? (data: any) => data > min && data < max : (data: any) => data >= min && data <= max;
   }
 }
 ```
 
+```typescript [Functional API]
+import {KeywordMethods} from "@tsed/ajv";
+import {array, number} from "@tsed/schema";
+import {keyword} from "@tsed/ajv/src/fn/keyword.js";
+
+export default keyword(Symbol.for("RANGE_KEYWORD"), {
+  keyword: "range",
+  type: "number",
+  schemaType: "array",
+  implements: ["exclusiveRange"],
+  metaSchema: array().items([number(), number()]).minItems(2).additionalItems(false)
+})
+  .factory((): KeywordMethods => {
+    return {
+      compile([min, max]: number[], parentSchema: any) {
+        return parentSchema.exclusiveRange === true ? (data: any) => data > min && data < max : (data: any) => data >= min && data <= max;
+      }
+    };
+  })
+  .token();
+```
+
+:::
+
 Then we can declare a model using the standard decorators from `@tsed/schema`:
 
 <Tabs class="-code">
   <Tab label="Product.ts">
-  
+
 ```typescript
 import {CustomKey} from "@tsed/schema";
 import {Range, ExclusiveRange} from "../decorators/Range"; // custom decorator
 
 export class Product {
-@CustomKey("range", [10, 100])
-@CustomKey("exclusiveRange", true)
-price: number;
+  @CustomKey("range", [10, 100])
+  @CustomKey("exclusiveRange", true)
+  price: number;
 
-// OR
+  // OR
 
-@Range(10, 100)
-@ExclusiveRange(true)
-price2: number;
+  @Range(10, 100)
+  @ExclusiveRange(true)
+  price2: number;
 }
+```
 
-````
   </Tab>
   <Tab label="Range.ts">
 
@@ -203,7 +235,7 @@ export function Range(min: number, max: number) {
 export function ExclusiveRange(bool: boolean) {
   return CustomKey("exclusiveRange", bool);
 }
-````
+```
 
   </Tab>
 </Tabs>
@@ -246,37 +278,39 @@ describe("Product", () => {
 ```
 
 ::: warning
-If you planed to create keyword that transform the data, you have to set `returnsCoercedValues` to `true` in your configuration.
+If you planed to create keyword that transform the data, you have to set `returnsCoercedValues` to `true` in your
+configuration.
 :::
 
 ### With "code" function
 
-Starting from v7 Ajv uses [CodeGen module](https://github.com/ajv-validator/ajv/blob/master/lib/compile/codegen/index.ts) for all pre-defined keywords - see [codegen.md](https://ajv.js.org/codegen.html) for details.
+Starting from v7 Ajv
+uses [CodeGen module](https://github.com/ajv-validator/ajv/blob/master/lib/compile/codegen/index.ts) for all pre-defined
+keywords - see [codegen.md](https://ajv.js.org/codegen.html) for details.
 
 Example `even` keyword:
 
 <Tabs class="-code">
   <Tab label="Event.ts">
-  
+
 ```typescript
 import {Keyword, KeywordMethods} from "@tsed/ajv";
 import {array, number} from "@tsed/schema";
 import {_, KeywordCxt} from "ajv";
 
 @Keyword({
-keyword: "even",
-type: "number",
-schemaType: "boolean"
+  keyword: "even",
+  type: "number",
+  schemaType: "boolean"
 })
 class EvenKeyword implements KeywordMethods {
-code(cxt: KeywordCxt) {
-const {data, schema} = cxt;
-const op = schema ? _`!==` : _`===`;
-cxt.fail(\_`${data} %2 ${op} 0`);
+  code(cxt: KeywordCxt) {
+    const {data, schema} = cxt;
+    const op = schema ? _`!==` : _`===`;
+    cxt.fail(_`${data} %2 ${op} 0`);
+  }
 }
-}
-
-````
+```
 
   </Tab>
   <Tab label="Ajv example">
@@ -290,27 +324,50 @@ ajv.addKeyword({
   schemaType: "boolean",
   // $data: true // to support [$data reference](./validation.html#data-reference), ...
   code(cxt: KeywordCxt) {
-    const {data, schema} = cxt
-    const op = schema ? _`!==` : _`===`
-    cxt.fail(_`${data} %2 ${op} 0`) // ... the only code change needed is to use `cxt.fail$data` here
-  },
-})
+    const {data, schema} = cxt;
+    const op = schema ? _`!==` : _`===`;
+    cxt.fail(_`${data} %2 ${op} 0`); // ... the only code change needed is to use `cxt.fail$data` here
+  }
+});
 
-const schema = {even: true}
-const validate = ajv.compile(schema)
-console.log(validate(2)) // true
-console.log(validate(3)) // false
-````
+const schema = {even: true};
+const validate = ajv.compile(schema);
+console.log(validate(2)); // true
+console.log(validate(3)); // false
+```
 
   </Tab>
 </Tabs>
 
 ## Formats
 
-You can add and replace any format using @@Formats@@ decorator. For example, the current format validator for `uri` doesn't allow
-empty string. So, with this decorator you can create or override an existing [ajv-formats](https://github.com/ajv-validator/ajv-formats) validator.
+You can add and replace any format using @@Formats@@ decorator. For example, the current format validator for `uri`
+doesn't allow
+empty string. So, with this decorator you can create or override an
+existing [ajv-formats](https://github.com/ajv-validator/ajv-formats) validator.
 
-```typescript
+:::code-group
+
+```typescript [Decorator]
+import {formats, FormatsMethods} from "@tsed/ajv";
+
+const NOT_URI_FRAGMENT = /\/|:/;
+const URI =
+  /^(?:[a-z][a-z0-9+\-.]*:)(?:\/?\/(?:(?:[a-z0-9\-._~!$&'()*+,;=:]|%[0-9a-f]{2})*@)?(?:\[(?:(?:(?:(?:[0-9a-f]{1,4}:){6}|::(?:[0-9a-f]{1,4}:){5}|(?:[0-9a-f]{1,4})?::(?:[0-9a-f]{1,4}:){4}|(?:(?:[0-9a-f]{1,4}:){0,1}[0-9a-f]{1,4})?::(?:[0-9a-f]{1,4}:){3}|(?:(?:[0-9a-f]{1,4}:){0,2}[0-9a-f]{1,4})?::(?:[0-9a-f]{1,4}:){2}|(?:(?:[0-9a-f]{1,4}:){0,3}[0-9a-f]{1,4})?::[0-9a-f]{1,4}:|(?:(?:[0-9a-f]{1,4}:){0,4}[0-9a-f]{1,4})?::)(?:[0-9a-f]{1,4}:[0-9a-f]{1,4}|(?:(?:25[0-5]|2[0-4]\d|[01]?\d\d?)\.){3}(?:25[0-5]|2[0-4]\d|[01]?\d\d?))|(?:(?:[0-9a-f]{1,4}:){0,5}[0-9a-f]{1,4})?::[0-9a-f]{1,4}|(?:(?:[0-9a-f]{1,4}:){0,6}[0-9a-f]{1,4})?::)|[Vv][0-9a-f]+\.[a-z0-9\-._~!$&'()*+,;=:]+)\]|(?:(?:25[0-5]|2[0-4]\d|[01]?\d\d?)\.){3}(?:25[0-5]|2[0-4]\d|[01]?\d\d?)|(?:[a-z0-9\-._~!$&'()*+,;=]|%[0-9a-f]{2})*)(?::\d*)?(?:\/(?:[a-z0-9\-._~!$&'()*+,;=:@]|%[0-9a-f]{2})*)*|\/(?:(?:[a-z0-9\-._~!$&'()*+,;=:@]|%[0-9a-f]{2})+(?:\/(?:[a-z0-9\-._~!$&'()*+,;=:@]|%[0-9a-f]{2})*)*)?|(?:[a-z0-9\-._~!$&'()*+,;=:@]|%[0-9a-f]{2})+(?:\/(?:[a-z0-9\-._~!$&'()*+,;=:@]|%[0-9a-f]{2})*)*)(?:\?(?:[a-z0-9\-._~!$&'()*+,;=:@/?]|%[0-9a-f]{2})*)?(?:#(?:[a-z0-9\-._~!$&'()*+,;=:@/?]|%[0-9a-f]{2})*)?$/i;
+
+export default formats(Symbol.for("URI_FORMAT"), "uri", {type: string})
+  .factory((): FormatsMethods => {
+    return {
+      validate(str: string): boolean {
+        // http://jmrware.com/articles/2009/uri_regexp/URI_regex.html + optional protocol + required "."
+        return str === "" ? true : NOT_URI_FRAGMENT.test(str) && URI.test(str);
+      }
+    };
+  })
+  .token();
+```
+
+```typescript [Functional API]
 import {Formats, FormatsMethods} from "@tsed/ajv";
 
 const NOT_URI_FRAGMENT = /\/|:/;
@@ -326,12 +383,14 @@ export class UriFormat implements FormatsMethods<string> {
 }
 ```
 
+:::
+
 Then, we can import this class to our server as follows:
 
 ```typescript
 import {Configuration} from "@tsed/di";
 import "@tsed/ajv"; // import ajv ts.ed module
-import "./formats/UriFormat"; // just import the class, then Ts.ED will mount automatically the new format
+import "./formats/UriFormat.js"; // just import the class, then Ts.ED will mount automatically the new format
 
 @Configuration({
   ajv: {

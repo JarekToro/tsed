@@ -6,7 +6,7 @@ import {getJsonSchema, JsonEntityStore, JsonSchema, JsonSchemaObject} from "@tse
 import {Ajv, ErrorObject} from "ajv";
 
 import {AjvValidationError} from "../errors/AjvValidationError.js";
-import {AjvErrorObject, ErrorFormatter} from "../interfaces/IAjvSettings.js";
+import {AjvErrorObject, ErrorFormatter} from "../interfaces/AjvSettings.js";
 import {defaultErrorFormatter} from "../utils/defaultErrorFormatter.js";
 import {getPath} from "../utils/getPath.js";
 

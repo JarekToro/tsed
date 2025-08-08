@@ -4,8 +4,8 @@ import {Ajv, Format, KeywordDefinition, Options, Vocabulary} from "ajv";
 import AjvErrors from "ajv-errors";
 import AjvFormats from "ajv-formats";
 
+import {AjvSettings} from "../interfaces/AjvSettings.js";
 import {FormatsMethods} from "../interfaces/FormatsMethods.js";
-import {IAjvSettings} from "../interfaces/IAjvSettings.js";
 
 function getHandler(key: string, service: any) {
   if (service[key]) {
@@ -56,7 +56,7 @@ function getFormats(): {name: string; options: Format}[] {
 injectable(Ajv)
   .scope(ProviderScope.SINGLETON)
   .factory(() => {
-    const {errorFormatter, keywords = [], ...props} = constant<IAjvSettings>("ajv") || {};
+    const {errorFormatter, keywords = [], ...props} = constant<AjvSettings>("ajv") || {};
     const options: Options = {
       verbose: false,
       coerceTypes: true,

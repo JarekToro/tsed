@@ -16,7 +16,7 @@ export type ErrorFormatter = (error: AjvErrorObject) => string;
 /**
  *
  */
-export interface IAjvSettings extends Options {
+export interface AjvSettings extends Options {
   Ajv?: any;
   errorFormatter?: ErrorFormatter;
   returnsCoercedValues?: boolean;

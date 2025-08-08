@@ -1,11 +1,4 @@
-import {StoreSet, useDecorators} from "@tsed/core";
-import {Injectable} from "@tsed/di";
-import {JsonSchema} from "@tsed/schema";
-import {AnySchemaObject, KeywordDefinition} from "ajv";
-
-export type KeywordOptions = Partial<Omit<KeywordDefinition, "metaSchema">> & {
-  metaSchema?: AnySchemaObject | JsonSchema;
-};
+import {keyword, type KeywordOptions} from "../fn/keyword.js";
 
 /**
  * Create new keyword custom validator
@@ -14,13 +7,7 @@ export type KeywordOptions = Partial<Omit<KeywordDefinition, "metaSchema">> & {
  * @ajv
  */
 export function Keyword(options: KeywordOptions): ClassDecorator {
-  return useDecorators(
-    Injectable({
-      type: "ajv:keyword"
-    }),
-    StoreSet("ajv:keyword", {
-      ...options,
-      metaSchema: options.metaSchema && options.metaSchema.toJSON ? options.metaSchema.toJSON() : options.metaSchema
-    })
-  );
+  return (target) => {
+    keyword(target, options);
+  };
 }

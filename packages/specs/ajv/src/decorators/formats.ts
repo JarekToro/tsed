@@ -1,8 +1,4 @@
-import {StoreSet, useDecorators} from "@tsed/core";
-import {Injectable} from "@tsed/di";
-import {AsyncFormatDefinition, FormatDefinition} from "ajv";
-
-export type FormatsOptions = Omit<FormatDefinition<any>, "validate" | "compare"> | Omit<AsyncFormatDefinition<any>, "validate" | "compare">;
+import {formats, type FormatsOptions} from "../fn/formats.js";
 
 /**
  * Create a new custom formats validator
@@ -12,13 +8,7 @@ export type FormatsOptions = Omit<FormatDefinition<any>, "validate" | "compare">
  * @ajv
  */
 export function Formats(name: string, options: FormatsOptions = {}): ClassDecorator {
-  return useDecorators(
-    Injectable({
-      type: "ajv:formats"
-    }),
-    StoreSet("ajv:formats", {
-      name,
-      options
-    })
-  );
+  return (target) => {
+    formats(target, name, options);
+  };
 }
