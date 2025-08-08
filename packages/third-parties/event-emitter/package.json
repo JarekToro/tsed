@@ -2,7 +2,7 @@
   "name": "@tsed/event-emitter",
   "description": "EventEmitter package for Ts.ED framework",
   "type": "module",
-  "version": "8.14.2-rc.2",
+  "version": "8.15.0",
   "contributors": [
     {
       "name": "Oliver Christen"

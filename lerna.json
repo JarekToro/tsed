@@ -11,12 +11,10 @@
     "packages/utils/*",
     "docs"
   ],
-  "version": "8.14.2-rc.2",
+  "version": "8.15.0",
   "command": {
     "bootstrap": {
-      "npmClientArgs": [
-        "--no-package-lock"
-      ]
+      "npmClientArgs": ["--no-package-lock"]
     }
   }
 }

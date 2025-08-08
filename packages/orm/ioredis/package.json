@@ -2,7 +2,7 @@
   "name": "@tsed/ioredis",
   "description": "IO Redis connection for Ts.ED",
   "type": "module",
-  "version": "8.14.2-rc.2",
+  "version": "8.15.0",
   "source": "./src/index.ts",
   "main": "./lib/esm/index.js",
   "module": "./lib/esm/index.js",
@@ -13,6 +13,12 @@
       "types": "./lib/types/index.d.ts",
       "import": "./lib/esm/index.js",
       "default": "./lib/esm/index.js"
+    },
+    "./cache": {
+      "tsed-source": "./src/domain/index.ts",
+      "types": "./lib/types/domain/index.d.ts",
+      "import": "./lib/esm/domain/index.js",
+      "default": "./lib/esm/domain/index.js"
     }
   },
   "scripts": {

@@ -2,7 +2,7 @@
   "name": "@tsed/di",
   "description": "DI module for Ts.ED Framework",
   "type": "module",
-  "version": "8.14.2-rc.2",
+  "version": "8.15.0",
   "source": "./src/index.ts",
   "main": "./lib/esm/index.js",
   "module": "./lib/esm/index.js",
