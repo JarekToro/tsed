@@ -7254,7 +7254,7 @@ __metadata:
     "@tsed/barrels": "workspace:*"
     "@tsed/core": "workspace:*"
     "@tsed/di": "workspace:*"
-    "@tsed/logger": "npm:^7.0.1"
+    "@tsed/logger": "npm:>=7.0.1"
     "@tsed/platform-http": "workspace:*"
     "@tsed/typescript": "workspace:*"
     apollo-datasource-http: "npm:0.21.0"
@@ -7741,6 +7741,18 @@ __metadata:
     semver: "npm:^7.6.0"
     tslib: "npm:2.6.2"
   checksum: 10/b3fbe6e7bdc8c1bee91aca96f20f9405ed07056a395e8b182b79b39d1486ac17241ee58ca2929dd62fdc6170eb2d3d13381492f3f3fd79793da94a58175535cc
+  languageName: node
+  linkType: hard
+
+"@tsed/logger@npm:>=7.0.1":
+  version: 8.0.0
+  resolution: "@tsed/logger@npm:8.0.0"
+  dependencies:
+    colors: "npm:1.4.0"
+    date-format: "npm:^4.0.14"
+    semver: "npm:^7.7.2"
+    tslib: "npm:2.8.1"
+  checksum: 10/4dc1221f2ec672aeb2c84119e2a66922d796e37162c56951b0a095db648903c1227a0c3e3c1a87d5d554c6388b223db64c2b7b6690f397eed288185753b9803d
   languageName: node
   linkType: hard
 
@@ -8257,7 +8269,6 @@ __metadata:
     "@tsed/exceptions": "workspace:*"
     "@tsed/hooks": "workspace:*"
     "@tsed/json-mapper": "workspace:*"
-    "@tsed/logger": "npm:^7.0.1"
     "@tsed/platform-exceptions": "workspace:*"
     "@tsed/platform-middlewares": "workspace:*"
     "@tsed/platform-multer": "workspace:*"
@@ -8459,7 +8470,6 @@ __metadata:
     "@tsed/platform-middlewares": ">=8.0.0"
     "@tsed/schema": ">=8.0.0"
     "@types/multer": ">=2.0.0"
-    cross-env: 7.0.3
   peerDependenciesMeta:
     "@tsed/core":
       optional: false
@@ -27421,6 +27431,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"semver@npm:^7.7.2":
+  version: 7.7.2
+  resolution: "semver@npm:7.7.2"
+  bin:
+    semver: bin/semver.js
+  checksum: 10/7a24cffcaa13f53c09ce55e05efe25cd41328730b2308678624f8b9f5fc3093fc4d189f47950f0b811ff8f3c3039c24a2c36717ba7961615c682045bf03e1dda
+  languageName: node
+  linkType: hard
+
 "send@npm:0.19.0":
   version: 0.19.0
   resolution: "send@npm:0.19.0"
@@ -29726,6 +29745,13 @@ __metadata:
   version: 2.7.0
   resolution: "tslib@npm:2.7.0"
   checksum: 10/9a5b47ddac65874fa011c20ff76db69f97cf90c78cff5934799ab8894a5342db2d17b4e7613a087046bc1d133d21547ddff87ac558abeec31ffa929c88b7fce6
+  languageName: node
+  linkType: hard
+
+"tslib@npm:2.8.1":
+  version: 2.8.1
+  resolution: "tslib@npm:2.8.1"
+  checksum: 10/3e2e043d5c2316461cb54e5c7fe02c30ef6dccb3384717ca22ae5c6b5bc95232a6241df19c622d9c73b809bea33b187f6dbc73030963e29950c2141bc32a79f7
   languageName: node
   linkType: hard
 
