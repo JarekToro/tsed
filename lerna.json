@@ -11,7 +11,7 @@
     "packages/utils/*",
     "docs"
   ],
-  "version": "8.15.1",
+  "version": "8.15.2",
   "command": {
     "bootstrap": {
       "npmClientArgs": [

@@ -2,7 +2,7 @@
   "name": "@tsed/socketio",
   "description": "Socket.io package for Ts.ED framework",
   "type": "module",
-  "version": "8.15.1",
+  "version": "8.15.2",
   "keywords": [
     "tsed",
     "socket.io",
