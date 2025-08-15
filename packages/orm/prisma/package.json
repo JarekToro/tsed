@@ -2,7 +2,7 @@
   "name": "@tsed/prisma",
   "description": "Generate Ts.ED JsonSchema based on Prisma models",
   "type": "module",
-  "version": "8.15.2",
+  "version": "8.15.3",
   "source": "./src/index.ts",
   "main": "./lib/esm/index.js",
   "module": "./lib/esm/index.js",

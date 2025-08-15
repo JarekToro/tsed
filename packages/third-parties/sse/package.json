@@ -2,7 +2,7 @@
   "name": "@tsed/sse",
   "description": "Server-sent events package for Ts.ED framework",
   "type": "module",
-  "version": "8.15.2",
+  "version": "8.15.3",
   "keywords": [
     "tsed",
     "server-sent events",

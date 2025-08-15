@@ -2,7 +2,7 @@
   "name": "@tsed/stripe",
   "description": "Stripe package for Ts.ED framework",
   "type": "module",
-  "version": "8.15.2",
+  "version": "8.15.3",
   "keywords": [
     "Stripe",
     "Ts.ED",
