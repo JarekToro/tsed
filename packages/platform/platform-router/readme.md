@@ -101,7 +101,7 @@ const expressApp = express();
 injector.addProvider(MyController);
 injector.addProvider(NestedController);
 
-const appRouter = new PlatformRouter(injector);
+const appRouter = new PlatformRouter();
 
 appRouter.use("/rest", MyController);
 
