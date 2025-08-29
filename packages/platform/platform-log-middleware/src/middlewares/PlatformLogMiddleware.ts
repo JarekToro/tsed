@@ -8,6 +8,7 @@ import type {LoggerRequestFields} from "../domain/PlatformLogMiddlewareSettings.
 /**
  * @middleware
  * @platform
+ * @deprecated Use @tsed/platform-log-request instead
  */
 @Middleware()
 export class PlatformLogMiddleware implements MiddlewareMethods {
