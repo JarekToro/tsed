@@ -1,10 +1,10 @@
 import {uniq} from "@tsed/core";
-import {constant, injectable, ProviderType} from "@tsed/di";
+import {constant, context, injectable, ProviderType} from "@tsed/di";
 import {NotAcceptable} from "@tsed/exceptions";
-import {MiddlewareMethods} from "@tsed/platform-middlewares";
-import {Context} from "@tsed/platform-params";
 import type {AlterEndpointHandlersArg} from "@tsed/platform-router";
 import type {JsonOperationRoute} from "@tsed/schema";
+
+import type {MiddlewareMethods} from "../domain/MiddlewareMethods.js";
 
 /**
  * @middleware
@@ -21,8 +21,8 @@ export class PlatformAcceptMimesMiddleware implements MiddlewareMethods {
     };
   }
 
-  public use(@Context() ctx: Context): void {
-    const {endpoint, request} = ctx;
+  public use(): void {
+    const {endpoint, request} = context();
     const mimes = uniq((endpoint?.get("acceptMimes") || []).concat(this.acceptMimes));
 
     if (mimes.length && !request.accepts(mimes)) {

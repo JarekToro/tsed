@@ -1,7 +1,8 @@
-import {catchError} from "@tsed/core";
+import {catchAsyncError} from "@tsed/core";
+import {runInContext} from "@tsed/di";
+import {PlatformTest} from "@tsed/platform-http/testing";
 import {AcceptMime, EndpointMetadata, Get} from "@tsed/schema";
 
-import {PlatformTest} from "../../testing/index.js";
 import {PlatformAcceptMimesMiddleware} from "./PlatformAcceptMimesMiddleware.js";
 
 describe("PlatformMimesMiddleware", () => {
@@ -34,7 +35,7 @@ describe("PlatformMimesMiddleware", () => {
 
       const middleware = await PlatformTest.invoke<PlatformAcceptMimesMiddleware>(PlatformAcceptMimesMiddleware);
 
-      middleware.use(ctx as never);
+      await runInContext(ctx, () => middleware.use());
 
       expect(request.accepts).toHaveBeenCalledWith(["application/json", "text"]);
     });
@@ -59,7 +60,7 @@ describe("PlatformMimesMiddleware", () => {
       vi.spyOn(request, "accepts");
 
       const middleware = await PlatformTest.invoke<PlatformAcceptMimesMiddleware>(PlatformAcceptMimesMiddleware);
-      middleware.use(ctx as never);
+      await runInContext(ctx, () => middleware.use());
 
       expect(request.accepts).toHaveBeenCalledWith(["text", "application/json"]);
     });
@@ -81,7 +82,7 @@ describe("PlatformMimesMiddleware", () => {
       vi.spyOn(request, "accepts");
 
       const middleware = await PlatformTest.invoke<PlatformAcceptMimesMiddleware>(PlatformAcceptMimesMiddleware);
-      middleware.use(ctx as never);
+      await runInContext(ctx, () => middleware.use());
 
       expect(request.accepts).toHaveBeenCalledWith(["application/json", "text"]);
     });
@@ -104,7 +105,7 @@ describe("PlatformMimesMiddleware", () => {
       });
       const middleware = await PlatformTest.invoke<PlatformAcceptMimesMiddleware>(PlatformAcceptMimesMiddleware);
 
-      const error: any = catchError(() => middleware.use(ctx as never));
+      const error: any = await catchAsyncError(() => runInContext(ctx, () => middleware.use()));
 
       expect(error.message).toEqual("You must accept content-type application/json, text");
     });
@@ -131,7 +132,7 @@ describe("PlatformMimesMiddleware", () => {
       vi.spyOn(request, "accepts");
 
       const middleware = await PlatformTest.invoke<PlatformAcceptMimesMiddleware>(PlatformAcceptMimesMiddleware);
-      middleware.use(ctx as never);
+      await runInContext(ctx, () => middleware.use());
 
       return expect(request.accepts).not.toHaveBeenCalled();
     });
@@ -155,7 +156,7 @@ describe("PlatformMimesMiddleware", () => {
       vi.spyOn(request, "accepts");
 
       const middleware = await PlatformTest.invoke<PlatformAcceptMimesMiddleware>(PlatformAcceptMimesMiddleware);
-      middleware.use(ctx as never);
+      await runInContext(ctx, () => middleware.use());
 
       expect(request.accepts).toHaveBeenCalledWith(["application/json"]);
     });
@@ -181,7 +182,7 @@ describe("PlatformMimesMiddleware", () => {
       vi.spyOn(request, "accepts");
 
       const middleware = await PlatformTest.invoke<PlatformAcceptMimesMiddleware>(PlatformAcceptMimesMiddleware);
-      middleware.use(ctx as never);
+      await runInContext(ctx, () => middleware.use());
 
       expect(request.accepts).toHaveBeenCalledWith(["text"]);
     });
@@ -207,7 +208,7 @@ describe("PlatformMimesMiddleware", () => {
 
       const middleware = await PlatformTest.invoke<PlatformAcceptMimesMiddleware>(PlatformAcceptMimesMiddleware);
 
-      const error: any = catchError(() => middleware.use(ctx as never));
+      const error: any = await catchAsyncError(() => runInContext(ctx, () => middleware.use()));
 
       expect(error.message).toEqual("You must accept content-type application/json");
     });

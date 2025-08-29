@@ -1,8 +1,10 @@
+import "@tsed/platform-accept-mimes";
+
 import type {IncomingMessage, ServerResponse} from "node:http";
 import Http from "node:http";
 import type Https from "node:https";
 
-import {type Env, isClass, isFunction, isString, nameOf, Type} from "@tsed/core";
+import {Type} from "@tsed/core";
 import {
   colors,
   configuration,
@@ -14,11 +16,9 @@ import {
   logger,
   ProviderOpts,
   ProviderScope,
-  setLoggerConfiguration,
   TokenProvider
 } from "@tsed/di";
-import {$asyncAlter, $asyncEmit} from "@tsed/hooks";
-import {getMiddlewaresForHook, PlatformMiddlewareLoadingOptions} from "@tsed/platform-middlewares";
+import {$alter, $asyncAlter, $asyncEmit} from "@tsed/hooks";
 import {PlatformLayer} from "@tsed/platform-router";
 import Http2 from "http2";
 
@@ -182,11 +182,6 @@ export class PlatformBuilder<App = TsED.Application> {
     // init adapter (Express, Koa, etc...)
     await this.adapter.onInit();
 
-    setLoggerConfiguration();
-
-    // create the middleware mapping to be executed to the expected hook
-    await this.mapTokenMiddlewares();
-
     await this.loadInjector();
 
     // add the context middleware to the application
@@ -340,7 +335,9 @@ export class PlatformBuilder<App = TsED.Application> {
    * @protected
    */
   protected loadMiddlewaresFor(hook: string): void {
-    return getMiddlewaresForHook(hook, this.settings, "$beforeRoutesInit").forEach(({use}) => {
+    const middlewares = $alter("$alterMiddlewaresForHook", constant<{use: any}[]>("middlewares", []), [hook]);
+
+    return middlewares.forEach(({use}) => {
       this.app.use(use);
     });
   }
@@ -369,58 +366,5 @@ export class PlatformBuilder<App = TsED.Application> {
 
       logger().info(printRoutes(await $asyncAlter("$logRoutes", routes)));
     }
-  }
-
-  protected async mapTokenMiddlewares() {
-    let middlewares = constant<PlatformMiddlewareLoadingOptions[]>("middlewares", []);
-    const env = constant<Env>("env");
-    const defaultHook = "$beforeRoutesInit";
-
-    const promises = middlewares.map(async (middleware: PlatformMiddlewareLoadingOptions): Promise<PlatformMiddlewareLoadingOptions> => {
-      if (isFunction(middleware)) {
-        return {
-          env,
-          hook: defaultHook,
-          use: middleware
-        };
-      }
-
-      if (isString(middleware)) {
-        middleware = {env, use: middleware, hook: defaultHook};
-      }
-
-      let {use, options} = middleware;
-
-      if (isString(use)) {
-        if (["text-parser", "raw-parser", "json-parser", "urlencoded-parser"].includes(use)) {
-          use = this.adapter.bodyParser(use.replace("-parser", ""), options);
-        } else {
-          const mod = await import(use);
-          use = (mod.default || mod)(options);
-        }
-      }
-
-      if (isClass(use) && ["$beforeInit", "$onInit", "$afterInit"].includes(middleware.hook!)) {
-        throw new Error(
-          `Ts.ED Middleware "${nameOf(use)}" middleware cannot be added on ${
-            middleware.hook
-          } hook. Use one of this hooks instead: $beforeRoutesInit, $onRoutesInit, $afterRoutesInit, $beforeListen, $afterListen, $onReady`
-        );
-      }
-
-      return {
-        env,
-        hook: defaultHook,
-        ...middleware,
-        use
-      };
-    });
-
-    middlewares = await Promise.all(promises);
-
-    configuration().set(
-      "middlewares",
-      middlewares.filter((middleware) => middleware.use)
-    );
   }
 }
