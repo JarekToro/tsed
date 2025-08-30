@@ -1,6 +1,4 @@
-import "@tsed/ajv";
-
-import {configuration, constant, inject, injectable, logger} from "@tsed/di";
+import {configuration, constant, injectable, logger} from "@tsed/di";
 import {$off, $on, $once} from "@tsed/hooks";
 
 import {CONFIG_SOURCES} from "../constants/constants.js";
@@ -26,7 +24,8 @@ export async function afterResolveConfiguration() {
       let data = await getAll.apply(instance);
 
       if (validationSchema) {
-        data = await validate(name!, data, validationSchema);
+        const {validate} = await import("../utils/validate.js");
+        data = validate(name!, data, validationSchema);
       }
 
       configuration().set(data);

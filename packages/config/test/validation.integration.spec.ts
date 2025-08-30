@@ -76,11 +76,9 @@ describe("@tsed/config: validation", () => {
       return $asyncEmit("$afterResolveConfiguration");
     });
 
-    expect(error?.message).toEqual('extends[test].test2 must be number. Given value: "string-3"');
+    expect(error?.message).toEqual("extends[test].test2 must be number.");
     expect(error?.errors).toEqual([
       {
-        data: "string-3",
-        dataPath: ".test2",
         instancePath: "/test2",
         keyword: "type",
         message: "must be number",

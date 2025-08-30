@@ -57,11 +57,11 @@
     "test:ci": "vitest run --coverage.thresholds.autoUpdate=true"
   },
   "dependencies": {
+    "ajv": "^8.17.1",
     "change-case": "5.4.4",
     "tslib": "2.7.0"
   },
   "devDependencies": {
-    "@tsed/ajv": "workspace:*",
     "@tsed/barrels": "workspace:*",
     "@tsed/core": "workspace:*",
     "@tsed/di": "workspace:*",
