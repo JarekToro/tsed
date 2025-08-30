@@ -32,7 +32,7 @@
     "@tsed/core": "workspace:*",
     "@tsed/di": "workspace:*",
     "@tsed/json-mapper": "workspace:*",
-    "@tsed/logger": "8.0.0-rc.1",
+    "@tsed/logger": "8.0.0",
     "@tsed/platform-cache": "workspace:*",
     "@tsed/platform-http": "workspace:*",
     "@tsed/platform-params": "workspace:*",

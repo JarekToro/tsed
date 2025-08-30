@@ -32,7 +32,7 @@
     "@tsed/barrels": "workspace:*",
     "@tsed/core": "workspace:*",
     "@tsed/di": "workspace:*",
-    "@tsed/logger": "^8.0.0-rc.1",
+    "@tsed/logger": "^8.0.0",
     "@tsed/platform-http": "workspace:*",
     "@tsed/typescript": "workspace:*",
     "apollo-datasource-http": "0.21.0",
@@ -46,7 +46,7 @@
     "@apollo/server": ">=4.10.4",
     "@tsed/core": ">=8.0.0",
     "@tsed/di": ">=8.0.0",
-    "@tsed/logger": ">=8.0.0-rc.1",
+    "@tsed/logger": ">=8.0.0",
     "@tsed/platform-http": ">=8.0.0",
     "graphql": ">16.0.0"
   }

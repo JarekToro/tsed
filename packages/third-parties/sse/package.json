@@ -52,7 +52,7 @@
   "peerDependencies": {
     "@tsed/di": ">=8.0.0",
     "@tsed/json-mapper": ">=8.0.0",
-    "@tsed/logger": ">=8.0.0-rc.1",
+    "@tsed/logger": ">=8.0.0",
     "@tsed/platform-middlewares": ">=8.0.0",
     "@tsed/schema": ">=8.0.0"
   },
