@@ -82,6 +82,7 @@
     "@tsed/json-mapper": "workspace:*",
     "@tsed/logger": "^8.0.0-rc.1",
     "@tsed/logger-std": "^8.0.0-rc.1",
+    "@tsed/platform-accept-mimes": "workspace:*",
     "@tsed/platform-exceptions": "workspace:*",
     "@tsed/platform-middlewares": "workspace:*",
     "@tsed/platform-multer": "workspace:*",
