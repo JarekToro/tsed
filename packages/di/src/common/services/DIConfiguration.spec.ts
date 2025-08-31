@@ -44,6 +44,7 @@ describe("DIConfiguration", () => {
       expect(obj).toEqual({
         imports: [],
         logger: {},
+        mount: {},
         routes: []
       });
     });
@@ -55,6 +56,15 @@ describe("DIConfiguration", () => {
 
       configuration.imports = [];
       expect(configuration.imports).toEqual([]);
+    });
+  });
+  describe("mount()", () => {
+    it("should get mount", () => {
+      // GIVEN
+      const configuration = new DIConfiguration();
+
+      configuration.mount = {};
+      expect(configuration.mount).toEqual({});
     });
   });
 });

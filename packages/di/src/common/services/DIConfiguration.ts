@@ -1,13 +1,13 @@
 import {Env} from "@tsed/core/types/Env.js";
 import {getValue} from "@tsed/core/utils/getValue.js";
+import {isFunction} from "@tsed/core/utils/isFunction.js";
 import {setValue} from "@tsed/core/utils/setValue.js";
+import {$alter} from "@tsed/hooks";
 
 import type {DILoggerOptions} from "../interfaces/DILoggerOptions.js";
 import type {ImportTokenProviderOpts} from "../interfaces/ImportTokenProviderOpts.js";
 import type {TokenProvider} from "../interfaces/TokenProvider.js";
 import type {TokenRoute} from "../interfaces/TokenRoute.js";
-
-export const CONFIGURATION = Symbol.for("CONFIGURATION");
 
 export class DIConfiguration {
   readonly default: Map<string, any> = new Map();
@@ -17,6 +17,7 @@ export class DIConfiguration {
     Object.entries({
       imports: [],
       routes: [],
+      mount: {},
       logger: {},
       ...initialProps
     }).forEach(([key, value]) => {
@@ -79,6 +80,14 @@ export class DIConfiguration {
 
   set debug(debug: boolean) {
     this.logger = {...this.logger, level: debug ? "debug" : "info"};
+  }
+
+  get mount(): Record<string, TokenProvider[]> {
+    return this.get("mount");
+  }
+
+  set mount(value: Record<string, TokenProvider[]>) {
+    this.setRaw("mount", value);
   }
 
   /**
