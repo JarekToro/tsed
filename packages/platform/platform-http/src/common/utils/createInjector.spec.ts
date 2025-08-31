@@ -2,7 +2,6 @@ import {Env} from "@tsed/core";
 import {$log} from "@tsed/logger";
 
 import {FakeAdapter} from "../../testing/FakeAdapter.js";
-import {PlatformConfiguration} from "../config/services/PlatformConfiguration.js";
 import {PlatformAdapter} from "../services/PlatformAdapter.js";
 import {createInjector} from "./createInjector.js";
 
@@ -22,7 +21,6 @@ describe("createInjector", () => {
 
     const injector = createInjector(settings);
 
-    expect(injector.settings).toBeInstanceOf(PlatformConfiguration);
     expect(injector.settings.get("test")).toEqual("test");
     expect(injector.logger).toEqual($log);
     expect(injector.get(PlatformAdapter)).toBeInstanceOf(FakeAdapter);

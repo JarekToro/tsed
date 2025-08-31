@@ -22,7 +22,8 @@ import {$alter, $asyncAlter, $asyncEmit} from "@tsed/hooks";
 import {PlatformLayer} from "@tsed/platform-router";
 import Http2 from "http2";
 
-import {PlatformStaticsSettings} from "../config/interfaces/PlatformStaticsSettings.js";
+import {defineConfiguration} from "../config/defineConfiguration.js";
+import type {PlatformStaticsSettings} from "../config/PlatformStaticsSettings.js";
 import {PlatformRouteDetails} from "../domain/PlatformRouteDetails.js";
 import {application} from "../fn/application.js";
 import {Route} from "../interfaces/Route.js";
@@ -32,7 +33,6 @@ import {PlatformApplication} from "../services/PlatformApplication.js";
 import {closeServer} from "../utils/closeServer.js";
 import {createInjector} from "../utils/createInjector.js";
 import {CreateServerReturn} from "../utils/createServer.js";
-import {getConfiguration} from "../utils/getConfiguration.js";
 import {getStaticsOptions} from "../utils/getStaticsOptions.js";
 import {printRoutes} from "../utils/printRoutes.js";
 import {resolveControllers} from "../utils/resolveControllers.js";
@@ -51,9 +51,12 @@ export class PlatformBuilder<App = TsED.Application> {
   protected constructor(module: Type, settings: Partial<TsED.Configuration>) {
     this.#rootModule = module;
 
-    const configuration = getConfiguration(settings, module);
-
-    createInjector(configuration);
+    createInjector(
+      defineConfiguration({
+        rootModule: module,
+        ...settings
+      })
+    );
 
     this.log(`Loading ${this.name.toUpperCase()} platform adapter...`);
 
@@ -87,20 +90,18 @@ export class PlatformBuilder<App = TsED.Application> {
    *
    * ```typescript
    * @Configuration({
-   *    port: 8000,
-   *    httpsPort: 8080,
-   *    mount: {
-   *      "/rest": "${rootDir}/controllers/**\/*.js"
-   *    }
+   *   port: 8000,
+   *   httpsPort: 8080,
+   *   mount: {
+   *     "/rest": "${rootDir}/controllers/**\/*.js"
+   *   }
    * })
    * export class Server {
-   *     $onInit(){
-   *         console.log(this.settings); // {rootDir, port, httpsPort,...}
-   *     }
+   *   $onInit(){
+   *     console.log(this.settings); // {rootDir, port, httpsPort,...}
+   *   }
    * }
    * ```
-   *
-   * @returns {PlatformConfiguration}
    */
   get settings() {
     return configuration();
@@ -174,7 +175,7 @@ export class PlatformBuilder<App = TsED.Application> {
    */
   public addControllers(endpoint: string, controllers: TokenProvider | TokenProvider[]) {
     [].concat(controllers as never[]).forEach((token: TokenProvider) => {
-      configuration().routes.push({token, route: endpoint});
+      configuration().get("routes").push({token, route: endpoint});
     });
   }
 
@@ -226,7 +227,9 @@ export class PlatformBuilder<App = TsED.Application> {
     this.log("Build providers");
     const settings = configuration();
 
-    settings.set("routes", settings.get("routes").concat(resolveControllers(settings)));
+    const routes = settings.get("routes").concat(resolveControllers(settings));
+
+    settings.set("routes", routes);
 
     const container = createContainer();
     container.delete(this.#rootModule);

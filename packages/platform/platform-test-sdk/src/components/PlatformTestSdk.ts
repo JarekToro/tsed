@@ -18,8 +18,9 @@ export class PlatformTestSdk {
   }
 
   bootstrap(options: any = {}) {
-    return PlatformTest.bootstrap(this.options.server, {
+    return PlatformTest.bootstrap({
       ...this.options,
+      rootModule: this.options.server,
       ...options
     });
   }

@@ -1,5 +1,6 @@
 import {Env, setValue} from "@tsed/core";
 import {constant, context, inject, Injectable, InjectorService} from "@tsed/di";
+import {$asyncAlter} from "@tsed/hooks";
 import {PlatformApplication, PlatformContext} from "@tsed/platform-http";
 import Provider, {type Configuration, type KoaContextWithOIDC} from "oidc-provider";
 
@@ -106,7 +107,7 @@ export class OidcProvider {
       return `https://localhost:${this.httpsPort}`;
     }
 
-    return `http://localhost:${this.httpPort}`;
+    return this.httpPort ? `http://localhost:${this.httpPort}` : "http://localhost";
   }
 
   get(): Provider {
@@ -120,7 +121,7 @@ export class OidcProvider {
     const {proxy = this.env === Env.PROD, secureKey, allowHttpLocalhost = this.env !== Env.PROD} = this.oidc;
     const configuration = await this.getConfiguration();
 
-    await this.injector.alterAsync("$alterOidcConfiguration", configuration);
+    await $asyncAlter("$alterOidcConfiguration", configuration);
 
     const oidcProvider = new Provider(this.getIssuer(), configuration);
 

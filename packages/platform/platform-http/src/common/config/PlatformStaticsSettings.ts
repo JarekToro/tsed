@@ -1,15 +1,3 @@
-declare global {
-  namespace TsED {
-    // @ts-ignore
-    export interface StaticsOptions {
-      root: string;
-      hook?: "$beforeRoutesInit" | "$afterRoutesInit";
-      // @ts-ignore
-      [key: string]: any;
-    }
-  }
-}
-
 export interface PlatformStaticsOptions extends TsED.StaticsOptions {
   root: string;
 

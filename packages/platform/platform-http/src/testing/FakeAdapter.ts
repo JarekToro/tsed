@@ -1,13 +1,7 @@
 import {injectable, type ProviderOpts} from "@tsed/di";
 import {type PlatformContextHandler, PlatformLayer} from "@tsed/platform-router";
 
-import {
-  PlatformAdapter,
-  PlatformContext,
-  type PlatformMulter,
-  type PlatformMulterSettings,
-  type PlatformStaticsOptions
-} from "../common/index.js";
+import {PlatformAdapter, PlatformContext, type PlatformStaticsOptions} from "../common/index.js";
 
 export class FakeAdapter extends PlatformAdapter<any> {
   readonly NAME: string = "FAKE_ADAPTER";
@@ -45,7 +39,7 @@ export class FakeAdapter extends PlatformAdapter<any> {
     };
   }
 
-  multipart(options: PlatformMulterSettings): PlatformMulter {
+  multipart(options: TsED.MultipartFileOptions): TsED.MultipartFileInstance {
     return {} as any;
   }
 

@@ -1,4 +1,4 @@
-import {configuration, injector} from "@tsed/di";
+import {configuration, injector, logger} from "@tsed/di";
 import {$asyncEmit} from "@tsed/hooks";
 
 import {PlatformTest} from "../../testing/PlatformTest.js";
@@ -80,6 +80,7 @@ describe("createContext", () => {
   it("should add a x-request-id header to the response", async () => {
     // GIVEN
     vi.spyOn(PlatformResponse.prototype, "setHeader");
+    vi.spyOn(logger(), "info").mockReturnValue(undefined);
 
     const {ctx, response, request, call} = await createContextFixture();
     response.req = request;
@@ -94,6 +95,7 @@ describe("createContext", () => {
   it("should use an existing x-request-id request header for the response x-request-id header", async () => {
     // GIVEN
     vi.spyOn(PlatformResponse.prototype, "setHeader");
+    vi.spyOn(logger(), "info").mockReturnValue(undefined);
 
     const {ctx, response, request, call} = await createContextFixture({
       headers: {

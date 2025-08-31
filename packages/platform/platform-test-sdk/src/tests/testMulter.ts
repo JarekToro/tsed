@@ -1,8 +1,8 @@
 import {dirname, join} from "node:path";
 
 import {Controller} from "@tsed/di";
-import {MulterOptions, MultipartFile, PlatformMulterFile} from "@tsed/platform-http";
 import {PlatformTest} from "@tsed/platform-http/testing";
+import {MulterOptions, MultipartFile, PlatformMulterFile} from "@tsed/platform-multer";
 import {BodyParams} from "@tsed/platform-params";
 import {CollectionOf, Post, Property, Required, Status} from "@tsed/schema";
 import multer, {FileFilterCallback} from "multer";

@@ -6,7 +6,7 @@ import {$on} from "@tsed/hooks";
 import type {PlatformMulter, PlatformMulterSettings} from "@tsed/platform-multer";
 import {PlatformHandlerMetadata, PlatformLayer} from "@tsed/platform-router";
 
-import {PlatformStaticsOptions} from "../config/interfaces/PlatformStaticsSettings.js";
+import type {PlatformStaticsOptions} from "../config/PlatformStaticsSettings.js";
 import {application} from "../fn/application.js";
 import {createHttpServer} from "../utils/createHttpServer.js";
 import {createHttpsServer} from "../utils/createHttpsServer.js";

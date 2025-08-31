@@ -7,11 +7,16 @@ declare global {
     export interface Configuration {
       multer?: Options;
     }
+
+    interface MultipartFileOptions extends Options {}
+
+    interface MultipartFileInstance extends Multer {}
   }
 }
 
 export type PlatformMulter = Multer;
 export type PlatformMulterSettings = Options;
+
 export interface PlatformMulterFile {
   /** Name of the form field associated with this file. */
   fieldname: string;

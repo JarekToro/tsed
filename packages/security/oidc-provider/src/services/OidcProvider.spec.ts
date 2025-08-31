@@ -38,30 +38,31 @@ describe("OidcProvider", () => {
     );
     afterEach(() => PlatformTest.reset());
 
-    it("should intercept all oidc errors", () => {
+    it("should intercept all oidc errors", async () => {
       const oidcProvider = PlatformTest.get<OidcProvider>(OidcProvider);
-      vi.spyOn((oidcProvider as any).injector.logger, "error");
+      const $ctx = PlatformTest.createDIContext();
+      vi.spyOn($ctx.logger, "error");
 
       const fn = (oidcProvider as any).createErrorHandler("event");
-      fn(
-        {
-          headers: {
-            origin: "origin"
-          },
-          oidc: {
-            params: {
-              client_id: "client_id"
+      await runInContext($ctx, () =>
+        fn(
+          {
+            headers: {
+              origin: "origin"
+            },
+            oidc: {
+              params: {
+                client_id: "client_id"
+              }
             }
-          }
-        },
-        {error: "error", error_description: "error_description", error_detail: "error_detail"},
-        "account_id",
-        "sid"
+          },
+          {error: "error", error_description: "error_description", error_detail: "error_detail"},
+          "account_id",
+          "sid"
+        )
       );
 
-      expect((oidcProvider as any).injector.logger.error).toHaveBeenCalledWith({
-        duration: expect.any(Number),
-        reqId: expect.any(String),
+      expect($ctx.logger.error).toHaveBeenCalledWith({
         account_id: "account_id",
         error: {error_description: "error_description", error_detail: "error_detail", error: "error"},
         event: "OIDC_ERROR",
@@ -70,8 +71,7 @@ describe("OidcProvider", () => {
         },
         params: {client_id: "client_id"},
         sid: "sid",
-        type: "event",
-        time: expect.any(Date)
+        type: "event"
       });
     });
     it("should intercept all oidc errors (in request context)", async () => {
