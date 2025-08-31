@@ -101,13 +101,12 @@ export class DIConfiguration {
     }, thisArg);
   }
 
-  /**
-   *
-   * @param propertyKey
-   * @param value
-   */
-  set(propertyKey: string | Partial<TsED.Configuration>, value?: any): this {
+  set(obj: Partial<TsED.Configuration>): this;
+  set(propertyKey: string, value?: unknown): this;
+  set(propertyKey: string | Partial<TsED.Configuration>, value?: unknown): this {
     if (typeof propertyKey === "string") {
+      value = $alter(`$alterConfig:${propertyKey}`, value);
+
       if (Reflect.has(this, propertyKey)) {
         // @ts-ignore
         this[propertyKey] = value;
