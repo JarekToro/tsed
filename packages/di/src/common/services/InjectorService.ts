@@ -50,6 +50,8 @@ const EXCLUDED_CONFIGURATION_KEYS = ["mount", "imports"];
  */
 export class InjectorService extends Container {
   public logger: DILogger = console;
+  /*readonly */
+  settings = new DIConfiguration();
   private resolvedConfiguration: boolean = false;
   #cache = new LocalsContainer();
   #loaded: boolean = false;
@@ -57,15 +59,7 @@ export class InjectorService extends Container {
   constructor() {
     super();
     this.#cache.set(InjectorService, this);
-    this.#cache.set(DIConfiguration, new DIConfiguration());
-  }
-
-  get settings(): DIConfiguration {
-    return this.#cache.get(DIConfiguration);
-  }
-
-  set settings(settings: DIConfiguration) {
-    this.#cache.set(DIConfiguration, settings);
+    this.#cache.set(DIConfiguration, this.settings);
   }
 
   isLoaded() {
