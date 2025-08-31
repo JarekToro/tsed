@@ -249,7 +249,7 @@ describe("PlatformBuilder", () => {
       server.addControllers("/test", MyClass);
 
       // THEN
-      expect(server.injector.settings.routes).toEqual([
+      expect(server.injector.settings.get("routes")).toEqual([
         {
           route: "/heath",
           token: HealthCtrl

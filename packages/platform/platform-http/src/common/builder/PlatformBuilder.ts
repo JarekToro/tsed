@@ -1,10 +1,8 @@
-import "@tsed/platform-accept-mimes";
-
 import type {IncomingMessage, ServerResponse} from "node:http";
 import Http from "node:http";
 import type Https from "node:https";
 
-import {Type} from "@tsed/core";
+import type {Type} from "@tsed/core";
 import {
   colors,
   configuration,
@@ -43,20 +41,15 @@ import {resolveControllers} from "../utils/resolveControllers.js";
 export class PlatformBuilder<App = TsED.Application> {
   protected startedAt = new Date();
   protected current = new Date();
-  readonly #rootModule: Type<any>;
+  readonly #rootModule?: Type<any>;
   #promise: Promise<this>;
   #servers: CreateServerReturn[];
   #listeners: (Http.Server | Https.Server | Http2.Http2Server)[] = [];
 
-  protected constructor(module: Type, settings: Partial<TsED.Configuration>) {
-    this.#rootModule = module;
+  protected constructor(settings: Partial<TsED.Configuration>) {
+    this.#rootModule = settings.rootModule;
 
-    createInjector(
-      defineConfiguration({
-        rootModule: module,
-        ...settings
-      })
-    );
+    createInjector(defineConfiguration(settings));
 
     this.log(`Loading ${this.name.toUpperCase()} platform adapter...`);
 
@@ -69,8 +62,8 @@ export class PlatformBuilder<App = TsED.Application> {
     return this.adapter.NAME;
   }
 
-  get rootModule(): any {
-    return injector().get(this.#rootModule);
+  get rootModule(): any | undefined {
+    return this.#rootModule && injector().get(this.#rootModule);
   }
 
   get app(): PlatformApplication<App> {
@@ -122,25 +115,38 @@ export class PlatformBuilder<App = TsED.Application> {
     return injector();
   }
 
-  static create<App = TsED.Application>(module: Type<any>, settings: PlatformBuilderSettings<App>) {
-    return this.build(module, {
+  static create<App = TsED.Application>(settings: PlatformBuilderSettings<App>): PlatformBuilder<App>;
+  static create<App = TsED.Application>(module: Type<any>, settings?: PlatformBuilderSettings<App>): PlatformBuilder<App>;
+  static create<App = TsED.Application>(module: Type<any>, settings?: PlatformBuilderSettings<App>): PlatformBuilder<App> {
+    return this.build(module as any, {
       httpsPort: false,
       httpPort: false,
       ...settings
     });
   }
 
-  static build<App = TsED.Application>(module: Type<any>, settings: PlatformBuilderSettings<App>) {
-    return new PlatformBuilder(module, settings);
+  static build<App = TsED.Application>(settings: PlatformBuilderSettings<App>): PlatformBuilder<App>;
+  static build<App = TsED.Application>(module: Type<any>, settings?: PlatformBuilderSettings<App>): PlatformBuilder<App>;
+  static build<App = TsED.Application>(
+    module: Type<any> | PlatformBuilderSettings<App>,
+    settings?: PlatformBuilderSettings<App>
+  ): PlatformBuilder<App> {
+    return new PlatformBuilder({
+      rootModule: settings ? module : undefined,
+      ...(settings ? settings : (module as any))
+    });
   }
 
   /**
    * Bootstrap a server application
-   * @param module
-   * @param settings
    */
-  static bootstrap<App = TsED.Application>(module: Type<any>, settings: PlatformBuilderSettings<App>) {
-    return this.build<App>(module, settings).bootstrap();
+  static bootstrap<App = TsED.Application>(settings: PlatformBuilderSettings<App>): Promise<PlatformBuilder<App>>;
+  static bootstrap<App = TsED.Application>(module: Type<any>, settings?: PlatformBuilderSettings<App>): Promise<PlatformBuilder<App>>;
+  static bootstrap<App = TsED.Application>(
+    module: Type<any> | PlatformBuilderSettings<App>,
+    settings?: PlatformBuilderSettings<App>
+  ): Promise<PlatformBuilder<App>> {
+    return this.build<App>(module as any, settings).bootstrap();
   }
 
   callback(): (req: IncomingMessage, res: ServerResponse) => void;
@@ -193,9 +199,9 @@ export class PlatformBuilder<App = TsED.Application> {
     this.log("Load routes");
     await this.adapter.beforeLoadRoutes();
 
-    if (this.rootModule.$beforeRoutesInit) {
+    if (this.rootModule?.$beforeRoutesInit) {
       await this.rootModule.$beforeRoutesInit();
-      // remove method to avoid multiple call and preserve hook order
+      // remove this method to avoid multiple call and preserve hook order
       this.rootModule.$beforeRoutesInit = () => {};
     }
 
@@ -232,11 +238,14 @@ export class PlatformBuilder<App = TsED.Application> {
     settings.set("routes", routes);
 
     const container = createContainer();
-    container.delete(this.#rootModule);
-    container.addProvider(this.#rootModule, {
-      type: "server:module",
-      scope: ProviderScope.SINGLETON
-    });
+
+    if (this.#rootModule) {
+      container.delete(this.#rootModule);
+      container.addProvider(this.#rootModule, {
+        type: "server:module",
+        scope: ProviderScope.SINGLETON
+      });
+    }
 
     await injector().load(container);
 
