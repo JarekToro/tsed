@@ -138,6 +138,21 @@ export class DIConfiguration {
     return this.getRaw(propertyKey, defaultValue);
   }
 
+  decorate(key: string, value: ((...args: unknown[]) => unknown) | PropertyDescriptor) {
+    if (key in this) {
+      return this;
+    }
+    Object.defineProperty(
+      DIConfiguration.prototype,
+      key,
+      isFunction(value)
+        ? {
+            value
+          }
+        : value
+    );
+  }
+
   protected getRaw(propertyKey: string, defaultValue?: any): any {
     const value = getValue(this.map, propertyKey);
 

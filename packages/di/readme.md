@@ -36,7 +36,9 @@
 <code><img height="20" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/chrome/chrome.png"></code>
 <code><img height="20" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/react/react.png"></code>
 
-A powerful and flexible Dependency Injection (DI) toolkit inspired by Angular, designed for both TypeScript and pure JavaScript applications. Use it standalone or as the foundation of Ts.ED. Supports both decorator-based and functional (decorator-less) APIs for maximum compatibility, even in non-TypeScript or pure JS projects.
+A powerful and flexible Dependency Injection (DI) toolkit inspired by Angular, designed for both TypeScript and pure
+JavaScript applications. Use it standalone or as the foundation of Ts.ED. Supports both decorator-based and functional (
+decorator-less) APIs for maximum compatibility, even in non-TypeScript or pure JS projects.
 
 ---
 
@@ -59,15 +61,26 @@ npm install --save @tsed/di @tsed/core @tsed/hooks @tsed/logger
 
 ## Features
 
-- **[Providers](https://tsed.dev/docs/providers.html):** Register and manage services, factories, values, interceptors, and more.
-- **[Functional API](https://tsed.dev/docs/providers.html#injectable):** Register providers and factories without decorators (for pure JS or decorator-less code).
-- **[Async Factories](https://tsed.dev/docs/custom-providers.html#register-async-factory):** Create providers that resolve asynchronously (e.g., database connections).
-- **[Constants Injection](https://tsed.dev/docs/providers.html#constant):** Use `@Constant()` or `constant()` to inject configuration or static values.
-- **[Value Injection](https://tsed.dev/docs/providers.html#value-refvalue):** Use `@Value()` or `refValue()` to inject resolved provider values.
-- **[InjectContext](https://tsed.dev/docs/providers.html#inject-context):** Access the injection context and advanced DI features.
-- **[Config Sources](https://tsed.dev/docs/configuration/configuration-sources.html):** Load and merge configuration from multiple sources (files, env, remote, etc.).
-- **[Lifecycle hooks](https://tsed.dev/docs/hooks.html):** Manage provider lifecycle with hooks like `$onInit`, `$onDestroy`.
-- **[Lazy loading](https://tsed.dev/docs/providers.html#lazy-load-provider):** Lazily load Node.js ESM modules. The lazy loading feature allows you to declare a provider that is only instantiated when it is first injected. The DI system will dynamically import the ESM module, discover injectable services within it, and instantiate them on demand—enabling efficient code splitting and reducing startup time.
+- **[Providers](https://tsed.dev/docs/providers.html):** Register and manage services, factories, values, interceptors,
+  and more.
+- **[Functional API](https://tsed.dev/docs/providers.html#injectable):** Register providers and factories without
+  decorators (for pure JS or decorator-less code).
+- **[Async Factories](https://tsed.dev/docs/custom-providers.html#register-async-factory):** Create providers that
+  resolve asynchronously (e.g., database connections).
+- **[Constants Injection](https://tsed.dev/docs/providers.html#constant):** Use `@Constant()` or `constant()` to inject
+  configuration or static values.
+- **[Value Injection](https://tsed.dev/docs/providers.html#value-refvalue):** Use `@Value()` or `refValue()` to inject
+  resolved provider values.
+- **[InjectContext](https://tsed.dev/docs/providers.html#inject-context):** Access the injection context and advanced DI
+  features.
+- **[Config Sources](https://tsed.dev/docs/configuration/configuration-sources.html):** Load and merge configuration
+  from multiple sources (files, env, remote, etc.).
+- **[Lifecycle hooks](https://tsed.dev/docs/hooks.html):** Manage provider lifecycle with hooks like `$onInit`,
+  `$onDestroy`.
+- **[Lazy loading](https://tsed.dev/docs/providers.html#lazy-load-provider):** Lazily load Node.js ESM modules. The lazy
+  loading feature allows you to declare a provider that is only instantiated when it is first injected. The DI system
+  will dynamically import the ESM module, discover injectable services within it, and instantiate them on
+  demand—enabling efficient code splitting and reducing startup time.
 - **Full TypeScript support:** Type inference with `inject()` and advanced tooling for type-safe DI.
 
 ---
@@ -118,7 +131,8 @@ You can use it in any JS/TS project (web, CLI, backend, etc) without Ts.ED.
 
 ## Stable & Recommended Initialization Example
 
-This is the recommended and most stable way to initialize and use the injector, especially when working with advanced scenarios (settings, async providers, custom loggers, etc):
+This is the recommended and most stable way to initialize and use the injector, especially when working with advanced
+scenarios (settings, async providers, custom loggers, etc):
 
 ```typescript
 import {injector, attachLogger, inject} from "@tsed/di";
@@ -127,12 +141,6 @@ import {CalendarCtrl} from "./CalendarCtrl.js";
 
 // Create a new InjectorService instance
 const inj = injector();
-
-// Register your configuration provider
-inj.addProvider(PlatformConfiguration);
-
-// Optionally invoke and set configuration
-inj.settings = inj.invoke(PlatformConfiguration);
 inj.settings.set(settings);
 
 // Attach a custom logger (optional)
@@ -198,11 +206,6 @@ import "./services/GetAllowerUsers.js"; // just add import is enough to discover
 // Create a new InjectorService instance
 const inj = injector();
 
-// Register your configuration provider
-inj.addProvider(PlatformConfiguration);
-
-// Optionally invoke and set configuration
-inj.settings = inj.invoke(PlatformConfiguration);
 inj.settings.set(settings);
 
 // Attach a custom logger (optional)
@@ -213,9 +216,11 @@ attachLogger($log); // Overriding the default logger is not recommended
 await inj.load();
 ```
 
-The example above is the main point to start the DI system. It should be placed in the main entry file of your application.
+The example above is the main point to start the DI system. It should be placed in the main entry file of your
+application.
 
-Now, you can use the `inject()` function to retrieve the instance of the class, injectable provider, or pure JavaScript function.
+Now, you can use the `inject()` function to retrieve the instance of the class, injectable provider, or pure JavaScript
+function.
 
 For example, if you want to use the `GET_ALLOWED_USERS` factory in your application, you can do it like this:
 
@@ -246,7 +251,8 @@ In summary:
 
 ## Async Factories
 
-You can register **async factories** to provide values/services that require asynchronous initialization (e.g., database connections):
+You can register **async factories** to provide values/services that require asynchronous initialization (e.g., database
+connections):
 
 ```typescript
 import {injectable, inject} from "@tsed/di";
@@ -269,7 +275,8 @@ db.query("SELECT * FROM users");
 
 ## Injecting Constants with `@Constant()` and `@Value()`
 
-You can inject constant values or configuration using the `@Constant()` decorator (or `constant()` function in the Functional API):
+You can inject constant values or configuration using the `@Constant()` decorator (or `constant()` function in the
+Functional API):
 
 ```typescript
 import {Injectable, Constant} from "@tsed/di";
@@ -284,7 +291,8 @@ export class MyService {
 }
 ```
 
-You can also use `@Value()` to inject the resolved value of a provider (by token), or `refValue()` for the functional API:
+You can also use `@Value()` to inject the resolved value of a provider (by token), or `refValue()` for the functional
+API:
 
 ```typescript
 import {Injectable, Value} from "@tsed/di";
@@ -331,6 +339,77 @@ See [Providers documentation](https://tsed.dev/docs/providers.html).
 
 ---
 
+## Extending DIConfiguration
+
+The `DIConfiguration` class provides a `decorate` method that allows you to extend its functionality by adding new methods or properties. You can access this method through the `configuration()` function.
+
+```typescript
+import {configuration} from "@tsed/di";
+
+// Add a custom method to DIConfiguration
+configuration().decorate("myCustomMethod", function () {
+  // Your custom logic here
+  return "Custom result";
+});
+
+// Usage
+const result = configuration().myCustomMethod(); // "Custom result"
+```
+
+You can also add a property with a custom getter/setter:
+
+```typescript
+configuration().decorate("customProperty", {
+  get() {
+    return this.get("someInternalValue");
+  },
+  set(value) {
+    this.set("someInternalValue", value);
+  }
+});
+```
+
+This is particularly useful for plugin authors who want to extend the configuration capabilities without modifying the core code.
+
+---
+
+## Using the $alterConfig:propertyKey Hook
+
+The `$alterConfig:propertyKey` hook allows you to intercept and modify configuration values before they are assigned to a property. This is useful when you need to transform, validate, or augment configuration values dynamically.
+
+When a value is set in the configuration using the `set()` method, the DIConfiguration class internally calls the `$alter` hook with the pattern `$alterConfig:${propertyKey}`, passing the value as the second argument.
+
+Here's how to use this hook:
+
+```typescript
+import {$on} from "@tsed/hooks";
+
+// Register a hook to intercept and modify the 'jsonMapper' configuration
+$on("$alterConfig:jsonMapper", (options) => {
+  // Modify the options before they are assigned
+  options.strictGroups = Boolean(options.strictGroups);
+  options.disableUnsecureConstructor = Boolean(options.disableUnsecureConstructor);
+  options.additionalProperties = Boolean(
+    isBoolean(options.additionalProperties) ? options.additionalProperties : options.additionalProperties === "accept"
+  );
+
+  // Return the modified options
+  return options;
+});
+```
+
+This hook is particularly useful for:
+
+- Normalizing configuration values
+- Applying default values
+- Validating configuration before it's applied
+- Transforming configuration formats
+- Implementing cross-cutting concerns for configuration properties
+
+The hook is executed whenever the corresponding property is set, whether through direct assignment or through the `configuration().set()` method.
+
+---
+
 ## Documentation & Resources
 
 - **[Providers](https://tsed.dev/docs/providers.html)**
@@ -354,7 +433,8 @@ Thank you to all our backers! 🙏 [[Become a backer](https://opencollective.com
 
 ## Sponsors
 
-Support this project by becoming a sponsor. Your logo will show up here with a link to your website. [[Become a sponsor](https://opencollective.com/tsed#sponsor)]
+Support this project by becoming a sponsor. Your logo will show up here with a link to your
+website. [[Become a sponsor](https://opencollective.com/tsed#sponsor)]
 
 ## License
 
@@ -362,8 +442,15 @@ The MIT License (MIT)
 
 Copyright (c) 2016 - 2022 Romain Lenzotti
 
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+documentation files (the "Software"), to deal in the Software without restriction, including without limitation the
+rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit
+persons to whom the Software is furnished to do so, subject to the following conditions:
 
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the
+Software.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.

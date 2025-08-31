@@ -67,4 +67,31 @@ describe("DIConfiguration", () => {
       expect(configuration.mount).toEqual({});
     });
   });
+  describe("decorate()", () => {
+    it("should decorate configuration with new method", () => {
+      // GIVEN
+      const configuration = new DIConfiguration();
+      const method = () => "test";
+
+      // WHEN
+      configuration.decorate("testMethod", method);
+
+      // THEN
+      expect((configuration as any)["testMethod"]).toEqual(method);
+    });
+
+    it("should allow accessing decorated method", () => {
+      // GIVEN
+      const configuration = new DIConfiguration();
+      const expected = "result";
+      const method = () => expected;
+
+      // WHEN
+      configuration.decorate("customMethod", method);
+      const result = (configuration as any)["customMethod"]();
+
+      // THEN
+      expect(result).toEqual(expected);
+    });
+  });
 });

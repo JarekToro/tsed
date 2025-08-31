@@ -528,3 +528,90 @@ function doSomething() {
   return myService.doSomething();
 }
 ```
+
+## Extending DIConfiguration
+
+The `DIConfiguration` class provides a `decorate` method that allows you to extend its functionality by adding new methods or properties. You can access this method through the `configuration()` function.
+
+```typescript
+import {configuration} from "@tsed/di";
+
+// Add a custom method to DIConfiguration
+configuration().decorate("myCustomMethod", function () {
+  // Your custom logic here
+  return "Custom result";
+});
+
+// Usage
+const result = configuration().myCustomMethod(); // "Custom result"
+```
+
+You can also add a property with a custom getter/setter:
+
+```typescript
+configuration().decorate("customProperty", {
+  get() {
+    return this.get("someInternalValue");
+  },
+  set(value) {
+    this.set("someInternalValue", value);
+  }
+});
+```
+
+This is particularly useful for plugin authors who want to extend the configuration capabilities without modifying the core code. For example, you could add methods to handle specific configuration patterns for your plugin:
+
+```typescript
+// In your plugin's initialization code
+configuration().decorate("myPlugin", function (options) {
+  // Set up plugin-specific configuration
+  this.set("myPlugin", {
+    enabled: options.enabled ?? true,
+    timeout: options.timeout ?? 5000
+    // other plugin options
+  });
+
+  return this;
+});
+
+// Usage in application code
+configuration().myPlugin({
+  enabled: true,
+  timeout: 10000
+});
+```
+
+## Using the $alterConfig:propertyKey Hook
+
+The `$alterConfig:propertyKey` hook allows you to intercept and modify configuration values before they are assigned to a property. This is useful when you need to transform, validate, or augment configuration values dynamically.
+
+When a value is set in the configuration using the `set()` method, the DIConfiguration class internally calls the `$alter` hook with the pattern `$alterConfig:${propertyKey}`, passing the value as the second argument.
+
+Here's how to use this hook:
+
+```typescript
+import {$on} from "@tsed/hooks";
+
+// Register a hook to intercept and modify the 'jsonMapper' configuration
+$on("$alterConfig:jsonMapper", (options) => {
+  // Modify the options before they are assigned
+  options.strictGroups = Boolean(options.strictGroups);
+  options.disableUnsecureConstructor = Boolean(options.disableUnsecureConstructor);
+  options.additionalProperties = Boolean(
+    isBoolean(options.additionalProperties) ? options.additionalProperties : options.additionalProperties === "accept"
+  );
+
+  // Return the modified options
+  return options;
+});
+```
+
+This hook is particularly useful for:
+
+- Normalizing configuration values
+- Applying default values
+- Validating configuration before it's applied
+- Transforming configuration formats
+- Implementing cross-cutting concerns for configuration properties
+
+The hook is executed whenever the corresponding property is set, whether through direct assignment or through the `configuration().set()` method.
