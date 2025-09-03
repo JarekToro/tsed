@@ -26,6 +26,7 @@
       "@tsed/platform-params": ["./packages/platform/platform-params/src/index.ts"],
       "@tsed/platform-response-filter": ["./packages/platform/platform-response-filter/src/index.ts"],
       "@tsed/platform-router": ["./packages/platform/platform-router/src/index.ts"],
+      "@tsed/platform-accept-mimes": ["./packages/platform/platform-accept-mimes/src/index.ts"],
       "@tsed/platform-views": ["./packages/platform/platform-views/src/index.ts"],
       "@tsed/platform-http": ["./packages/platform/platform-http/src/index.ts"],
       "@tsed/platform-http/testing": ["./packages/platform/platform-http/src/testing/index.ts"],

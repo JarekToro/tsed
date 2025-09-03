@@ -11,4 +11,5 @@ export * from "./decorators/useBefore.js";
 export * from "./decorators/useBeforeEach.js";
 export * from "./domain/MiddlewareMethods.js";
 export * from "./domain/PlatformMiddlewareSettings.js";
-export * from "./utils/getMiddlewaresForHook.js";
+export * from "./hooks/alterMiddlewaresForHook.js";
+export * from "./hooks/beforeInit.js";

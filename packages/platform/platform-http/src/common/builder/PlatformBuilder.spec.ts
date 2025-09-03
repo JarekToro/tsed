@@ -1,4 +1,3 @@
-import {catchAsyncError} from "@tsed/core";
 import {Configuration, configuration, Controller, destroyInjector, Injectable, injector, Module} from "@tsed/di";
 import {$asyncEmit} from "@tsed/hooks";
 
@@ -113,8 +112,7 @@ describe("PlatformBuilder", () => {
         {
           hook: "$afterRoutesInit",
           use: vi.fn()
-        },
-        vi.fn()
+        }
       ];
       // WHEN
       const platform = await PlatformCustom.bootstrap(ServerModule, {
@@ -129,67 +127,6 @@ describe("PlatformBuilder", () => {
       platform.loadMiddlewaresFor("$beforeRoutesInit");
 
       expect(platform.app.use).toHaveBeenCalledWith(middlewares[0].use);
-      expect(platform.app.use).toHaveBeenCalledWith(middlewares[2]);
-    });
-    it("should throw an error when a Ts.ED middleware is added on $afterInit hook", async () => {
-      const middlewares: any[] = [
-        {
-          hook: "$afterInit",
-          use: class TestMiddleware {}
-        }
-      ];
-      // WHEN
-      const error = await catchAsyncError(() =>
-        PlatformCustom.bootstrap(ServerModule, {
-          httpPort: false,
-          httpsPort: false,
-          middlewares
-        })
-      );
-
-      expect(error?.message).toEqual(
-        'Ts.ED Middleware "TestMiddleware" middleware cannot be added on $afterInit hook. Use one of this hooks instead: $beforeRoutesInit, $onRoutesInit, $afterRoutesInit, $beforeListen, $afterListen, $onReady'
-      );
-    });
-    it("should throw an error when a Ts.ED middleware is added on $beforeInit hook", async () => {
-      const middlewares: any[] = [
-        {
-          hook: "$beforeInit",
-          use: class TestMiddleware {}
-        }
-      ];
-      // WHEN
-      const error = await catchAsyncError(() =>
-        PlatformCustom.bootstrap(ServerModule, {
-          httpPort: false,
-          httpsPort: false,
-          middlewares
-        })
-      );
-
-      expect(error?.message).toEqual(
-        'Ts.ED Middleware "TestMiddleware" middleware cannot be added on $beforeInit hook. Use one of this hooks instead: $beforeRoutesInit, $onRoutesInit, $afterRoutesInit, $beforeListen, $afterListen, $onReady'
-      );
-    });
-    it("should throw an error when a Ts.ED middleware is added on $onInit hook", async () => {
-      const middlewares: any[] = [
-        {
-          hook: "$onInit",
-          use: class TestMiddleware {}
-        }
-      ];
-      // WHEN
-      const error = await catchAsyncError(() =>
-        PlatformCustom.bootstrap(ServerModule, {
-          httpPort: false,
-          httpsPort: false,
-          middlewares
-        })
-      );
-
-      expect(error?.message).toEqual(
-        'Ts.ED Middleware "TestMiddleware" middleware cannot be added on $onInit hook. Use one of this hooks instead: $beforeRoutesInit, $onRoutesInit, $afterRoutesInit, $beforeListen, $afterListen, $onReady'
-      );
     });
   });
   describe("boostrap", () => {
@@ -312,7 +249,7 @@ describe("PlatformBuilder", () => {
       server.addControllers("/test", MyClass);
 
       // THEN
-      expect(server.injector.settings.routes).toEqual([
+      expect(server.injector.settings.get("routes")).toEqual([
         {
           route: "/heath",
           token: HealthCtrl

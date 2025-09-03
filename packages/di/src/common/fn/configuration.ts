@@ -4,7 +4,7 @@ import type {TokenProvider} from "../interfaces/TokenProvider.js";
 import {DIConfiguration} from "../services/DIConfiguration.js";
 import {injector} from "./injector.js";
 
-export function configuration(): TsED.DIConfiguration & DIConfiguration;
+export function configuration(): TsED.Configuration & DIConfiguration;
 export function configuration(token: TokenProvider): Partial<TsED.Configuration>;
 export function configuration(token: TokenProvider, configuration: Partial<TsED.Configuration>): Partial<TsED.Configuration>;
 export function configuration(token?: TokenProvider, configuration?: Partial<TsED.Configuration>) {
@@ -18,5 +18,5 @@ export function configuration(token?: TokenProvider, configuration?: Partial<TsE
     return store.get("configuration", configuration);
   }
 
-  return injector().settings as TsED.DIConfiguration & DIConfiguration;
+  return injector().settings as TsED.Configuration & DIConfiguration;
 }

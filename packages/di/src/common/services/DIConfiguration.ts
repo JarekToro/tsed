@@ -1,13 +1,13 @@
 import {Env} from "@tsed/core/types/Env.js";
 import {getValue} from "@tsed/core/utils/getValue.js";
+import {isFunction} from "@tsed/core/utils/isFunction.js";
 import {setValue} from "@tsed/core/utils/setValue.js";
+import {$alter} from "@tsed/hooks";
 
 import type {DILoggerOptions} from "../interfaces/DILoggerOptions.js";
 import type {ImportTokenProviderOpts} from "../interfaces/ImportTokenProviderOpts.js";
 import type {TokenProvider} from "../interfaces/TokenProvider.js";
 import type {TokenRoute} from "../interfaces/TokenRoute.js";
-
-export const CONFIGURATION = Symbol.for("CONFIGURATION");
 
 export class DIConfiguration {
   readonly default: Map<string, any> = new Map();
@@ -17,6 +17,7 @@ export class DIConfiguration {
     Object.entries({
       imports: [],
       routes: [],
+      mount: {},
       logger: {},
       ...initialProps
     }).forEach(([key, value]) => {
@@ -81,6 +82,14 @@ export class DIConfiguration {
     this.logger = {...this.logger, level: debug ? "debug" : "info"};
   }
 
+  get mount(): Record<string, TokenProvider[]> {
+    return this.get("mount");
+  }
+
+  set mount(value: Record<string, TokenProvider[]>) {
+    this.setRaw("mount", value);
+  }
+
   /**
    *
    * @param callbackfn
@@ -92,13 +101,12 @@ export class DIConfiguration {
     }, thisArg);
   }
 
-  /**
-   *
-   * @param propertyKey
-   * @param value
-   */
-  set(propertyKey: string | Partial<TsED.Configuration>, value?: any): this {
+  set(obj: Partial<TsED.Configuration>): this;
+  set(propertyKey: string, value?: unknown): this;
+  set(propertyKey: string | Partial<TsED.Configuration>, value?: unknown): this {
     if (typeof propertyKey === "string") {
+      value = $alter(`$alterConfig:${propertyKey}`, value);
+
       if (Reflect.has(this, propertyKey)) {
         // @ts-ignore
         this[propertyKey] = value;
@@ -128,6 +136,21 @@ export class DIConfiguration {
    */
   get<T = any>(propertyKey: string, defaultValue?: T): T {
     return this.getRaw(propertyKey, defaultValue);
+  }
+
+  decorate(key: string, value: ((...args: unknown[]) => unknown) | PropertyDescriptor) {
+    if (key in this) {
+      return this;
+    }
+    Object.defineProperty(
+      DIConfiguration.prototype,
+      key,
+      isFunction(value)
+        ? {
+            value
+          }
+        : value
+    );
   }
 
   protected getRaw(propertyKey: string, defaultValue?: any): any {

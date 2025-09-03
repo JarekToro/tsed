@@ -2,7 +2,7 @@ import type {IncomingMessage, ServerResponse} from "node:http";
 import Http from "node:http";
 import type Https from "node:https";
 
-import {type Env, isClass, isFunction, isString, nameOf, Type} from "@tsed/core";
+import type {Type} from "@tsed/core";
 import {
   colors,
   configuration,
@@ -14,15 +14,14 @@ import {
   logger,
   ProviderOpts,
   ProviderScope,
-  setLoggerConfiguration,
   TokenProvider
 } from "@tsed/di";
-import {$asyncAlter, $asyncEmit} from "@tsed/hooks";
-import {getMiddlewaresForHook, PlatformMiddlewareLoadingOptions} from "@tsed/platform-middlewares";
+import {$alter, $asyncAlter, $asyncEmit} from "@tsed/hooks";
 import {PlatformLayer} from "@tsed/platform-router";
 import Http2 from "http2";
 
-import {PlatformStaticsSettings} from "../config/interfaces/PlatformStaticsSettings.js";
+import {defineConfiguration} from "../config/defineConfiguration.js";
+import type {PlatformStaticsSettings} from "../config/PlatformStaticsSettings.js";
 import {PlatformRouteDetails} from "../domain/PlatformRouteDetails.js";
 import {application} from "../fn/application.js";
 import {Route} from "../interfaces/Route.js";
@@ -32,7 +31,6 @@ import {PlatformApplication} from "../services/PlatformApplication.js";
 import {closeServer} from "../utils/closeServer.js";
 import {createInjector} from "../utils/createInjector.js";
 import {CreateServerReturn} from "../utils/createServer.js";
-import {getConfiguration} from "../utils/getConfiguration.js";
 import {getStaticsOptions} from "../utils/getStaticsOptions.js";
 import {printRoutes} from "../utils/printRoutes.js";
 import {resolveControllers} from "../utils/resolveControllers.js";
@@ -43,17 +41,15 @@ import {resolveControllers} from "../utils/resolveControllers.js";
 export class PlatformBuilder<App = TsED.Application> {
   protected startedAt = new Date();
   protected current = new Date();
-  readonly #rootModule: Type<any>;
+  readonly #rootModule?: Type<any>;
   #promise: Promise<this>;
   #servers: CreateServerReturn[];
   #listeners: (Http.Server | Https.Server | Http2.Http2Server)[] = [];
 
-  protected constructor(module: Type, settings: Partial<TsED.Configuration>) {
-    this.#rootModule = module;
+  protected constructor(settings: Partial<TsED.Configuration>) {
+    this.#rootModule = settings.rootModule;
 
-    const configuration = getConfiguration(settings, module);
-
-    createInjector(configuration);
+    createInjector(defineConfiguration(settings));
 
     this.log(`Loading ${this.name.toUpperCase()} platform adapter...`);
 
@@ -66,8 +62,8 @@ export class PlatformBuilder<App = TsED.Application> {
     return this.adapter.NAME;
   }
 
-  get rootModule(): any {
-    return injector().get(this.#rootModule);
+  get rootModule(): any | undefined {
+    return this.#rootModule && injector().get(this.#rootModule);
   }
 
   get app(): PlatformApplication<App> {
@@ -87,20 +83,18 @@ export class PlatformBuilder<App = TsED.Application> {
    *
    * ```typescript
    * @Configuration({
-   *    port: 8000,
-   *    httpsPort: 8080,
-   *    mount: {
-   *      "/rest": "${rootDir}/controllers/**\/*.js"
-   *    }
+   *   port: 8000,
+   *   httpsPort: 8080,
+   *   mount: {
+   *     "/rest": "${rootDir}/controllers/**\/*.js"
+   *   }
    * })
    * export class Server {
-   *     $onInit(){
-   *         console.log(this.settings); // {rootDir, port, httpsPort,...}
-   *     }
+   *   $onInit(){
+   *     console.log(this.settings); // {rootDir, port, httpsPort,...}
+   *   }
    * }
    * ```
-   *
-   * @returns {PlatformConfiguration}
    */
   get settings() {
     return configuration();
@@ -121,25 +115,38 @@ export class PlatformBuilder<App = TsED.Application> {
     return injector();
   }
 
-  static create<App = TsED.Application>(module: Type<any>, settings: PlatformBuilderSettings<App>) {
-    return this.build(module, {
+  static create<App = TsED.Application>(settings: PlatformBuilderSettings<App>): PlatformBuilder<App>;
+  static create<App = TsED.Application>(module: Type<any>, settings?: PlatformBuilderSettings<App>): PlatformBuilder<App>;
+  static create<App = TsED.Application>(module: Type<any>, settings?: PlatformBuilderSettings<App>): PlatformBuilder<App> {
+    return this.build(module as any, {
       httpsPort: false,
       httpPort: false,
       ...settings
     });
   }
 
-  static build<App = TsED.Application>(module: Type<any>, settings: PlatformBuilderSettings<App>) {
-    return new PlatformBuilder(module, settings);
+  static build<App = TsED.Application>(settings: PlatformBuilderSettings<App>): PlatformBuilder<App>;
+  static build<App = TsED.Application>(module: Type<any>, settings?: PlatformBuilderSettings<App>): PlatformBuilder<App>;
+  static build<App = TsED.Application>(
+    module: Type<any> | PlatformBuilderSettings<App>,
+    settings?: PlatformBuilderSettings<App>
+  ): PlatformBuilder<App> {
+    return new PlatformBuilder({
+      rootModule: settings ? module : undefined,
+      ...(settings ? settings : (module as any))
+    });
   }
 
   /**
    * Bootstrap a server application
-   * @param module
-   * @param settings
    */
-  static bootstrap<App = TsED.Application>(module: Type<any>, settings: PlatformBuilderSettings<App>) {
-    return this.build<App>(module, settings).bootstrap();
+  static bootstrap<App = TsED.Application>(settings: PlatformBuilderSettings<App>): Promise<PlatformBuilder<App>>;
+  static bootstrap<App = TsED.Application>(module: Type<any>, settings?: PlatformBuilderSettings<App>): Promise<PlatformBuilder<App>>;
+  static bootstrap<App = TsED.Application>(
+    module: Type<any> | PlatformBuilderSettings<App>,
+    settings?: PlatformBuilderSettings<App>
+  ): Promise<PlatformBuilder<App>> {
+    return this.build<App>(module as any, settings).bootstrap();
   }
 
   callback(): (req: IncomingMessage, res: ServerResponse) => void;
@@ -174,18 +181,13 @@ export class PlatformBuilder<App = TsED.Application> {
    */
   public addControllers(endpoint: string, controllers: TokenProvider | TokenProvider[]) {
     [].concat(controllers as never[]).forEach((token: TokenProvider) => {
-      configuration().routes.push({token, route: endpoint});
+      configuration().get("routes").push({token, route: endpoint});
     });
   }
 
   public async runLifecycle() {
     // init adapter (Express, Koa, etc...)
     await this.adapter.onInit();
-
-    setLoggerConfiguration();
-
-    // create the middleware mapping to be executed to the expected hook
-    await this.mapTokenMiddlewares();
 
     await this.loadInjector();
 
@@ -197,9 +199,9 @@ export class PlatformBuilder<App = TsED.Application> {
     this.log("Load routes");
     await this.adapter.beforeLoadRoutes();
 
-    if (this.rootModule.$beforeRoutesInit) {
+    if (this.rootModule?.$beforeRoutesInit) {
       await this.rootModule.$beforeRoutesInit();
-      // remove method to avoid multiple call and preserve hook order
+      // remove this method to avoid multiple call and preserve hook order
       this.rootModule.$beforeRoutesInit = () => {};
     }
 
@@ -231,14 +233,19 @@ export class PlatformBuilder<App = TsED.Application> {
     this.log("Build providers");
     const settings = configuration();
 
-    settings.set("routes", settings.get("routes").concat(resolveControllers(settings)));
+    const routes = settings.get("routes").concat(resolveControllers(settings));
+
+    settings.set("routes", routes);
 
     const container = createContainer();
-    container.delete(this.#rootModule);
-    container.addProvider(this.#rootModule, {
-      type: "server:module",
-      scope: ProviderScope.SINGLETON
-    });
+
+    if (this.#rootModule) {
+      container.delete(this.#rootModule);
+      container.addProvider(this.#rootModule, {
+        type: "server:module",
+        scope: ProviderScope.SINGLETON
+      });
+    }
 
     await injector().load(container);
 
@@ -340,7 +347,9 @@ export class PlatformBuilder<App = TsED.Application> {
    * @protected
    */
   protected loadMiddlewaresFor(hook: string): void {
-    return getMiddlewaresForHook(hook, this.settings, "$beforeRoutesInit").forEach(({use}) => {
+    const middlewares = $alter("$alterMiddlewaresForHook", constant<{use: any}[]>("middlewares", []), [hook]);
+
+    return middlewares.forEach(({use}) => {
       this.app.use(use);
     });
   }
@@ -369,58 +378,5 @@ export class PlatformBuilder<App = TsED.Application> {
 
       logger().info(printRoutes(await $asyncAlter("$logRoutes", routes)));
     }
-  }
-
-  protected async mapTokenMiddlewares() {
-    let middlewares = constant<PlatformMiddlewareLoadingOptions[]>("middlewares", []);
-    const env = constant<Env>("env");
-    const defaultHook = "$beforeRoutesInit";
-
-    const promises = middlewares.map(async (middleware: PlatformMiddlewareLoadingOptions): Promise<PlatformMiddlewareLoadingOptions> => {
-      if (isFunction(middleware)) {
-        return {
-          env,
-          hook: defaultHook,
-          use: middleware
-        };
-      }
-
-      if (isString(middleware)) {
-        middleware = {env, use: middleware, hook: defaultHook};
-      }
-
-      let {use, options} = middleware;
-
-      if (isString(use)) {
-        if (["text-parser", "raw-parser", "json-parser", "urlencoded-parser"].includes(use)) {
-          use = this.adapter.bodyParser(use.replace("-parser", ""), options);
-        } else {
-          const mod = await import(use);
-          use = (mod.default || mod)(options);
-        }
-      }
-
-      if (isClass(use) && ["$beforeInit", "$onInit", "$afterInit"].includes(middleware.hook!)) {
-        throw new Error(
-          `Ts.ED Middleware "${nameOf(use)}" middleware cannot be added on ${
-            middleware.hook
-          } hook. Use one of this hooks instead: $beforeRoutesInit, $onRoutesInit, $afterRoutesInit, $beforeListen, $afterListen, $onReady`
-        );
-      }
-
-      return {
-        env,
-        hook: defaultHook,
-        ...middleware,
-        use
-      };
-    });
-
-    middlewares = await Promise.all(promises);
-
-    configuration().set(
-      "middlewares",
-      middlewares.filter((middleware) => middleware.use)
-    );
   }
 }

@@ -1,15 +1,15 @@
 import type {IncomingMessage, RequestListener, ServerResponse} from "node:http";
 
+import {isPlainObject} from "@tsed/core";
 import {DITest, injector, InjectorService} from "@tsed/di";
 import accepts from "accepts";
 
 import {PlatformBuilder} from "../common/builder/PlatformBuilder.js";
 import {PlatformContext, PlatformContextOptions} from "../common/domain/PlatformContext.js";
-import {adapter} from "../common/index.js";
+import {adapter, defineConfiguration} from "../common/index.js";
 import {PlatformAdapter, PlatformBuilderSettings} from "../common/services/PlatformAdapter.js";
 import {PlatformApplication} from "../common/services/PlatformApplication.js";
 import {createInjector} from "../common/utils/createInjector.js";
-import {getConfiguration} from "../common/utils/getConfiguration.js";
 import {FakeAdapter} from "./FakeAdapter.js";
 import {FakeResponse} from "./FakeResponse.js";
 
@@ -26,46 +26,50 @@ export class PlatformTest extends DITest {
       ...(settings.imports || [])
     ];
 
-    PlatformTest.createInjector(getConfiguration(settings));
+    PlatformTest.createInjector(defineConfiguration(DITest.configure(settings)));
+
     await DITest.createContainer();
   }
 
   /**
    * Create a new injector with the right default services
    */
-  static createInjector(settings: any = {}): InjectorService {
-    return createInjector(DITest.configure({httpPort: false, httpsPort: false, ...settings}));
+  static createInjector(settings: Partial<TsED.Configuration> = {}): InjectorService {
+    return createInjector(settings);
   }
 
   /**
    * Load the server silently without listening port and configure it on test profile.
-   * @decorator
-   * @param mod
-   * @param listen
-   * @param settings
+   *
    * @returns {Promise<void>}
    */
+  static bootstrap(settings?: Partial<PlatformBuilderSettings & {listen: boolean}>): () => Promise<void>;
+  static bootstrap(mod: any, settings?: Partial<PlatformBuilderSettings & {listen: boolean}>): () => Promise<void>;
   static bootstrap(
     mod: any,
-    {
-      listen,
-      ...settings
-    }: Partial<
+    initialSettings: Partial<
       PlatformBuilderSettings & {
         listen: boolean;
       }
     > = {}
   ): () => Promise<void> {
+    if (!isPlainObject(mod)) {
+      initialSettings.rootModule = mod;
+    } else {
+      initialSettings = mod;
+    }
+
+    const {listen, ...props} = initialSettings;
     return async function before(): Promise<void> {
       let instance: PlatformBuilder;
       // @ts-ignore
-      settings = DITest.configure(settings);
+
+      const settings = DITest.configure(props);
 
       adapter(settings.adapter || adapter());
+      const configuration = defineConfiguration(settings);
 
-      const configuration = getConfiguration(settings, mod);
-
-      instance = await PlatformBuilder.build(mod, configuration).bootstrap();
+      instance = await PlatformBuilder.build(configuration.rootModule, configuration).bootstrap();
 
       await instance.listen(!!listen);
     };

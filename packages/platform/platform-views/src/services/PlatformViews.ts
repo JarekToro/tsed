@@ -149,4 +149,4 @@ injectable(PlatformViews)
     views: {
       exists: true
     }
-  } as never);
+  } as any);

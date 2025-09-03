@@ -1,5 +1,5 @@
 import {Store} from "@tsed/core/types/Store.js";
-import {type AbstractType, Type} from "@tsed/core/types/Type.js";
+import type {AbstractType, Type} from "@tsed/core/types/Type.js";
 import {classOf} from "@tsed/core/utils/classOf.js";
 import {getClassOrSymbol} from "@tsed/core/utils/getClassOrSymbol.js";
 import {isClass} from "@tsed/core/utils/isClass.js";

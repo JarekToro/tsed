@@ -1,5 +1,5 @@
 import {Store} from "@tsed/core/types/Store.js";
-import {Type} from "@tsed/core/types/Type.js";
+import type {Type} from "@tsed/core/types/Type.js";
 import {classOf} from "@tsed/core/utils/classOf.js";
 import {isArrayOrArrayClass} from "@tsed/core/utils/isArray.js";
 import {useDecorators} from "@tsed/core/utils/useDecorators.js";

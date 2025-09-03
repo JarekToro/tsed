@@ -1,5 +1,4 @@
-import {ProviderType} from "../domain/ProviderType.js";
-import {Injectable} from "./injectable.js";
+import {interceptor} from "../fn/injectable.js";
 
 /**
  * The decorators `@Interceptor()` declare a new service can be injected in other service or controller on there `constructor`.
@@ -10,8 +9,8 @@ import {Injectable} from "./injectable.js";
  * @returns {Function}
  * @decorator
  */
-export function Interceptor(): Function {
-  return Injectable({
-    type: ProviderType.INTERCEPTOR
-  });
+export function Interceptor(): ClassDecorator {
+  return (target) => {
+    interceptor(target);
+  };
 }

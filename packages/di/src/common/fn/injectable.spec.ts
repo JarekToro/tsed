@@ -36,6 +36,11 @@ describe("injectable", () => {
 
       expect(Store.from(MyClass).get("test")).toEqual("test");
     });
+    it("should define class with scope and set store info using set", async () => {
+      injectable(MyClass).scope(ProviderScope.SINGLETON).class(MyClass).set("test", "test");
+
+      expect(Store.from(MyClass).get("test")).toEqual("test");
+    });
     it("should create a factory", async () => {
       const builder = injectable(Symbol.for("Test")).factory(() => "test");
       const provider = builder.inspect();

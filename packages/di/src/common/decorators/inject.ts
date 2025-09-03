@@ -1,7 +1,7 @@
 import {DecoratorTypes} from "@tsed/core/types/DecoratorTypes.js";
 import {Metadata} from "@tsed/core/types/Metadata.js";
 import {Store} from "@tsed/core/types/Store.js";
-import {type Type} from "@tsed/core/types/Type.js";
+import type {Type} from "@tsed/core/types/Type.js";
 import {catchError} from "@tsed/core/utils/catchError.js";
 import {decoratorTypeOf} from "@tsed/core/utils/decoratorTypeOf.js";
 import {isPromise} from "@tsed/core/utils/isPromise.js";

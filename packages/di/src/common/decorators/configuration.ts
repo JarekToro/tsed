@@ -29,7 +29,7 @@ export function Configuration(settings: Partial<TsED.Configuration> = {}): Funct
   };
 }
 
-export type Configuration = TsED.DIConfiguration & DIConfiguration;
+export type Configuration = TsED.Configuration & DIConfiguration;
 
 // To maintain compatibility with the previous implementation, we need to declare Configuration as
 // injectable token.

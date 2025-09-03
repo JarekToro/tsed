@@ -1,6 +1,6 @@
 {
   "name": "@tsed/github-sponsors",
-  "version": "8.15.5",
+  "version": "8.16.0-rc.5",
   "private": true,
   "type": "module",
   "scripts": {

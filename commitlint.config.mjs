@@ -1,6 +1,6 @@
 import {globbySync} from "globby";
 import {basename} from "node:path";
-import pkg from "./package.json" assert {type: "json"};
+import pkg from "./package.json" with {type: "json"};
 import {RuleConfigSeverity} from "@commitlint/types";
 
 function findPackages() {
@@ -9,7 +9,7 @@ function findPackages() {
   });
 
   let pkgs = globbySync(patterns, {
-    cwd: process.cwd(),
+    cwd: process.cwd()
   });
 
   return pkgs.map((pkg) => {
@@ -22,7 +22,7 @@ export default {
   rules: {
     "scope-enum": [RuleConfigSeverity.Error, "always", findPackages()],
     "header-max-length": [0, "always", 120],
-    "footer-max-line-length": [0, "always", 200],
+    "footer-max-line-length": [0, "always", 200]
   },
   ignores: [
     (message) =>

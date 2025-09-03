@@ -1,6 +1,6 @@
 import {getValue} from "@tsed/core";
 
-import {PlatformStaticsOptions, PlatformStaticsSettings} from "../config/interfaces/PlatformStaticsSettings.js";
+import type {PlatformStaticsOptions, PlatformStaticsSettings} from "../config/PlatformStaticsSettings.js";
 
 function mapOptions(options: any): any {
   const opts: PlatformStaticsOptions = typeof options === "string" ? {root: options} : options;
@@ -10,7 +10,10 @@ function mapOptions(options: any): any {
   };
 }
 
-export function getStaticsOptions(statics?: PlatformStaticsSettings): {path: string; options: PlatformStaticsOptions}[] {
+export function getStaticsOptions(statics?: PlatformStaticsSettings): {
+  path: string;
+  options: PlatformStaticsOptions;
+}[] {
   return Object.entries(statics || {}).reduce(
     (statics, [path, items]) => {
       [].concat(items as any).forEach((options) => {

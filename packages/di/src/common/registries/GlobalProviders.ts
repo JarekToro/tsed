@@ -1,4 +1,4 @@
-import {Type} from "@tsed/core/types/Type.js";
+import type {Type} from "@tsed/core/types/Type.js";
 import {getClassOrSymbol} from "@tsed/core/utils/getClassOrSymbol.js";
 
 import {Provider} from "../domain/Provider.js";

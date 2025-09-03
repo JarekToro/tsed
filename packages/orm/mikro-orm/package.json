@@ -2,7 +2,7 @@
   "name": "@tsed/mikro-orm",
   "description": "MikroORM package for Ts.ED framework",
   "type": "module",
-  "version": "8.15.5",
+  "version": "8.16.0-rc.5",
   "source": "./src/index.ts",
   "main": "./lib/esm/index.js",
   "module": "./lib/esm/index.js",
@@ -32,7 +32,7 @@
     "@tsed/core": "workspace:*",
     "@tsed/di": "workspace:*",
     "@tsed/json-mapper": "workspace:*",
-    "@tsed/logger": "^7.0.1",
+    "@tsed/logger": "^8.0.0",
     "@tsed/platform-http": "workspace:*",
     "@tsed/schema": "workspace:*",
     "@tsed/testcontainers-mongo": "workspace:*",
@@ -47,7 +47,7 @@
     "@mikro-orm/core": ">=4.5.9",
     "@tsed/core": ">=8.0.0",
     "@tsed/di": ">=8.0.0",
-    "@tsed/logger": ">=7.0.1",
+    "@tsed/logger": ">=8.0.0",
     "@tsed/platform-http": ">=8.0.0"
   }
 }

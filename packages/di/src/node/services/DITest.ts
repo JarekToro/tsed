@@ -4,6 +4,7 @@ import {isClass} from "@tsed/core/utils/isClass.js";
 import {isObject} from "@tsed/core/utils/isObject.js";
 import {$log} from "@tsed/logger";
 
+import {DIContext} from "../../common/domain/DIContext.js";
 import {cleanAllLocalsContainer, detachLocalsContainer, localsContainer} from "../../common/fn/localsContainer.js";
 import {logger} from "../../common/fn/logger.js";
 import {
@@ -17,8 +18,7 @@ import {
   TokenProvider,
   type UseImportTokenProviderOpts
 } from "../../common/index.js";
-import {DIContext} from "../domain/DIContext.js";
-import {setLoggerConfiguration} from "../utils/setLoggerConfiguration.js";
+import {setLoggerConfiguration} from "../../common/utils/setLoggerConfiguration.js";
 
 /**
  * Tool to run test with lightweight DI sandbox.

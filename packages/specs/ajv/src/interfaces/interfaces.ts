@@ -1,10 +1,9 @@
-import {IAjvSettings} from "./IAjvSettings.js";
+import {AjvSettings} from "./AjvSettings.js";
 
 declare global {
   namespace TsED {
     interface Configuration {
-      // @ts-ignore
-      ajv?: IAjvSettings;
+      ajv?: AjvSettings;
     }
   }
 }

@@ -1,7 +1,7 @@
 import "../registries/ProviderRegistry.js";
 
 import {Store} from "@tsed/core/types/Store.js";
-import {type Type} from "@tsed/core/types/Type.js";
+import type {Type} from "@tsed/core/types/Type.js";
 
 import {ProviderType} from "../domain/ProviderType.js";
 import {injector} from "../fn/injector.js";
@@ -23,6 +23,7 @@ type ProviderBuilder<TypeOf, BaseProvider, T extends object> = BaseMethodsProvid
   ): ProviderBuilder<FactoryTokenProvider<FactoryReturn>, BaseProvider, T>;
   value<Value>(v: Value): ProviderBuilder<FactoryTokenProvider<Value>, BaseProvider, T>;
   class<TokenKlass>(c: Type<TokenKlass>): ProviderBuilder<TokenKlass, BaseProvider, T>;
+  set(key: string, value: any): ProviderBuilder<TypeOf, BaseProvider, T>;
 };
 
 export type ProviderBuilderFn<Provider, Picked extends keyof Provider> = <TypeOf extends TokenProvider>(
@@ -88,6 +89,10 @@ export function providerBuilder<Provider, Picked extends keyof Provider>(
         },
         token() {
           return provider.token as TypeOf;
+        },
+        set(key: string, value: any) {
+          this.store().set(key, value);
+          return this;
         }
       } as ProviderBuilder<TypeOf, Provider, Pick<Provider, Picked>>
     );
