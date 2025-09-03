@@ -1,4 +1,6 @@
 import {Ajv, type ErrorObject} from "ajv";
+import AjvErrors from "ajv-errors";
+import AjvFormats from "ajv-formats";
 
 const ajv = new Ajv({
   verbose: false,
@@ -7,6 +9,12 @@ const ajv = new Ajv({
   discriminator: true,
   allErrors: true
 });
+
+// @ts-ignore
+AjvErrors(ajv);
+
+// @ts-ignore
+AjvFormats(ajv as any);
 
 class ValidationError extends Error {
   private errors: ErrorObject[];

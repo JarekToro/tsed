@@ -7359,6 +7359,8 @@ __metadata:
     "@tsed/typescript": "workspace:*"
     "@types/js-yaml": "npm:4.0.9"
     ajv: "npm:^8.17.1"
+    ajv-errors: "npm:3.0.0"
+    ajv-formats: "npm:2.1.1"
     change-case: "npm:5.4.4"
     dotenv: "npm:^16.5.0"
     dotenv-expand: "npm:^12.0.2"
