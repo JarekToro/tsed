@@ -76,7 +76,7 @@ export class Server {}
 ```
 
 We recommend you to start your project with
-the [starter project](https://github.com/tsedio/tsed-vike-example).
+the [starter project](https://github.com/tsedio/tsed-vite-react-movies-demo).
 
 The starter project is a monorepo (Nx) with 2 projects:
 
